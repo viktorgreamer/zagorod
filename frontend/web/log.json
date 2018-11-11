@@ -1,0 +1,913 @@
+[{"name":"input_40_","value":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e"},{"name":"input_39_","value":"2"},{"name":"input_41_","value":""},{"name":"input_42_","value":""},{"name":"input_43_","value":""},{"name":"input_44_","value":""},{"name":"input_45_","value":""},{"name":"input_22_","value":"922"},{"name":"input_79_","value":"1"},{"name":"input_80_","value":"1"},{"name":"input_48_","value":"1"},{"name":"input_49_","value":"1"},{"name":"input_65_","value":"1"},{"name":"input_91_","value":"1"},{"name":"input_105_","value":"1"},{"name":"input_106_","value":"1"},{"name":"input_107_","value":"1"},{"name":"input_108_","value":"1"},{"name":"input_109_","value":"1"},{"name":"input_110_","value":"1"},{"name":"input_111_","value":"1"},{"name":"input_112_","value":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435"},{"name":"input_113_","value":""},{"name":"input_76_[input_76_][0]","value":"","multiple":"true"}]
+ COLUMNS
+{"76":[]}
+{"76":[""]}
+ KEY  = 76
+{"40":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e","39":"2","41":"","42":"","43":"","44":"","45":"","22":"922","79":"1","80":"1","48":"1","49":"1","65":"1","91":"1","105":"1","106":"1","107":"1","108":"1","109":"1","110":"1","111":"1","112":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435","113":"","76":[""]}
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[]]
+ VALUE = 2 (int) value =2
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[]]
+ VALUE = 1 (int) value =1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран фильтрующий колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран сборный колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана КНС
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Грунтовые воды точное значение
+return ('Значение'  == Значение);
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"}]
+{"event10":1,"event11":1,"event13":1,"event15":1}
+[{"name":"input_40_","value":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e"},{"name":"input_39_","value":"2"},{"name":"input_41_","value":""},{"name":"input_42_","value":""},{"name":"input_43_","value":""},{"name":"input_44_","value":""},{"name":"input_45_","value":""},{"name":"input_22_","value":"922"},{"name":"input_79_","value":"1"},{"name":"input_80_","value":"1"},{"name":"input_48_","value":"1"},{"name":"input_49_","value":"1"},{"name":"input_65_","value":"1"},{"name":"input_91_","value":"1"},{"name":"input_105_","value":"1"},{"name":"input_106_","value":"1"},{"name":"input_107_","value":"1"},{"name":"input_108_","value":"1"},{"name":"input_109_","value":"1"},{"name":"input_110_","value":"1"},{"name":"input_111_","value":"1"},{"name":"input_112_","value":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435"},{"name":"input_113_","value":""},{"name":"input_76_[input_76_][0]","value":"","multiple":"true"}]
+ COLUMNS
+{"76":[]}
+{"76":[""]}
+ KEY  = 76
+{"40":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e","39":"2","41":"","42":"","43":"","44":"","45":"","22":"922","79":"1","80":"1","48":"1","49":"1","65":"1","91":"1","105":"1","106":"1","107":"1","108":"1","109":"1","110":"1","111":"1","112":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435","113":"","76":[""]}
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[]]
+ VALUE = 2 (int) value =2
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[]]
+ VALUE = 1 (int) value =1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран фильтрующий колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран сборный колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана КНС
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Грунтовые воды точное значение
+return ('Значение'  == Значение);
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"}]
+{"event10":1,"event11":1,"event13":1,"event15":1}
+[{"name":"input_40_","value":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e"},{"name":"input_39_","value":"2"},{"name":"input_41_","value":""},{"name":"input_42_","value":""},{"name":"input_43_","value":""},{"name":"input_44_","value":""},{"name":"input_45_","value":""},{"name":"input_22_","value":"922"},{"name":"input_79_","value":"1"},{"name":"input_80_","value":"1"},{"name":"input_48_","value":"1"},{"name":"input_49_","value":"1"},{"name":"input_65_","value":"1"},{"name":"input_91_","value":"1"},{"name":"input_105_","value":"1"},{"name":"input_106_","value":"1"},{"name":"input_107_","value":"1"},{"name":"input_108_","value":"1"},{"name":"input_109_","value":"1"},{"name":"input_110_","value":"1"},{"name":"input_111_","value":"1"},{"name":"input_112_","value":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435"},{"name":"input_76_[input_76_][0]","value":"","multiple":"true"}]
+ COLUMNS
+{"76":[]}
+{"76":[""]}
+ KEY  = 76
+{"40":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e","39":"2","41":"","42":"","43":"","44":"","45":"","22":"922","79":"1","80":"1","48":"1","49":"1","65":"1","91":"1","105":"1","106":"1","107":"1","108":"1","109":"1","110":"1","111":"1","112":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435","76":[""]}
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[]]
+ VALUE = 2 (int) value =2
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[]]
+ VALUE = 1 (int) value =1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран фильтрующий колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран сборный колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана КНС
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Грунтовые воды точное значение
+return ('Значение'  == Значение);
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+{"event10":1,"event11":1,"event13":1,"event15":1}
+[{"name":"input_40_","value":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e"},{"name":"input_39_","value":"2"},{"name":"input_41_","value":""},{"name":"input_42_","value":""},{"name":"input_43_","value":""},{"name":"input_44_","value":""},{"name":"input_45_","value":""},{"name":"input_22_","value":"922"},{"name":"input_79_","value":"1"},{"name":"input_80_","value":"1"},{"name":"input_48_","value":"1"},{"name":"input_49_","value":"1"},{"name":"input_65_","value":"1"},{"name":"input_91_","value":"1"},{"name":"input_105_","value":"1"},{"name":"input_106_","value":"1"},{"name":"input_107_","value":"1"},{"name":"input_108_","value":"1"},{"name":"input_109_","value":"1"},{"name":"input_110_","value":"1"},{"name":"input_111_","value":"1"},{"name":"input_112_","value":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435"},{"name":"input_76_[input_76_][0]","value":"","multiple":"true"}]
+ COLUMNS
+{"76":[]}
+{"76":[""]}
+ KEY  = 76
+{"40":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e","39":"2","41":"","42":"","43":"","44":"","45":"","22":"922","79":"1","80":"1","48":"1","49":"1","65":"1","91":"1","105":"1","106":"1","107":"1","108":"1","109":"1","110":"1","111":"1","112":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435","76":[""]}
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[]]
+ VALUE = 2 (int) value =2
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[]]
+ VALUE = 1 (int) value =1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран фильтрующий колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран сборный колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана КНС
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Грунтовые воды точное значение
+return ('Значение'  == Значение);
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+{"event10":1,"event11":1,"event13":1,"event15":1}
+[{"name":"input_40_","value":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e"},{"name":"input_39_","value":"2"},{"name":"input_41_","value":""},{"name":"input_42_","value":""},{"name":"input_43_","value":""},{"name":"input_44_","value":""},{"name":"input_45_","value":""},{"name":"input_22_","value":"922"},{"name":"input_79_","value":"1"},{"name":"input_80_","value":"1"},{"name":"input_48_","value":"1"},{"name":"input_49_","value":"1"},{"name":"input_65_","value":"1"},{"name":"input_91_","value":"1"},{"name":"input_105_","value":"1"},{"name":"input_106_","value":"1"},{"name":"input_107_","value":"1"},{"name":"input_108_","value":"1"},{"name":"input_109_","value":"1"},{"name":"input_110_","value":"1"},{"name":"input_111_","value":"1"},{"name":"input_112_","value":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435"},{"name":"input_76_[input_76_][0]","value":"","multiple":"true"}]
+ COLUMNS
+{"76":[]}
+{"76":[""]}
+ KEY  = 76
+{"40":"\u041f\u043e\u0441\u0442\u043e\u044f\u043d\u043d\u043e","39":"2","41":"","42":"","43":"","44":"","45":"","22":"922","79":"1","80":"1","48":"1","49":"1","65":"1","91":"1","105":"1","106":"1","107":"1","108":"1","109":"1","110":"1","111":"1","112":"\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435","76":[""]}
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[]]
+ VALUE = 2 (int) value =2
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[]]
+ VALUE = 1 (int) value =1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран фильтрующий колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбран сборный колодец
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана КНС
+ FORMULA = 1
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Грунтовые воды точное значение
+return ('Значение'  == Значение);
+ VALUE = 1
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+{"event10":1,"event11":1,"event13":1,"event15":1}
+[{"name":"input_140_","value":""},{"name":"input_153_","value":""},{"name":"input_147_","value":""},{"name":"input_149_","value":""},{"name":"input_150_","value":""},{"name":"input_151_","value":""},{"name":"input_152_","value":""},{"name":"input_75_[input_75_][0]","value":"","multiple":"true"},{"name":"input_148_[input_148_][0]","value":"","multiple":"true"},{"name":"input_155_[0][user]","value":"\u041e\u0434\u0438\u043d","multiple":"true"},{"name":"input_155_[0][priority]","value":"45","multiple":"true"},{"name":"input_155_[1][user]","value":"\u041e\u0434\u0438\u043d","multiple":"true"},{"name":"input_155_[1][priority]","value":"54","multiple":"true"},{"name":"input_155_[2][user]","value":"\u041e\u0434\u0438\u043d","multiple":"true"},{"name":"input_155_[2][priority]","value":"445","multiple":"true"}]
+ COLUMNS
+{"75":[],"148":[],"155":["user","priority"]}
+{"75":[""],"148":[""],"155":["\u041e\u0434\u0438\u043d","45","\u041e\u0434\u0438\u043d","54","\u041e\u0434\u0438\u043d","445"]}
+ KEY  = 75
+ KEY  = 148
+ KEY  = 155
+[["\u041e\u0434\u0438\u043d","45"],["\u041e\u0434\u0438\u043d","54"],["\u041e\u0434\u0438\u043d","445"]]
+{"140":"","153":"","147":"","149":"","150":"","151":"","152":"","75":[""],"148":[""],"155":[{"user":"\u041e\u0434\u0438\u043d","priority":"45"},{"user":"\u041e\u0434\u0438\u043d","priority":"54"},{"user":"\u041e\u0434\u0438\u043d","priority":"445"}]}
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"}]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"},[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"},[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"},[],[],[]]
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"},[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"}]
+null
+NAME =  user
+NAME =  priority
+NAME =  user
+NAME =  priority
+NAME =  user
+NAME =  priority
+EVENTS EXISTS
+EVENT NAME Выбрана СТАНЦИЯ П
+return ('0' == 1);
+ VALUE = 0
+[[],[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"},[],[],[],{"error":"\u041f\u043e\u043b\u0435 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c"},[]]
+null
+ ESTIMATE NAME = Данные клиента
+ INPUT NAME = ФИО:
+ INPUT NAME = Телефон клиента оылвоаыовдаоывыав
+ INPUT NAME = Адрес объекта:
+ INPUT NAME = Широта
+ INPUT NAME = Телефон клиента
+ INPUT NAME = Станция
+ INPUT NAME = Материал подложки
+ INPUT NAME = Километраж от главпочтампа, км
+ INPUT NAME = e-mail
+ INPUT NAME = Долгота
+ INPUT NAME = Менеджер
+ INPUT NAME = Желаемая дата монтажа
+ INPUT NAME = Номер сделки
+ INPUT NAME = Геокординаты объекта
+ INPUT NAME = Регион
+ INPUT NAME = Ближайший населенный пункт
+ ESTIMATE NAME = Расчет канализации
+ INPUT NAME = Модель станция или септика
+ INPUT NAME = кол-во человек
+ INPUT NAME = Количество Техники
+ INPUT NAME = Пользователей, чел.
+ INPUT NAME = Условия проживания
+ INPUT NAME = Cанузел, шт.
+ INPUT NAME = Раковина (мойка), шт.
+ INPUT NAME = Душевая кабина, шт.
+ INPUT NAME = Стиральная машина, шт.
+ INPUT NAME = Посудомоечная машина, шт.
+ INPUT NAME = Стабилизатор напряжения 1 кВА
+ INPUT NAME = Колодец фильтрующий
+ INPUT NAME = Выход из дома
+ INPUT NAME = Глубина вывода, см
+ INPUT NAME = Алмазное бурение
+ INPUT NAME = Подкоп под ленту фундамента
+ INPUT NAME = Подкоп под ленту фундамента, шт.
+ INPUT NAME = Переделка (поднятие) вывода
+ INPUT NAME = Переделка (поднятие) вывода, шт.
+ INPUT NAME = Проход ж\б кольца (подводящая труба)
+ INPUT NAME = Проход ж\б кольца, шт.
+ INPUT NAME = Гильза асбестцементная
+ INPUT NAME = Диаметр гильзы, мм
+ INPUT NAME = Количество гильз (длина 4 м), шт.
+ INPUT NAME = Колодец фильтрующий, шт.
+ INPUT NAME = Сборный колодец (СБ)
+ INPUT NAME = Диаметр сборного колодца, мм
+ INPUT NAME = Высота сборного колодца, м
+ INPUT NAME = Расстояние от колодца до канавы,м.
+ INPUT NAME = Кабель, м
+ INPUT NAME = Труба ПНД 20мм, м.
+ INPUT NAME = Прокладка кабеля отдельно от канализационной траншеи, м.
+ INPUT NAME = Отводы 90 град на ПНД трубу, шт.
+ INPUT NAME = Крепеж ПНД трубы под кабель, шт.
+ INPUT NAME = Подключение станции
+ INPUT NAME = Множественое поле ввода
+ INPUT NAME = Ванная, шт.
+ INPUT NAME = Сантехприборы
+ INPUT NAME = Комплект аварийной сигнализации
+ INPUT NAME = Блок управления выносной (Тверь/ Евролос)
+ INPUT NAME = Высота фильтрующего колодца, м
+ INPUT NAME = Аварийная сигнализация (СБ)
+ INPUT NAME = Блок управления (СБ)
+ INPUT NAME = Подвод электропитания к сборному колодцу
+ INPUT NAME = Кабель (сборный колодец), м
+ INPUT NAME = Труба ПНД 20мм (СБ), м
+ INPUT NAME = Прокладка кабеля отдельно от траншеи (СБ), м
+ INPUT NAME = Отводы 90 град на ПНД трубу под кабель (СБ), шт
+ INPUT NAME = Крепеж ПНД трубы под кабель (СБ), шт.
+ INPUT NAME = Подключение сборного колодца
+ INPUT NAME = Канализационная насосная станция (КНС)
+ INPUT NAME = Диаметр КНС, мм
+ INPUT NAME = Высота КНС, м
+ INPUT NAME = Расстояние от КНС до станции, м
+ INPUT NAME = Блок управления (КНС)
+ INPUT NAME = Подвод электропитания к КНС
+ INPUT NAME = Кабель (КНС), м
+ INPUT NAME = Труба ПНД 20мм (КНС), м
+ INPUT NAME = Прокладка кабеля отдельно от траншеи (КНС), м
+ INPUT NAME =  Отводы 90 град на ПНД трубу под кабель (КНС), шт
+ INPUT NAME = Крепеж ПНД трубы под кабель (КНС), шт.
+ INPUT NAME = Подключение КНС
+ INPUT NAME = Тип грунта
+ INPUT NAME = Песок/ супесь
+ INPUT NAME = Суглинок
+ INPUT NAME = Известняк/ бут
+ INPUT NAME = Глина
+ INPUT NAME = Каменистый
+ INPUT NAME = Плывун
+ INPUT NAME = Торф
+ INPUT NAME = Грунтовые воды
+ INPUT NAME = Глубина грунтовых вод, м
+ INPUT NAME = Вид работ
+ INPUT NAME = Использование спецтехники
+ INPUT NAME = Нулевая отметка
+ INPUT NAME = Подрубка корней
+ INPUT NAME = Класс подрубки
+ INPUT NAME = Электричество на участке
+ INPUT NAME = Ввод кабеля в:
+ INPUT NAME = Сыпучие материалы
+ INPUT NAME = Песок намывной
+ INPUT NAME = Вода на участке
+ INPUT NAME = Из:
+ INPUT NAME = До места
+ INPUT NAME = Нужен насос
+ INPUT NAME = Нужен шланг
+ INPUT NAME = Длина шланга, м
+ INPUT NAME = Величина планировки, см
+ INPUT NAME = Наличие тачки
+ INPUT NAME = Перемещение грунта
+ INPUT NAME = Перемещение грунта, м
+ INPUT NAME = Пленка под грунт
+ INPUT NAME = Вывоз и утилизация грунта
+ INPUT NAME = Демонтаж бетонных колец
+ INPUT NAME = Диаметр колец, м
+ INPUT NAME = Перемещение жби колец
+ INPUT NAME = Перемещение колец, м
+ INPUT NAME = Вывоз и утилизация колец
+ INPUT NAME = Появляется, если СП у станции
+ INPUT NAME = Расстояние от септика до сброса, м
+ INPUT NAME = Отвод очищенной воды
+ INPUT NAME = Копка отводящей канавы (глубина 40-50 см)
+ INPUT NAME = Копка канавы, м
+ INPUT NAME = Примечание
+ INPUT NAME = Телефоны спецтехники и доставки песка
+ INPUT NAME = Стоимость замера, руб
+ INPUT NAME = Предоплата на замере, руб
+ INPUT NAME = Скидка при внесении предоплаты, %
+ INPUT NAME = Дата выезда
+ INPUT NAME = Песок намывной, куб м
+ INPUT NAME = Щебень гранитный фр. 20-40, куб м
+ INPUT NAME = sdasdasdasdas
+ INPUT NAME = Значение1
+ INPUT NAME = Значение2
+ INPUT NAME = Значение2
+ ESTIMATE NAME = водоснабжение
+ INPUT NAME = Водоснабжение
+ INPUT NAME = Глубина залегания воды

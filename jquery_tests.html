@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+
+
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+
+    <ul class="nav nav-pills">
+        <li role="presentation" data-stage_id="23"><a href="#">Этап 1</a></li>
+        <li role="presentation" data-stage_id="45"><a href="#">Расчет рабочей силы</a></li>
+        <li role="presentation" data-stage_id="56" class="disabled"><a href="#">Этап 3</a></li>
+    </ul>
+
+    <div class="form-group">
+        <label for="input_2_"></label>
+        <input class="form-control" name='input_2_' id="input_2_" value="98">
+    </div>
+
+    <div id="response">
+
+    </div>
+
+
+</div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+
+
+</script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+
+<script>
+
+    events = [
+        {id: 1, name: "event_1", formula: "event_3_ && event_2_", value: 1},
+        {id: 2, name: "event_2", formula: "input_2_ > 56", value: 0},
+        {id: 3, name: "event_3", formula: "input_2_ < 90", value: 0},
+
+    ];
+
+    // определение переменных
+    events.forEach(function (item) {
+        window['event_' + item.id + '_'] = item.value;
+        console.log('event_' + item.id + '_' + '=' + item.value);
+    });
+
+
+    reload_inputs();
+    reload_events();
+
+    $(document).on('change', 'input', function () {
+        reload_inputs();
+        console.log("INPUT_2_ = " + input_2_);
+        reload_events();
+    });
+
+
+
+    response_div = $('#response');
+
+
+    function reload_inputs() {
+        inputs = document.querySelectorAll('input');
+        if (inputs) {
+            inputs.forEach(function (item) {
+                window[item.name] = item.value;
+                console.log(" SETTING " + item.name + " VALUE" + item.value);
+            })
+        }
+
+    }
+
+    function reload_events() {
+
+
+        events.forEach(function (item) {
+            console.log(" EVENT ID = " + item.id + " FORMULA = (" + item.formula + ")");
+            result = eval("(" + item.formula + ")");
+            if (result == true) window['event_' + item.id + '_'] = 1;
+            if (result == '0') window['event_' + item.id + '_'] = 0;
+            if (result == false) window['event_' + item.id + '_'] = 0;
+            console.log(" RESULT IS " + result);
+        });
+
+
+        relatives_enents = events.filter( function(event) {
+            formula = event.formula;
+            console.log('EVENT FORMULA = ' + event.formula);
+            return formula.match(/event/)});
+
+        console.log(" TRY TO CALCULATE EVENT RELATIVE ");
+
+        relatives_enents.forEach(function (item) {
+            console.log(" EVENT ID = " + item.id + " FORMULA = (" + item.formula + ")");
+            result = eval("(" + item.formula + ")");
+            if (result == true) window['event_' + item.id + '_'] = 1;
+            if (result == 0) window['event_' + item.id + '_'] = 0;
+            if (result == false) window['event_' + item.id + '_'] = 0;
+            console.log(" RESULT IS " + result);
+        });
+
+
+
+
+
+        console.log(" EVENT_1_ = " + event_1_);
+    }
+
+
+</script>
+</html>
