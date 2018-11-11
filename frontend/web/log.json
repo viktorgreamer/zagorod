@@ -911,3 +911,11 @@ null
  ESTIMATE NAME = водоснабжение
  INPUT NAME = Водоснабжение
  INPUT NAME = Глубина залегания воды
+[{"name":"input_114_","value":"\u041c\u043e\u043d\u0442\u0430\u0436 \u043f\u043e\u0434 \u043a\u043b\u044e\u0447"},{"name":"input_115_","value":""},{"name":"input_116_","value":"\u041f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u043a\u0430"},{"name":"input_50_","value":"\u041e\u0442\u043a\u043e\u043f\u0430\u043d"},{"name":"input_52_","value":"1"},{"name":"input_53_","value":"1"},{"name":"input_55_","value":"1"},{"name":"input_57_","value":"1"},{"name":"input_59_","value":"1"},{"name":"input_117_","value":"1"},{"name":"input_119_","value":""},{"name":"input_122_","value":""},{"name":"input_123_","value":"\u041d\u0430 \u0443\u0447\u0430\u0441\u0442\u043a\u0435"},{"name":"input_124_","value":""},{"name":"input_125_","value":"1"},{"name":"input_126_","value":"1"},{"name":"input_127_","value":"1"},{"name":"input_130_","value":"1"},{"name":"input_133_","value":"1"},{"name":"input_131_","value":"1"},{"name":"input_132_","value":""},{"name":"input_134_","value":"1"},{"name":"input_135_","value":"1"},{"name":"input_136_","value":""},{"name":"input_137_","value":"1"},{"name":"input_138_","value":""},{"name":"input_139_","value":"1"}]
+ COLUMNS
+null
+[]
+{"114":"\u041c\u043e\u043d\u0442\u0430\u0436 \u043f\u043e\u0434 \u043a\u043b\u044e\u0447","115":"","116":"\u041f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u043a\u0430","50":"\u041e\u0442\u043a\u043e\u043f\u0430\u043d","52":"1","53":"1","55":"1","57":"1","59":"1","117":"1","119":"","122":"","123":"\u041d\u0430 \u0443\u0447\u0430\u0441\u0442\u043a\u0435","124":"","125":"1","126":"1","127":"1","130":"1","133":"1","131":"1","132":"","134":"1","135":"1","136":"","137":"1","138":"","139":"1"}
+EVENTS EXISTS
+EVENT NAME Есть вывод из дома
+return (''Откопан' ' != 'Нет');

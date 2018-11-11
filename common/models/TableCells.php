@@ -46,4 +46,8 @@ class TableCells extends \yii\db\ActiveRecord
             'table_id' => 'Table ID',
         ];
     }
+
+    public function getRows() {
+
+    }
 }

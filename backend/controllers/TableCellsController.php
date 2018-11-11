@@ -28,6 +28,9 @@ class TableCellsController extends Controller
             ],
         ];
     }
+    public function actionAddRow($after,$table_id) {
+
+    }
 
     public function actionChange() {
         if ($_POST['tr_id'] AND $_POST['td_id'] AND $_POST['attr'] AND $_POST['value']) {
