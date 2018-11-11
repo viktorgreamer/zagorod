@@ -28,12 +28,7 @@ return [
             'password' => '',
             'charset' => 'utf8',
         ],
-        /*'db' => ['class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=141.8.195.92;dbname=a0086640_zagorod',
-            'username' => 'a0086640_pr',
-            'password' => 'WindU160',
-            'charset' => 'utf8',
-            ],*/
+     
 
         'request' => [
             'csrfParam' => '_csrf-backend',
