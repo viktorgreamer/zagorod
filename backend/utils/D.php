@@ -5,7 +5,7 @@ namespace backend\utils;
 class D
 {
     const LOG_TO_FILE = true;
-    const PATH_TO_JSON = "/debug/log.json";
+    const PATH_TO_JSON = "debug/log.json";
 
     private static $dumpVars;
 
