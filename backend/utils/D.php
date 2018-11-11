@@ -5,25 +5,26 @@ namespace backend\utils;
 class D
 {
     const LOG_TO_FILE = true;
+    const PATH_TO_JSON = "/debug/log.json";
 
     private static $dumpVars;
 
     public static function logToFile($var)
     {
 
-        $log = file_get_contents("log.json");
+        $log = file_get_contents(self::PATH_TO_JSON);
         $log .= $var . "\r\n";
 
-        file_put_contents('log.json', $log);
+        file_put_contents(self::PATH_TO_JSON, $log);
     }
 
     public static function dumpToFile($var)
     {
 
-        $log = file_get_contents("log.json");
+        $log = file_get_contents(self::PATH_TO_JSON);
         $log .= json_encode($var) . "\r\n";
 
-        file_put_contents('log.json', $log);
+        file_put_contents(self::PATH_TO_JSON, $log);
     }
 
     public static function dump($var)
