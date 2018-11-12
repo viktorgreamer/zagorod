@@ -52,14 +52,15 @@ $id = $model->getFormID();
 
                         if ($model->multiple) {
                             echo "<div class='$inputClass'>";
-                            echo MultipleInput::widget(
-                                [
-                                    'name' => $model->getFormName(),
-                                    'data' => $model->getGroupValue($value),
-                                    'addButtonOptions' => [
-                                        'class' => ' btn btn-success', 'id' => 'button-add-multiple']
+                            $multipleOptions = [
+                                'name' => $model->getFormName(),
+                                'data' => $model->getGroupValue($value),
+                                'addButtonOptions' => [
+                                    'class' => ' btn btn-success', 'id' => 'button-add-multiple']
 
-                                ]);
+                            ]; 
+                            if ($model->type == Input::IN_ARRAY_TYPE) $multipleOptions['type'] = 'dropDownList';
+                            echo MultipleInput::widget($multipleOptions);
                             echo "</div>";
                         } else {
                             echo Html::input('string', $model->getFormName(), $value,
