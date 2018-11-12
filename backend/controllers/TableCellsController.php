@@ -2,6 +2,9 @@
 
 namespace backend\controllers;
 
+use backend\utils\D;
+use common\models\Table;
+use kartik\base\WidgetAsset;
 use Yii;
 use common\models\TableCells;
 use common\models\TableCellsSearch;
@@ -28,14 +31,107 @@ class TableCellsController extends Controller
             ],
         ];
     }
-    public function actionAddRow($after,$table_id) {
+
+    public function actionReset($table_id)
+    {
+        $table = Table::findOne($table_id);
+        if ($table) $table->reset();
+        /* @var $table Table */
+
+        // return $this->render('_debug');
+    }
+
+
+    // public function actionAddRow($after,$table_id) {
+    public function actionAddRow($table_id)
+    {
+
+        /* @var $table Table */
+        if ($table = Table::findOne($table_id)) {
+            $table_max_row = TableCells::find()->where(['table_id' => $table_id])->max('tr_id');
+            D::dump($table_max_row);
+            $CountCells = TableCells::find()->where(['table_id' => $table_id])->max('td_id');
+            $counter = 0;
+            D::dump($CountCells);
+            do {
+                $counter++;
+                $cell = new TableCells(['tr_id' => $table_max_row + 1, 'table_id' => $table_id, 'td_id' => $counter, 'value' => '']);
+                D::dump($cell->toArray());
+                if (!$cell->save()) D::dump($cell->errors);
+            } while ($counter < $CountCells);
+
+
+        }
+    }
+
+
+    public
+    function actionAddColumn($table_id)
+    {
+
+        /* @var $table Table */
+        if ($table = Table::findOne($table_id)) {
+            $table_max_column = TableCells::find()->where(['table_id' => $table_id])->max('td_id');
+            D::dump($table_max_column);
+            $CountCells = TableCells::find()->where(['table_id' => $table_id])->max('tr_id');
+            $counter = 0;
+            D::dump($CountCells);
+            do {
+                $counter++;
+                $cell = new TableCells(['td_id' => $table_max_column + 1, 'table_id' => $table_id, 'tr_id' => $counter, 'value' => '']);
+                D::dump($cell->toArray());
+                 if (!$cell->save()) D::dump($cell->errors);
+            } while ($counter < $CountCells);
+
+            return $this->render('_debug');
+
+
+        }
+
+        // return $this->render('_debug');
+    }
+
+    public
+    function actionDeleteRow($table_id, $tr_id)
+    {
+        TableCells::deleteAll(['table_id' => $table_id, 'tr_id' => $tr_id]);
+        $table = Table::findOne($table_id);
+        if ($table) $table->reset();
+        /* @var $table Table */
+
+        return $this->render('_debug');
+    }
+
+    public
+    function actionChangePriority()
+    {
+        $table_id = $_POST['table_id'];
+        $tr_id = $_POST['tr_id'];
+        $priority = $_POST['priority'];
+        if ($table = Table::findOne($table_id)) {
+            $table->reorderPriority($tr_id, $priority);
+        }
+
+    }
+    public
+    function actionChangePriorityColumn()
+    {
+        $table_id = $_POST['table_id'];
+        $td_id = $_POST['td_id'];
+        $priority = $_POST['priority'];
+        if ($table = Table::findOne($table_id)) {
+            $table->reorderPriorityColumn($td_id, $priority);
+        }
 
     }
 
-    public function actionChange() {
+
+    public
+    function actionChange()
+    {
         if ($_POST['tr_id'] AND $_POST['td_id'] AND $_POST['attr'] AND $_POST['value']) {
-        $isUpdated = TableCells::updateAll([$_POST['attr'] => $_POST['value']],['tr_id' => $_POST['tr_id'],'td_id' => $_POST['td_id']]);
-        return $isUpdated;
+            $isUpdated = TableCells::updateAll([$_POST['attr'] => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'td_id' => $_POST['td_id']]);
+            return $isUpdated;
         }
 
     }
@@ -44,7 +140,8 @@ class TableCellsController extends Controller
      * Lists all TableCells models.
      * @return mixed
      */
-    public function actionIndex()
+    public
+    function actionIndex()
     {
         $searchModel = new TableCellsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -61,7 +158,8 @@ class TableCellsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public
+    function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -73,7 +171,8 @@ class TableCellsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public
+    function actionCreate()
     {
         $model = new TableCells();
 
@@ -93,7 +192,8 @@ class TableCellsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public
+    function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -113,7 +213,8 @@ class TableCellsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public
+    function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
@@ -127,7 +228,8 @@ class TableCellsController extends Controller
      * @return TableCells the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected
+    function findModel($id)
     {
         if (($model = TableCells::findOne($id)) !== null) {
             return $model;

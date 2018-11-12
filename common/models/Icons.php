@@ -15,6 +15,8 @@ class Icons
     const ADD = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
     const MOVE_UP = '<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>';
     const MOVE_DOWN = '<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>';
+    const MOVE_LEFT = '<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>';
+    const MOVE_RIGHT = '<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>';
     const EDIT = '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>';
     const COPY = '<span class="glyphicon glyphicon-copy" aria-hidden="true"></span>';
 }

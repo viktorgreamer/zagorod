@@ -23,6 +23,12 @@ class TableCells extends \yii\db\ActiveRecord
         return 'table_cells';
     }
 
+
+
+
+
+
+
     /**
      * {@inheritdoc}
      */

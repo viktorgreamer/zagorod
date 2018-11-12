@@ -117,3 +117,110 @@ $a = "Цена меньше 89999, a именно stat55ion.price";
 [{"id":"1","tr_id":"1","td_id":"1","value":"34","table_id":"1"},{"id":"2","tr_id":"1","td_id":"2","value":null,"table_id":"1"}]
  COUNT ROWS = 1
 [{"tr_id":"1"}]
+"2"
+"2"
+"2"
+"2"
+"2"
+{"tr_id":3,"td_id":1,"value":""}
+{"tr_id":3,"td_id":2,"value":""}
+"2"
+"2"
+{"tr_id":3,"td_id":1,"value":""}
+{"tr_id":3,"td_id":2,"value":""}
+"2"
+"2"
+{"tr_id":3,"td_id":1,"value":""}
+{"tr_id":3,"td_id":2,"value":""}
+"2"
+"2"
+{"tr_id":3,"table_id":1,"td_id":1,"value":""}
+{"tr_id":3,"table_id":1,"td_id":2,"value":""}
+"3"
+"2"
+{"tr_id":4,"table_id":1,"td_id":1,"value":""}
+{"tr_id":4,"table_id":1,"td_id":2,"value":""}
+"4"
+"2"
+{"tr_id":5,"table_id":1,"td_id":1,"value":""}
+{"tr_id":5,"table_id":1,"td_id":2,"value":""}
+"5"
+"2"
+{"tr_id":6,"table_id":1,"td_id":1,"value":""}
+{"tr_id":6,"table_id":1,"td_id":2,"value":""}
+"6"
+"2"
+{"tr_id":7,"table_id":1,"td_id":1,"value":""}
+{"tr_id":7,"table_id":1,"td_id":2,"value":""}
+"7"
+"2"
+{"tr_id":8,"table_id":1,"td_id":1,"value":""}
+{"tr_id":8,"table_id":1,"td_id":2,"value":""}
+"4"
+"2"
+{"tr_id":5,"table_id":"1","td_id":1,"value":""}
+{"tr_id":5,"table_id":"1","td_id":2,"value":""}
+"5"
+"2"
+{"tr_id":6,"table_id":"1","td_id":1,"value":""}
+{"tr_id":6,"table_id":"1","td_id":2,"value":""}
+["1","2","3","4","9"]
+"1"
+"2"
+"3"
+"4"
+"9"
+["1","2","3","4","9"]
+"1"
+SETTING NEW TR_ID 1 TO 1
+"2"
+SETTING NEW TR_ID 2 TO 2
+"3"
+SETTING NEW TR_ID 3 TO 3
+"4"
+SETTING NEW TR_ID 4 TO 4
+"9"
+SETTING NEW TR_ID 5 TO 9
+["1","2","4","5","7"]
+"1"
+SETTING NEW TR_ID 1 TO 1
+"2"
+SETTING NEW TR_ID 2 TO 2
+"4"
+SETTING NEW TR_ID 3 TO 4
+"5"
+SETTING NEW TR_ID 4 TO 5
+"7"
+SETTING NEW TR_ID 5 TO 7
+"4"
+"2"
+{"tr_id":5,"table_id":"1","td_id":1,"value":""}
+{"tr_id":5,"table_id":"1","td_id":2,"value":""}
+"2"
+"5"
+{"td_id":3,"table_id":"1","tr_id":1,"value":""}
+{"td_id":3,"table_id":"1","tr_id":2,"value":""}
+{"td_id":3,"table_id":"1","tr_id":3,"value":""}
+{"td_id":3,"table_id":"1","tr_id":4,"value":""}
+{"td_id":3,"table_id":"1","tr_id":5,"value":""}
+"2"
+"5"
+{"td_id":3,"table_id":"1","tr_id":1,"value":""}
+{"td_id":3,"table_id":"1","tr_id":2,"value":""}
+{"td_id":3,"table_id":"1","tr_id":3,"value":""}
+{"td_id":3,"table_id":"1","tr_id":4,"value":""}
+{"td_id":3,"table_id":"1","tr_id":5,"value":""}
+"2"
+"5"
+{"td_id":3,"table_id":"1","tr_id":1,"value":""}
+{"td_id":3,"table_id":"1","tr_id":2,"value":""}
+{"td_id":3,"table_id":"1","tr_id":3,"value":""}
+{"td_id":3,"table_id":"1","tr_id":4,"value":""}
+{"td_id":3,"table_id":"1","tr_id":5,"value":""}
+"3"
+"5"
+{"td_id":4,"table_id":"1","tr_id":1,"value":""}
+{"td_id":4,"table_id":"1","tr_id":2,"value":""}
+{"td_id":4,"table_id":"1","tr_id":3,"value":""}
+{"td_id":4,"table_id":"1","tr_id":4,"value":""}
+{"td_id":4,"table_id":"1","tr_id":5,"value":""}
