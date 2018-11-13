@@ -237,8 +237,8 @@ class SmetaController extends Controller
 
         //  $return[] = $inputs_values;
         // file_put_contents('log.json', json_encode($message));
-        file_put_contents('response.json', json_encode($return));
-        file_put_contents('posts.json', json_encode($_POST));
+        //file_put_contents('response.json', json_encode($return));
+        //file_put_contents('posts.json', json_encode($_POST));
         if (Yii::$app->request->isAjax) return json_encode($return);
         else return $this->render('debug');
 
