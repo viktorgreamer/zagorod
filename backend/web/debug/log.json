@@ -1,226 +1,267 @@
-{
-  "type": "1",
-  "result": "station.price"
-}
-/manager.email/ ->>>'an.viktory@gmail.com' ->>> 79500
-EVAL  = 'return 79500';
-{"type": "1", "result": "station.price.\"jkjkjk\""}
-/manager.email/ ->>>'an.viktory@gmail.com' ->>> 79500."jkjkjk"
-EVAL  = 'return 79500."jkjkjk"';
-"ERROR MESSAGE  = syntax error, unexpected '\"jkjkjk\"' (T_CONSTANT_ENCAPSED_STRING), expecting ';'"
-{"type": "1", "result": "station.price*7"}
-/manager.email/ ->>>'an.viktory@gmail.com' ->>> 79500*7
-EVAL  = 'return 79500*7';
-{"type": "1", "result": "station.price\/678"
-}
-/manager.email/ ->>>'an.viktory@gmail.com' ->>> 79500/678
-EVAL  = 'return 79500/678';
-{"type": "1", "result": "\"jkjkjkj\".\"jkjkjkjkj\""
-}
-EVAL  = 'return "jkjkjkj"."jkjkjkjkj"';
-{"type":"1","result":"$a","formula":"$a = \"jkjkjkj\".\"jkjkjkjkj\";"}
-EVAL  = $a = "jkjkjkj"."jkjkjkjkj";; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jkjkjkj\"+\"jkjkjkjkj\";"}
-EVAL  = $a = "jkjkjkj"+"jkjkjkjkj";; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jkjkjkj\".\"jkjkjkjkj\";"}
-EVAL  = $a = "jkjkjkj"."jkjkjkjkj";; return $a;
-{"type":"1","result":"2*2","formula":"2+2"}
-EVAL  = 2+2; return 2*2;
-{"type":"1","result":"station.price.\"kdkflsdkfsl\"","formula":"2+2"}
-/manager.email/ ->>>'an.viktory@gmail.com' ->>> 79500."kdkflsdkfsl"
-EVAL  = 2+2; return 79500."kdkflsdkfsl";
-"ERROR MESSAGE  = syntax error, unexpected '\"kdkflsdkfsl\"' (T_CONSTANT_ENCAPSED_STRING), expecting ';'"
-{"type":"1","result":"$a","formula":"$a = station.price + 'JJKJKJK'"}
-EVAL  = $a = 79500 + 'JJKJKJK'; return $a;
-{"type":"1","result":"$a","formula":"$a = station.price + 'JJKJKJK'"}
-EVAL  = $a = 79500 + 'JJKJKJK'; return $a;
-{"type":"1","result":"$a","formula":"$a = station.price .'JJKJKJK'"}
-EVAL  = $a = 79500 .'JJKJKJK'; return $a;
-{"type":"1","result":"$a","formula":"$a = station.price .'JJKJKJK'"}
-EVAL  = $a = 79500 .'JJKJKJK'; return $a;
-{"type":"1","result":"$a","formula":"$a = station.price .'JJKJKJK'"}
-EVAL  = $a = 79500 .'JJKJKJK'; return $a;
-{"type":"1","result":"2*2","formula":"2+2"}
-EVAL  = 2+2; return 2*2;
-{"type":"1","result":"2*2","formula":"2+2"}
-EVAL  = 2+2; return 2*2;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\".\"jkjkjkjk\";"}
-EVAL  = $a = "jjkjkj"."jkjkjkjk";; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\".\"jkjkjkjk\""}
-EVAL  = $a = "jjkjkj"."jkjkjkjk"; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\"==\"jkjkjkjk\""}
-EVAL  = $a = "jjkjkj"=="jkjkjkjk"; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\"0-9=\"jkjkjkjk\""}
-EVAL  = $a = "jjkjkj"0-9="jkjkjkjk"; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\"0-9=\"jkjkjkjk\""}
-EVAL  = $a = "jjkjkj"0-9="jkjkjkjk"; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\"0=\"jkjkjkjk\""}
-EVAL  = $a = "jjkjkj"0="jkjkjkjk"; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\" + \"jkjkjkjk\""}
-EVAL  = $a = "jjkjkj" + "jkjkjkjk"; return $a;
-{"type":"1","result":"$a","formula":"$a = \"jjkjkj\" . \"jkjkjkjk\""}
-EVAL  = $a = "jjkjkj" . "jkjkjkjk"; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 67\";\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 67";
-}; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 67\";\n} else { \n$a = \"\u0426\u0435\u043d\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 67\";\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 67";
-} else { 
-$a = "Цена меньше 67";
-}; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 67, a \u0438\u043c\u0435\u043d\u043d\u043e \".station.price;\n} else { \n$a = \"\u0426\u0435\u043d\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 67, a \u0438\u043c\u0435\u043d\u043d\u043e \".station.price\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 67, a именно ".79500;
-} else { 
-$a = "Цена меньше 67, a именно ".79500
-}; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 67, a \u0438\u043c\u0435\u043d\u043d\u043e \".station.price;\n} else { \n$a = \"\u0426\u0435\u043d\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 67, a \u0438\u043c\u0435\u043d\u043d\u043e \".station.price;\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 67, a именно ".79500;
-} else { 
-$a = "Цена меньше 67, a именно ".79500;
-}; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 67, a \u0438\u043c\u0435\u043d\u043d\u043e station.price\";\n} else { \n$a = \"\u0426\u0435\u043d\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 67, a \u0438\u043c\u0435\u043d\u043d\u043e station.price\";\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 67, a именно 79500";
-} else { 
-$a = "Цена меньше 67, a именно 79500";
-}; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 89999, a \u0438\u043c\u0435\u043d\u043d\u043e station.price\";\n} else { \n$a = \"\u0426\u0435\u043d\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 89999, a \u0438\u043c\u0435\u043d\u043d\u043e station.price\";\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 89999, a именно 79500";
-} else { 
-$a = "Цена меньше 89999, a именно 79500";
-}; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 89999, a \u0438\u043c\u0435\u043d\u043d\u043e statiof55n.price\";\n} else { \n$a = \"\u0426\u0435\u043d\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 89999, a \u0438\u043c\u0435\u043d\u043d\u043e station.price\";\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 89999, a именно statiof55n.price";
-} else { 
-$a = "Цена меньше 89999, a именно 79500";
-}; return $a;
-{"type":"1","result":"$a","formula":"if (station.price > 89999) {\n$a = \"\u0426\u0435\u043d\u0430 \u0431\u043e\u043b\u044c\u0448\u0435 89999, a \u0438\u043c\u0435\u043d\u043d\u043e statiof55n.price\";\n} else { \n$a = \"\u0426\u0435\u043d\u0430 \u043c\u0435\u043d\u044c\u0448\u0435 89999, a \u0438\u043c\u0435\u043d\u043d\u043e stat55ion.price\";\n}"}
-EVAL  = if (79500 > 89999) {
-$a = "Цена больше 89999, a именно statiof55n.price";
-} else { 
-$a = "Цена меньше 89999, a именно stat55ion.price";
-}; return $a;
-[{"id":"1","tr_id":"1","td_id":"1","value":"34","table_id":"1"},{"id":"2","tr_id":"1","td_id":"2","value":null,"table_id":"1"}]
-[{"tr_id":"1"},{"tr_id":"1"}]
- COUNT ROWS = 1
-[{"tr_id":"1"},{"tr_id":"1"}]
- COUNT ROWS = 1
-[{}]
- COUNT ROWS = 1
-[{"tr_id":"1"}]
-[{"id":"1","tr_id":"1","td_id":"1","value":"34","table_id":"1"},{"id":"2","tr_id":"1","td_id":"2","value":null,"table_id":"1"}]
- COUNT ROWS = 1
-[{"tr_id":"1"}]
-"2"
-"2"
-"2"
-"2"
-"2"
-{"tr_id":3,"td_id":1,"value":""}
-{"tr_id":3,"td_id":2,"value":""}
-"2"
-"2"
-{"tr_id":3,"td_id":1,"value":""}
-{"tr_id":3,"td_id":2,"value":""}
-"2"
-"2"
-{"tr_id":3,"td_id":1,"value":""}
-{"tr_id":3,"td_id":2,"value":""}
-"2"
-"2"
-{"tr_id":3,"table_id":1,"td_id":1,"value":""}
-{"tr_id":3,"table_id":1,"td_id":2,"value":""}
-"3"
-"2"
-{"tr_id":4,"table_id":1,"td_id":1,"value":""}
-{"tr_id":4,"table_id":1,"td_id":2,"value":""}
-"4"
-"2"
-{"tr_id":5,"table_id":1,"td_id":1,"value":""}
-{"tr_id":5,"table_id":1,"td_id":2,"value":""}
-"5"
-"2"
-{"tr_id":6,"table_id":1,"td_id":1,"value":""}
-{"tr_id":6,"table_id":1,"td_id":2,"value":""}
-"6"
-"2"
-{"tr_id":7,"table_id":1,"td_id":1,"value":""}
-{"tr_id":7,"table_id":1,"td_id":2,"value":""}
-"7"
-"2"
-{"tr_id":8,"table_id":1,"td_id":1,"value":""}
-{"tr_id":8,"table_id":1,"td_id":2,"value":""}
-"4"
-"2"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-"5"
-"2"
-{"tr_id":6,"table_id":"1","td_id":1,"value":""}
-{"tr_id":6,"table_id":"1","td_id":2,"value":""}
-["1","2","3","4","9"]
-"1"
-"2"
-"3"
-"4"
-"9"
-["1","2","3","4","9"]
-"1"
-SETTING NEW TR_ID 1 TO 1
-"2"
-SETTING NEW TR_ID 2 TO 2
-"3"
-SETTING NEW TR_ID 3 TO 3
-"4"
-SETTING NEW TR_ID 4 TO 4
-"9"
-SETTING NEW TR_ID 5 TO 9
-["1","2","4","5","7"]
-"1"
-SETTING NEW TR_ID 1 TO 1
-"2"
-SETTING NEW TR_ID 2 TO 2
-"4"
-SETTING NEW TR_ID 3 TO 4
-"5"
-SETTING NEW TR_ID 4 TO 5
-"7"
-SETTING NEW TR_ID 5 TO 7
-"4"
-"2"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-"2"
-"5"
-{"td_id":3,"table_id":"1","tr_id":1,"value":""}
-{"td_id":3,"table_id":"1","tr_id":2,"value":""}
-{"td_id":3,"table_id":"1","tr_id":3,"value":""}
-{"td_id":3,"table_id":"1","tr_id":4,"value":""}
-{"td_id":3,"table_id":"1","tr_id":5,"value":""}
-"2"
-"5"
-{"td_id":3,"table_id":"1","tr_id":1,"value":""}
-{"td_id":3,"table_id":"1","tr_id":2,"value":""}
-{"td_id":3,"table_id":"1","tr_id":3,"value":""}
-{"td_id":3,"table_id":"1","tr_id":4,"value":""}
-{"td_id":3,"table_id":"1","tr_id":5,"value":""}
-"2"
-"5"
-{"td_id":3,"table_id":"1","tr_id":1,"value":""}
-{"td_id":3,"table_id":"1","tr_id":2,"value":""}
-{"td_id":3,"table_id":"1","tr_id":3,"value":""}
-{"td_id":3,"table_id":"1","tr_id":4,"value":""}
-{"td_id":3,"table_id":"1","tr_id":5,"value":""}
-"3"
-"5"
-{"td_id":4,"table_id":"1","tr_id":1,"value":""}
-{"td_id":4,"table_id":"1","tr_id":2,"value":""}
-{"td_id":4,"table_id":"1","tr_id":3,"value":""}
-{"td_id":4,"table_id":"1","tr_id":4,"value":""}
-{"td_id":4,"table_id":"1","tr_id":5,"value":""}
+false
+EVENT ID = 4
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 5
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 6
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 7
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 10
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 11
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 12
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 13
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 14
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 15
+RESULT IS STRING
+return ('Значение' == 'Значение');
+ VALUE = 1
+EVENT ID = 16
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 17
+RESULT IS STRING
+return ('Планировка' == 'Планировка');
+ VALUE = 1
+EVENT ID = 18
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 19
+RESULT IS STRING
+return ('На участке' == 'На участке');
+ VALUE = 1
+EVENT ID = 20
+RESULT IS STRING
+return ('Откопан' != 'Нет');
+ VALUE = 1
+EVENT ID = 21
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 22
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 24
+RESULT IS NOT STRING
+ FORMULA = ((0 && 0))
+ VALUE = 0
+EVENT ID = 25
+RESULT IS NOT STRING
+return (1 == П);
+ VALUE = 0
+EVENT ID = 26
+RESULT IS NOT STRING
+ FORMULA = (1 )
+ VALUE = 1
+EVENT ID = 28
+RESULT IS NOT STRING
+return ((3 + 2 ) > 9);
+ VALUE = 0
+EVENT ID = 29
+RESULT IS NOT STRING
+return (1 == С);
+ VALUE = 0
+false
+EVENT ID = 4
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 5
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 6
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 7
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 10
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 11
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 12
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 13
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 14
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 15
+RESULT IS STRING
+return ('Значение' == 'Значение');
+ VALUE = 1
+EVENT ID = 16
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 17
+RESULT IS STRING
+return ('Планировка' == 'Планировка');
+ VALUE = 1
+EVENT ID = 18
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 19
+RESULT IS STRING
+return ('На участке' == 'На участке');
+ VALUE = 1
+EVENT ID = 20
+RESULT IS STRING
+return ('Откопан' != 'Нет');
+ VALUE = 1
+EVENT ID = 21
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 22
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 24
+RESULT IS NOT STRING
+ FORMULA = ((0 && 0))
+ VALUE = 0
+EVENT ID = 25
+RESULT IS NOT STRING
+return (1 == П);
+ VALUE = 0
+EVENT ID = 26
+RESULT IS NOT STRING
+ FORMULA = (1 )
+ VALUE = 1
+EVENT ID = 28
+RESULT IS NOT STRING
+return ((3 + 2 ) > 9);
+ VALUE = 0
+EVENT ID = 29
+RESULT IS NOT STRING
+return (1 == С);
+ VALUE = 0
+false
+EVENT ID = 4
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 5
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 6
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 7
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 10
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 11
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 12
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 13
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 14
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 15
+RESULT IS STRING
+return ('Значение' == 'Значение');
+ VALUE = 1
+EVENT ID = 16
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 17
+RESULT IS STRING
+return ('Планировка' == 'Планировка');
+ VALUE = 1
+EVENT ID = 18
+RESULT IS NOT STRING
+ FORMULA = (1)
+ VALUE = 1
+EVENT ID = 19
+RESULT IS STRING
+return ('На участке' == 'На участке');
+ VALUE = 1
+EVENT ID = 20
+RESULT IS STRING
+return ('Откопан' != 'Нет');
+ VALUE = 1
+EVENT ID = 21
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 22
+RESULT IS NOT STRING
+ FORMULA = (0)
+ VALUE = 0
+EVENT ID = 24
+RESULT IS NOT STRING
+ FORMULA = ((0 && 0))
+ VALUE = 0
+EVENT ID = 25
+RESULT IS STRING
+return (1 == 'П');
+ VALUE = 0
+EVENT ID = 26
+RESULT IS NOT STRING
+ FORMULA = (1 )
+ VALUE = 1
+EVENT ID = 28
+RESULT IS NOT STRING
+return ((3 + 2 ) > 9);
+ VALUE = 0
+EVENT ID = 29
+RESULT IS STRING
+return (1 == 'С');
+ VALUE = 0

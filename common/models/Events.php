@@ -242,6 +242,16 @@ class Events extends \yii\db\ActiveRecord
 
     public function check($smeta)
     {
+
+          if (preg_match('/[a-zа-яA-ZА-Я]/u', $this->result)) {
+              D::success("RESULT IS STRING");
+              $result = "'" . $this->result . "'";
+          } else {
+              D::success("RESULT IS NOT STRING");
+              $result = $this->result;
+          }
+
+
         $station = Yii::$app->session->get('station');
       //  D::dump($station);
         $value = self::FALSE;
@@ -249,9 +259,10 @@ class Events extends \yii\db\ActiveRecord
             case self::TYPE_TRUE:
                 {
                     $formula = $this->renderFormula($smeta);
-                    D::alert(" FORMULA = " . $formula);
+                    D::alert(" FORMULA = (" . $formula.")");
+                    $result = eval('return ' . $formula . ";");
 
-                    if ($formula)
+                    if ($result)
                         $value = self::TRUE;
 
                     break;
@@ -263,7 +274,9 @@ class Events extends \yii\db\ActiveRecord
                     $formula = $this->renderFormula($smeta);
                     D::alert(" FORMULA = " . $formula);
 
-                    if (!($formula))
+                    $result = eval('return ' . $formula . ";");
+
+                    if (!($result))
                         $value = self::TRUE;
 
                     break;
@@ -272,7 +285,7 @@ class Events extends \yii\db\ActiveRecord
             case self::TYPE_EQUALS:
                 {
                     $formula = $this->renderFormula($smeta);
-                    $result = $this->result;
+                  //  $result = $this->result;
                   //  if (preg_match('/[a-zа-я]/u', $this->result)) $result = "'" . $this->result . "'"; else $result = $this->result;
                   //  if (preg_match('/[a-zа-я]/u', $formula)) $formula = "'" . $formula . "'";
 
@@ -293,13 +306,14 @@ class Events extends \yii\db\ActiveRecord
             case self::TYPE_NOT_EQUALS:
                 {
                     $formula = $this->renderFormula($smeta);
-                    if (preg_match('/[a-zа-я]/u', $this->result)) $result = "'" . $this->result . "'"; else $result = $this->result;
-                    if (preg_match('/[a-zа-я]/u', $formula)) $formula = "'" . $formula . "'";
+                   // $result = $this->result;
+                  //  if (preg_match('/[a-zа-я]/u', $this->result)) $result = "'" . $this->result . "'"; else $result = $this->result;
+                  //  if (preg_match('/[a-zа-я]/u', $formula)) $formula = "'" . $formula . "'";
 
                     $statement = $formula . " != " . $result;
-                    D::alert('return (' . $statement . ");");
+                    D::alert("return (" . $statement . ");");
 
-                    $result = eval('return ' . $statement . ";");
+                    $result = eval("return " . $statement . ";");
 
 
                     if ($result) $value = self::TRUE;
@@ -311,8 +325,8 @@ class Events extends \yii\db\ActiveRecord
             case self::TYPE_MORE:
                 {
                     $formula = $this->renderFormula($smeta);
-                    if (is_string($this->result)) $result = "'" . $this->result . "'";
-                    if (is_string($formula)) $formula = "'" . $formula . "'";
+                    //if (is_string($this->result)) $result = "'" . $this->result . "'";
+                   // if (is_string($formula)) $formula = "'" . $formula . "'";
 
                     $statement = $formula . " > " . $result;
                     D::alert('return (' . $statement . ");");

@@ -33,7 +33,19 @@ if ($controls = $model->controls) {
     }
 }
 
-if ($variables["event_" . $model->event_id . "_"]) $classVisible = 'hidden'; else $classVisible = 'active_element';
+
+if ($model->event_id) {
+    $title  = "EVENT_ID = ".$model->event_id." FOR ".$model->getFormName()." IS ".$variables["event_" . $model->event_id . "_"];
+
+    if ($variables["event_" . $model->event_id . "_"]) {
+        $title .= " ELEMENT " . $model->getFormName() . " IS ACTIVE";
+        $classVisible = 'active_element';
+    } else {
+        $title .= " ELEMENT  " . $model->getFormName() . " IS HIDDEN";
+        $classVisible = 'hidden';
+    }
+} else $classVisible = 'active_element';
+
 $inputClass = 'input_field ' . $classVisible;
 $id = $model->getFormID();
 ?>
@@ -58,12 +70,11 @@ $id = $model->getFormID();
                                 'addButtonOptions' => [
                                     'class' => ' btn btn-success', 'id' => 'button-add-multiple']
 
-                            ]; 
-                            if ($model->type == Input::IN_ARRAY_TYPE) $multipleOptions['type'] = 'dropDownList';
+                            ];
                             echo MultipleInput::widget($multipleOptions);
                             echo "</div>";
                         } else {
-                            echo Html::input('string', $model->getFormName(), $value,
+                            echo Html::input('text', $model->getFormName(), $value,
                                 [
                                     'id' => $id,
                                     'size' => $model->width,
@@ -94,7 +105,8 @@ $id = $model->getFormID();
                         echo Html::checkbox($model->getFormName(), $value, ['label' => $model->name, 'class' => $inputClass, 'id' => $id, 'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::IN_ARRAY_TYPE) {
                         $items = $model->renderItems($model->list);
-                        echo Html::dropDownList($model->getFormName(), $value, $items, ['label' => $model->name, 'class' => $inputClass . ' form-control', 'id' => $id,
+                        echo Html::dropDownList($model->getFormName(), $value, $items,
+                            ['label' => $model->name, 'class' => $inputClass . ' form-control', 'title' => $title,'id' => $id,
                             'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::GROUP_INPUT) {
                         echo "<div class='$inputClass'>";

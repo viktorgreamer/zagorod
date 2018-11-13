@@ -64,9 +64,9 @@ $("#submit-form-ajax-stage-id-$stage->stage_id").on('click', function (e) {
  
 data = [];
   $('#div-stage-id-$stage->stage_id .input_field.active_element').each( function() {
-      if ($(this).type == 'checkbox') {
+      if ($(this).attr('type') == 'checkbox') {
           console.log(" CHECKBOX");
-          if (this.checked) this.value = 1; else this.value = 0;
+          if ($(this).is(":checked")) this.value = 1; else this.value = 0;
          
       }
        if (this.name) data.push({name: this.name,value: this.value});

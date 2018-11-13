@@ -65,6 +65,29 @@ class EventsController extends Controller
         return $this->render('_debug');
     }
 
+    public function actionTestEvent()
+    {
+
+        $result = eval("return (1 == С);");
+        D::dump($result);
+
+        /* @var $event Events */
+
+        $smeta = Smeta::findOne(3);
+       // D::dump($smeta->toArray());
+      if ( $events = Events::find()->all()) {
+          foreach ($events as $event) {
+            /*  D::success($event->name);
+              D::success($event->formula);
+              D::success($event->renderFormula($smeta));*/
+            D::success("EVENT ID = ".$event->event_id);
+              $event->check($smeta);
+          }
+      }
+
+        return $this->render('_debug');
+    }
+
     public function actionValidateEmail()
     {
 

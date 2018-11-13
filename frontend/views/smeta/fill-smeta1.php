@@ -176,7 +176,7 @@ console.log(true_events);
     });
 
     reload_inputs();
-    reload_events();
+   // reload_events();
     
     
     console.log(true_events);
