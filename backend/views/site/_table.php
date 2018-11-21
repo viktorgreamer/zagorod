@@ -3,10 +3,27 @@
 use common\models\TableCells;
 use \backend\utils\D;
 use yii\helpers\Html;
+use yii\bootstrap\Collapse;
+
+
+/* @var $smeta \common\models\Smeta */
+if ($smeta = \common\models\Smeta::find()->where(['forTest' => 1])->one()) {
+    if ($variables = $smeta->loadVariables()) {
+        foreach ($variables as $key => $variable) {
+            $body .= " <br>" . $value . " " . $key . " => " . $variable;
+        }
+
+    };
+
+};
 
 
 $table_id = 1;
+$table = \common\models\Table::findOne($table_id);
+$estimate = \common\models\Estimate::findOne($table->estimate_id);
+$inputs = $estimate->inputs;
 $query_row = TableCells::find()->where(['table_id' => $table_id])->select('tr_id');
+
 $rows = $query_row->distinct()->asArray()->orderBy('tr_id')->all();
 echo Html::button(" ADD ROW", ['id' => 'add-row-button', 'class' => 'btn btn-success']);
 echo Html::button(" ADD COLUMN", ['id' => 'add-column-button', 'class' => 'btn btn-success']);
@@ -15,18 +32,22 @@ echo Html::tag("h3", "ТАБЛИЦА");
 if ($rows) {
     $trs = '';
     foreach ($rows as $keyRow => $row) {
+        $table_row = \common\models\TableRows::find()->where(['table_id' => $table_id])->andWhere(['tr_id' => $row['tr_id']])->one();
 
         $row_sells_query = TableCells::find()->where(['table_id' => $table_id])->orderBy('td_id')->andWhere(['tr_id' => $row['tr_id']]);
         if ($cells = $row_sells_query->asArray()->all()) {
             $tds = '';
             foreach ($cells as $cell) {
-                if ($keyRow == 0) $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $cell['td_id'],'max_column' => count($cells)]));
+                if ($keyRow == 0) $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $cell['td_id'], 'max_column' => count($cells)]));
+
+                $comment_value = $smeta->ReplaceValue($cell['value']);
+
 
                 $value = Html::tag('div', $cell['value'], [
                         // 'class' => 'edit-cell',
                         'id' => "cell_id_" . $cell['tr_id'] . "_" . $cell['td_id'],
 
-                        'title' => 'Комментарий',
+                        'title' => $comment_value,
                         // 'data' => ['tr_id' => $cell['tr_id'],'td_id' => $cell['td_id']]]
                     ])
                     . Html::input('text', '', $cell['value'],
@@ -45,18 +66,69 @@ if ($rows) {
 
                     ]);
             }
+            $row_class = 'success';
+            if ($table_row->result) {
+                $result_value = $smeta->ReplaceValue($table_row->result);
+                if ($result_value === $table_row->result) {
+                    $table_row->result = "<text style=\"color:red\">" . $table_row->result . "</text>";
+                    $row_class = 'danger';
+                } elseif (!$result_value) {
+                    $row_class = 'warning';
+                }
+            }
+
+
+            $value = Html::tag('div', $table_row->result, [
+                    // 'class' => 'edit-cell',
+                    'id' => "cell_id_" . $cell['tr_id'] . "_0",
+
+                    'title' => $result_value,
+                    // 'data' => ['tr_id' => $cell['tr_id'],'td_id' => $cell['td_id']]]
+                ])
+                . Html::input('text', 'result_row_' . $cell['tr_id'], $table_row->result,
+                    [
+                        'class' => 'edit-title-input hidden',
+                        'id' => "input_id_" . $cell['tr_id'] . "_0",
+
+                    ]);
+            $tds .= Html::tag('td', $value,
+                [
+                    'class' => 'edit-cell',
+                    'data' => [
+                        'tr_id' => $cell['tr_id'],
+                        'td_id' => '0'
+                    ]
+
+                ]);
+
+
         }
 
-        if ($keyRow == 0) $trs_head .= Html::tag('tr', $tds_head);
-
-        $trs .= Html::tag('tr', $tds . Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)])));
+        if ($keyRow == 0) $trs_head .= Html::tag('tr', $tds_head . "<td>Условие</td>");
+        $td_action = Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)]));
+        $trs .= Html::tag('tr', $tds . $td_action, ['class' => $row_class]);
     }
-    $TableHead = Html::tag('thead',$trs_head);
-    $table = Html::tag("table", $TableHead.$trs, ['class' => 'table table-stripped table-bordered']);
+    $TableHead = Html::tag('thead', $trs_head);
+    $table = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered']);
 }
 echo $table;
 \yii\widgets\Pjax::end();
 
+
+echo Collapse::widget([
+    'items' => [
+        // equivalent to the above
+        [
+            'label' => 'Переменные',
+            'content' => $body,
+
+        ], [
+            'label' => 'Ссылки на переменный',
+            'content' => $this->render("/output/_data", compact('inputs')),
+        ],
+
+    ]
+]);
 ?>
 
 
@@ -83,7 +155,7 @@ function save_element() {
           console.log("UPDATE VALUE  = " + value + " TR_ID = " + window.old_clicked_tr_id  + " TD_ID = " + window.old_clicked_td_id );
      $.ajax({
         url: '/admin/table-cells/change',
-        data: {attr: 'value',value: value,tr_id:window.old_clicked_tr_id,td_id:window.old_clicked_td_id},
+        data: {attr: 'value',value: value,tr_id:window.old_clicked_tr_id,td_id:window.old_clicked_td_id,table_id: window.table_id},
         type: 'post',
         success: function (res) {
             console.log(res);

@@ -25,6 +25,9 @@ class Output extends Input
     const STRING_REPLACE = 1;
     const CALCULATION = 2;
 
+    public static $pattern = '/output_(\d+)_/';
+
+
 
     public function mapTypes()
     {

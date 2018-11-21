@@ -73,6 +73,7 @@ class Input extends \yii\db\ActiveRecord
 
 
     public static $formulaName = 'input_{id}_';
+    public static $pattern = '/input_(\d+)_/';
 
     public function getFormulaName()
     {

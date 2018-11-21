@@ -18,12 +18,31 @@ use yii\helpers\ArrayHelper;
  */
 class Smeta extends \yii\db\ActiveRecord
 {
+
+    protected $variables;
+    protected $variablesKeys;
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'smeta';
+    }
+
+    public function ReplaceValue($value)
+    {
+        if ($value) {
+            if ($variables = $this->variables) {
+                foreach ($variables as $key => $variable) {
+                    $value = preg_replace("/" . $key . "/", $this->variables[$key], $value);
+                }
+            }
+            
+        }
+        return $value;
+
+
     }
 
 
@@ -129,7 +148,7 @@ class Smeta extends \yii\db\ActiveRecord
 
         if ($estimates = $this->estimates) {
             foreach ($estimates as $estimate) {
-                  D::success(" ESTIMATE NAME = " . $estimate->name);
+                D::success(" ESTIMATE NAME = " . $estimate->name);
                 if ($events = $estimate->events) {
                     foreach ($events as $event) {
                         // D::success(" EVENT NAME = " . $event->name);
@@ -146,10 +165,10 @@ class Smeta extends \yii\db\ActiveRecord
 
                 if ($inputs = $estimate->inputs) {
                     foreach ($inputs as $input) {
-                         D::success(" INPUT NAME = " . $input->name);
+                        D::success(" INPUT NAME = " . $input->name);
                         if ($inputValue = InputValue::find()->where(['input_id' => $input->input_id])->andWhere(['smeta_id' => $this->smeta_id])->one()) {
 
-                            InputValue::updateAll(['type' => $input->type],['AND',['input_id' => $input->input_id],['smeta_id' => $this->smeta_id]]);
+                            InputValue::updateAll(['type' => $input->type], ['AND', ['input_id' => $input->input_id], ['smeta_id' => $this->smeta_id]]);
                         } else {
                             $inputValue = new InputValue(['smeta_id' => $this->smeta_id, 'type' => $input->type, 'input_id' => $input->input_id, 'estimate_id' => $estimate->estimate_id]);
                             if (!$inputValue->save()) D::dump($inputValue->errors);
@@ -215,15 +234,25 @@ class Smeta extends \yii\db\ActiveRecord
 
 
         }
+        if ($table_cells = TableCells::find()->where(['like', 'value', 'material_'])->select('value')->column()) {
+            foreach ($table_cells as $table_cell) {
+                $body .= " " . $table_cell;
+            }
+
+
+        }
         return $body;
     }
 
     public function loadVariables($params = [])
     {
         if (!$params['materials_id']) $params['materials_id'] = Material::preg_match($this->getBodyMaterials());
-        $variables = array_merge($this->loadEvents(), $this->loadInputs(),
+        $variables = array_merge($this->loadEvents(), $this->loadInputs(), $this->loadOutputs(),
             $this->loadStation(), $this->loadMaterials($params['materials_id']),
             $this->loadManager(), $this->loadCity());
+
+        $this->variables = $variables;
+        $this->variablesKeys = array_keys($this->variables);
 
 
         return $variables;
@@ -245,6 +274,28 @@ class Smeta extends \yii\db\ActiveRecord
                     $inputValue->value = "'" . $inputValue->value . "'";
                 }
                 $variables["input_" . $inputValue->input_id . "_"] = $inputValue->value;
+
+            }
+
+            return $variables;
+
+        } else return [];
+    }
+
+    public function loadOutputs()
+    {
+
+        /* @var $inputValue InputValue */
+
+        if ($outputValues = OutputValue::find()->where(['smeta_id' => $this->smeta_id])->joinWith('output as output')->all()) {
+            foreach ($outputValues as $outputValue) {
+
+                if (in_array($outputValue->output->type, [2, 3, 4])) {
+                    if (!$outputValue->value) $outputValue->value = 0;
+                } else {
+                    $outputValue->value = "'" . $outputValue->value . "'";
+                }
+                $variables["output_" . $outputValue->output_id . "_"] = $outputValue->value;
 
             }
 
@@ -312,7 +363,7 @@ class Smeta extends \yii\db\ActiveRecord
             }
             if ($station = BaseStation::find()->where(['id' => $station_id])->asArray()->one()) {
                 foreach ($station as $key => $value) {
-                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) $value = "'".$value."'";
+                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) $value = "'" . $value . "'";
                     elseif (!$value) $value = 0;
                     $variables["station." . $key] = $value;
                 }
@@ -344,7 +395,7 @@ class Smeta extends \yii\db\ActiveRecord
             }
             if ($station = City::find()->where(['id' => $station_id])->asArray()->one()) {
                 foreach ($station as $key => $value) {
-                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) $value = "'".$value."'";
+                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) $value = "'" . $value . "'";
                     elseif (!$value) $value = 0;
                     $variables["city." . $key] = $value;
                 }
@@ -376,7 +427,7 @@ class Smeta extends \yii\db\ActiveRecord
             }
             if ($station = User::find()->where(['id' => $station_id])->select('name,phone,email')->asArray()->one()) {
                 foreach ($station as $key => $value) {
-                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) $value = "'".$value."'";
+                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) $value = "'" . $value . "'";
                     elseif (!$value) $value = 0;
                     $variables["manager." . $key] = $value;
                 }

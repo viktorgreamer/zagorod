@@ -23,6 +23,7 @@ class Events extends \yii\db\ActiveRecord
     private $value = false;
 
     public static $formulaName = 'event_{id}_';
+    public static $pattern = '/event_(\d+)_/';
 
     public function getFormulaName()
     {

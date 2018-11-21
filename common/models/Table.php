@@ -40,6 +40,14 @@ class Table extends \yii\db\ActiveRecord
                 'tr_id' => $new_tr
             ]);
 
+        TableRows::updateAll([
+                'tr_id' => 0
+            ]
+            , [
+                'table_id' => $this->table_id,
+                'tr_id' => $new_tr
+            ]);
+
         // перемещаем текущий tr_id
         TableCells::updateAll([
             'tr_id' => $new_tr
@@ -48,8 +56,25 @@ class Table extends \yii\db\ActiveRecord
             'tr_id' => $tr_id
         ]);
 
+        // перемещаем текущий tr_id
+        TableRows::updateAll([
+            'tr_id' => $new_tr
+        ], [
+            'table_id' => $this->table_id,
+            'tr_id' => $tr_id
+        ]);
+
         // ставим бывшему tr_id = 0 прячем в буфер.
         TableCells::updateAll([
+            'tr_id' => $tr_id
+        ],
+            [
+                'table_id' => $this->table_id,
+                'tr_id' => 0
+            ]);
+
+        // ставим бывшему tr_id = 0 прячем в буфер.
+        TableRows::updateAll([
             'tr_id' => $tr_id
         ],
             [
@@ -101,6 +126,15 @@ class Table extends \yii\db\ActiveRecord
                 //   D::dump($row);
                 // D::success("SETTING NEW TR_ID ".($key+1)." TO ".$row);
                 TableCells::updateAll(['tr_id' => $key + 1], ['tr_id' => $row, 'table_id' => $this->table_id]);
+                TableRows::updateAll(['tr_id' => $key + 1], ['tr_id' => $row, 'table_id' => $this->table_id]);
+            }
+        }
+        if ($columns = TableCells::find()->where(['table_id' => $this->table_id])->orderBy('td_id')->distinct()->select('td_id')->column()) {
+            //   D::dump($rows);
+            foreach ($columns as $key => $column) {
+                //   D::dump($row);
+                // D::success("SETTING NEW TR_ID ".($key+1)." TO ".$row);
+                TableCells::updateAll(['td_id' => $key + 1], ['td_id' => $column, 'table_id' => $this->table_id]);
             }
         }
 

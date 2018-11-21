@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\utils\D;
 use common\models\Table;
+use common\models\TableRows;
 use kartik\base\WidgetAsset;
 use Yii;
 use common\models\TableCells;
@@ -41,16 +42,40 @@ class TableCellsController extends Controller
         // return $this->render('_debug');
     }
 
+    public function actionResetRows()
+    {
+        $table = Table::findOne(1);
+        if ($table) {
+            if ($rows = $table->getRows()->select('tr_id')->distinct()->orderBy('tr_id')->all()) {
+                foreach ($rows as $row) {
+                    $tr = new TableRows();
+                    $tr->tr_id = $row->tr_id;
+                    $tr->table_id = $table->table_id;
+                    if (!$tr->save()) D::dump($tr->errors);
+
+                }
+            }
+        }
+        /* @var $table Table */
+
+        return $this->render('_debug');
+    }
+
 
     // public function actionAddRow($after,$table_id) {
+
     public function actionAddRow($table_id)
     {
 
         /* @var $table Table */
+
         if ($table = Table::findOne($table_id)) {
             $table_max_row = TableCells::find()->where(['table_id' => $table_id])->max('tr_id');
             D::dump($table_max_row);
             $CountCells = TableCells::find()->where(['table_id' => $table_id])->max('td_id');
+            $tr = new TableRows();
+            $tr->tr_id = $table_max_row + 1;
+            $tr->table_id = $table->table_id;
             $counter = 0;
             D::dump($CountCells);
             do {
@@ -59,8 +84,6 @@ class TableCellsController extends Controller
                 D::dump($cell->toArray());
                 if (!$cell->save()) D::dump($cell->errors);
             } while ($counter < $CountCells);
-
-
         }
     }
 
@@ -80,7 +103,7 @@ class TableCellsController extends Controller
                 $counter++;
                 $cell = new TableCells(['td_id' => $table_max_column + 1, 'table_id' => $table_id, 'tr_id' => $counter, 'value' => '']);
                 D::dump($cell->toArray());
-                 if (!$cell->save()) D::dump($cell->errors);
+                if (!$cell->save()) D::dump($cell->errors);
             } while ($counter < $CountCells);
 
             return $this->render('_debug');
@@ -103,6 +126,17 @@ class TableCellsController extends Controller
     }
 
     public
+    function actionDeleteColumn($table_id, $td_id)
+    {
+        TableCells::deleteAll(['table_id' => $table_id, 'td_id' => $td_id]);
+        $table = Table::findOne($table_id);
+        if ($table) $table->reset();
+        /* @var $table Table */
+
+        return $this->render('_debug');
+    }
+
+    public
     function actionChangePriority()
     {
         $table_id = $_POST['table_id'];
@@ -113,6 +147,7 @@ class TableCellsController extends Controller
         }
 
     }
+
     public
     function actionChangePriorityColumn()
     {
@@ -129,9 +164,16 @@ class TableCellsController extends Controller
     public
     function actionChange()
     {
-        if ($_POST['tr_id'] AND $_POST['td_id'] AND $_POST['attr'] AND $_POST['value']) {
-            $isUpdated = TableCells::updateAll([$_POST['attr'] => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'td_id' => $_POST['td_id']]);
-            return $isUpdated;
+        if ($_POST['tr_id'] AND $_POST['attr'] AND $_POST['value'] AND $_POST['table_id']) {
+            if ($_POST['td_id'] == 0) {
+                $isUpdated = TableRows::updateAll(['result' => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
+               return $isUpdated;
+            } else {
+                $isUpdated = TableCells::updateAll([$_POST['attr'] => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'td_id' => $_POST['td_id'],'table_id' => $_POST['table_id']]);
+                return $isUpdated;
+            }
+
+
         }
 
     }
