@@ -42,7 +42,7 @@ if ($rows) {
         if ($cells = $row_sells_query->asArray()->all()) {
             $tds = '';
             foreach ($cells as $cell) {
-                if ($keyRow == (count($rows) - 1)) $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $cell['td_id'], 'max_column' => count($cells)]));
+                if ($keyRow == (count($rows) - 1)) $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $cell['td_id'], 'max_column' => count($cells)]),['class' => 'header_bottom']);
 
                 $comment_value = $smeta->ReplaceValue($cell['value']);
 
@@ -63,13 +63,12 @@ if ($rows) {
                 $tds .= Html::tag('td', $value,
                     [
                         'colspan' => $cell['colspan'],
-
-                        'class' => 'edit-cell',
+                        'class' => 'edit-cell active_cell',
                         'id' => 'cell_' . $cell['tr_id'] . "_" . $cell['td_id'],
                         'data' => [
                             'tr_id' => $cell['tr_id'],
                             'td_id' => $cell['td_id']
-                        ]
+                        ],
 
                     ]);
             }
@@ -117,7 +116,7 @@ if ($rows) {
         $trs .= Html::tag('tr', $tds . $td_action, ['class' => $row_class]);
     }
     $TableHead = Html::tag('thead', $trs_head);
-    $table = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered']);
+    $table = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table']);
 }
 echo $table;
 \yii\widgets\Pjax::end();

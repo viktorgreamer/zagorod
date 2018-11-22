@@ -3,6 +3,14 @@ body {
     height: 100%;
 }
 
+table.table-bordered td.active_cell {
+    border: 1px solid black;
+}
+
+table.table-bordered  thead > tr > td.header_bottom {
+    border-bottom: 1px solid black; !important;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -129,7 +137,8 @@ a.desc:after {
 }
 
 .edit-group {
-     align-self: flex-end;!important;
+    align-self: flex-end;
+!important;
 }
 
 hr.no-margin {
@@ -137,7 +146,6 @@ hr.no-margin {
     margin-bottom: 10px;
     border-top: 1px solid #ae9d9d;
 }
-
 
 h2.name-stage {
     margin-top: 0px;
