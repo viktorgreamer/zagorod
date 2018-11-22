@@ -27,6 +27,10 @@ class Table extends \yii\db\ActiveRecord
         return $this->hasMany(TableCells::className(), ['table_id' => 'table_id'])->andFilterWhere(['tr_id' => $row_id]);;
     }
 
+    public function getEstimate() {
+        return $this->hasOne(Estimate::className(),['estimate_id' => 'estimate_id']);
+    }
+
 
     public function reorderPriority($tr_id, $priority)
     {

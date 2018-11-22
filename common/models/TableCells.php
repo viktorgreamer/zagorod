@@ -15,6 +15,11 @@ use Yii;
  */
 class TableCells extends \yii\db\ActiveRecord
 {
+
+    const H1 = "h1";
+    const H1_pattern = "<h1>{value}</h1>";
+    const H4 = "h4";
+    const H4_pattern = "<h4>{value}</h4>";
     /**
      * {@inheritdoc}
      */

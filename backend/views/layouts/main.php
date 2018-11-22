@@ -50,6 +50,7 @@ AppAsset::register($this);
                 ['label' => 'Этапы сметы', 'url' => ['/estimate-stage/index']],
                 ['label' => 'События', 'url' => ['/events/index']],
                 ['label' => 'Контроллеры ввода', 'url' => ['/input-controls/index']],
+                ['label' => 'Таблицы', 'url' => ['/table/index']],
 
             ],
         ],

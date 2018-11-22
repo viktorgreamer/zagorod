@@ -125,6 +125,47 @@ class TableCellsController extends Controller
         return $this->render('_debug');
     }
 
+    public function actionCombine()
+    {
+        if (($_POST['table_id']) AND ($_POST['tr_id']) AND ($_POST['td_to_delete']) AND $_POST['td_col_span']) {
+            $colspan_colspan = TableCells::find()
+                ->where(['td_id' => $_POST['td_col_span']])
+                ->andWhere(['tr_id' => $_POST['tr_id']])
+                ->andWhere(['table_id' => $_POST['table_id']])
+               // ->select('colspan')
+                ->one();
+            $colspan_delete = TableCells::find()
+                ->where(['td_id' => $_POST['td_to_delete']])
+                ->andWhere(['tr_id' => $_POST['tr_id']])
+                ->andWhere(['table_id' => $_POST['table_id']])
+               // ->select('colspan')
+                ->one();
+            if (!$colspan_colspan->colspan) $colspan_colspan->colspan = 1;
+            if (!$colspan_delete->colspan) $colspan_delete->colspan = 1;
+            TableCells::deleteAll(['td_id' => $_POST['td_to_delete'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
+
+            $colspan = $colspan_colspan->colspan + $colspan_delete->colspan;
+            TableCells::updateAll(['colspan' => $colspan], ['td_id' => $_POST['td_col_span'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
+        }
+
+    }
+
+    public
+    function actionFormat()
+    {
+        if (($_POST['table_id']) AND ($_POST['tr_id']) AND ($_POST['td_id']) AND $_POST['format']) {
+            $cell = TableCells::find()->where(['AND', ['td_id' => $_POST['td_id'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]])->one();
+            if ($_POST['format'] == TableCells::H1) {
+                $value = preg_replace("/{value}/", $cell->value, TableCells::H1_pattern);
+            }
+
+            if ($_POST['format'] == TableCells::H4) {
+                $value = preg_replace("/{value}/", strip_tags($cell->value), TableCells::H4_pattern);
+            }
+            TableCells::updateAll(['value' => $value], ['td_id' => $_POST['td_id'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
+        }
+    }
+
     public
     function actionDeleteColumn($table_id, $td_id)
     {
@@ -167,9 +208,9 @@ class TableCellsController extends Controller
         if ($_POST['tr_id'] AND $_POST['attr'] AND $_POST['value'] AND $_POST['table_id']) {
             if ($_POST['td_id'] == 0) {
                 $isUpdated = TableRows::updateAll(['result' => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
-               return $isUpdated;
+                return $isUpdated;
             } else {
-                $isUpdated = TableCells::updateAll([$_POST['attr'] => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'td_id' => $_POST['td_id'],'table_id' => $_POST['table_id']]);
+                $isUpdated = TableCells::updateAll([$_POST['attr'] => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'td_id' => $_POST['td_id'], 'table_id' => $_POST['table_id']]);
                 return $isUpdated;
             }
 
