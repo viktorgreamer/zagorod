@@ -5,6 +5,8 @@ use \backend\utils\D;
 use yii\helpers\Html;
 use yii\bootstrap\Collapse;
 
+use \common\models\Icons;
+
 
 /* @var $smeta \common\models\Smeta */
 if ($smeta = \common\models\Smeta::find()->where(['forTest' => 1])->one()) {
@@ -30,6 +32,9 @@ echo Html::button(" ADD COLUMN", ['id' => 'add-column-button', 'class' => 'btn b
 echo Html::button(" Объеденить", ['id' => 'combine', 'class' => 'btn btn-primary']);
 echo Html::button(" H1", ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::H1]]);
 echo Html::button(" H4", ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::H4]]);
+echo Html::button(Icons::ALIGH_LEFT, ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::LEFT]]);
+echo Html::button(Icons::ALIGH_CENTER, ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::CENTER]]);
+echo Html::button(Icons::ALIGH_RIGHT, ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::RIGHT]]);
 \yii\widgets\Pjax::begin(['id' => 'pjax-table']);
 echo Html::tag("h3", "ТАБЛИЦА");
 if ($rows) {
@@ -42,7 +47,6 @@ if ($rows) {
         if ($cells = $row_sells_query->asArray()->all()) {
             $tds = '';
             foreach ($cells as $cell) {
-                if ($keyRow == (count($rows) - 1)) $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $cell['td_id'], 'max_column' => count($cells)]),['class' => 'header_bottom']);
 
                 $comment_value = $smeta->ReplaceValue($cell['value']);
 
@@ -60,10 +64,13 @@ if ($rows) {
                             'id' => "input_id_" . $cell['tr_id'] . "_" . $cell['td_id'],
 
                         ]);
+
+                if ($cell['align']) $alignClass = " ".$cell['align'];
+
                 $tds .= Html::tag('td', $value,
                     [
                         'colspan' => $cell['colspan'],
-                        'class' => 'edit-cell active_cell',
+                        'class' => 'edit-cell active_cell'.$alignClass,
                         'id' => 'cell_' . $cell['tr_id'] . "_" . $cell['td_id'],
                         'data' => [
                             'tr_id' => $cell['tr_id'],
@@ -111,16 +118,40 @@ if ($rows) {
 
         }
 
-        if ($keyRow == (count($rows) - 1)) $trs_head .= Html::tag('tr', $tds_head . "<td>Условие</td>");
+
         $td_action = Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)]));
         $trs .= Html::tag('tr', $tds . $td_action, ['class' => $row_class]);
     }
+
+    if ($tableColumns = \common\models\TableColumns::find()->Where(['table_id' => $table_id])->asArray()->all()) {
+      //  D::dump($tableColumns);
+        foreach ($tableColumns as $column) {
+            $options = [];
+            if ($width = $column['width']) {
+               $options = ['width' => $width.'px'];
+            };
+            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'max_column' => count($tableColumns)]),$options);
+
+    }
+
+    }
+
+    $trs_head .= Html::tag('tr', $tds_head . "<td>Условие</td>");
+
+
     $TableHead = Html::tag('thead', $trs_head);
-    $table = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table']);
+    $table = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table','id' => 'report_table']);
 }
 echo $table;
 \yii\widgets\Pjax::end();
+?>
 
+    <textarea class="form-control" rows="5" id="variables"><?php $table->variables; ?></textarea>
+  <?= Html::button('Сохранить переменные',['id' => 'save-variables','class' => 'btn btn-success']); ?>
+
+
+
+<?php
 
 echo Collapse::widget([
     'items' => [
@@ -195,6 +226,8 @@ function save_element() {
           
 }
 
+
+
 $(document).on('click','#add-row-button', function() {
    // table_id = $(this).data('table_id');
      $.ajax({
@@ -204,6 +237,22 @@ $(document).on('click','#add-row-button', function() {
         success: function (res) {
             console.log(res);
              $.pjax.reload('#pjax-table',{timeout : false});
+             
+        },
+
+        
+    });
+});
+
+$(document).on('click','#save-variables', function() {
+    variables = $('#variables').val();
+     $.ajax({
+        url: '/admin/table/save-variables',
+        data: {table_id: window.table_id,variables: variables},
+        type: 'post',
+        success: function (res) {
+            console.log(res);
+            
              
         },
 
@@ -254,6 +303,23 @@ $(document).on('click','.delete-column-button', function() {
         
     });
 });
+$(document).on('click','.column-width-change', function() {
+    change_td_id = $(this).data('td_id');
+    width = $(this).data('width');
+     $.ajax({
+        url: '/admin/table-cells/change-width',
+        data: {td_id: change_td_id,table_id: window.table_id,width:width},
+        type: 'post',
+        success: function (res) {
+            console.log(res);
+             $.pjax.reload('#pjax-table',{timeout : false});
+             
+        },
+
+        
+    });
+});
+
 $(document).on('click','.row-priority-change', function() {
     change_tr_id = $(this).data('tr_id');
     priority = $(this).data('priority');
@@ -345,6 +411,7 @@ $(document).on("click",".edit-cell", function () {
         type: 'post',
         success: function (res) {
             console.log(res);
+             $.pjax.reload('#pjax-table',{timeout : false});
         }
          });
          

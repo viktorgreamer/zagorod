@@ -51,6 +51,14 @@ class TableController extends Controller
         ]);
     }
 
+    public function actionSaveVariables()
+    {
+        if (($_POST['variables']) AND ($_POST['table_id'])) {
+            Table::updateAll(['variables' => $_POST['variables']],['table_id' => $_POST['table_id']]);
+        }
+
+    }
+
     /**
      * Displays a single Table model.
      * @param integer $id

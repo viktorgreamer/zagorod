@@ -19,4 +19,8 @@ class Icons
     const MOVE_RIGHT = '<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>';
     const EDIT = '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>';
     const COPY = '<span class="glyphicon glyphicon-copy" aria-hidden="true"></span>';
+    const ALIGH_CENTER = '<span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>';
+    const ALIGH_RIGHT = '<span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>';
+    const ALIGH_LEFT = '<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>';
+
 }

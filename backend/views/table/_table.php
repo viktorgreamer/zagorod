@@ -38,7 +38,6 @@ if ($rows) {
         if ($cells = $row_sells_query->asArray()->all()) {
             $tds = '';
             foreach ($cells as $cell) {
-                if ($keyRow == 0) $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $cell['td_id'], 'max_column' => count($cells)]));
 
                 $comment_value = $smeta->ReplaceValue($cell['value']);
 
@@ -104,9 +103,24 @@ if ($rows) {
 
         }
 
-        if ($keyRow == 0) $trs_head .= Html::tag('tr', $tds_head . "<td>Условие</td>");
+
         $td_action = Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)]));
         $trs .= Html::tag('tr', $tds . $td_action, ['class' => $row_class]);
+    }
+
+    if ($tableColumns = \common\models\TableColumns::find()->Where(['table_id' => $table_id])->asArray()->all()) {
+
+        foreach ($tableColumns as $column) {
+            $options = [];
+            if ($width = $column->width) {
+                D::success($width);
+                $options = ['width' => $width.'px'];
+            };
+            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'max_column' => count($tableColumns)]),$options);
+
+
+        }
+        $trs_head .= Html::tag('tr', $tds_head . "<td>Условие</td>");
     }
     $TableHead = Html::tag('thead', $trs_head);
     $table = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered']);

@@ -1,84 +1,32 @@
-{"tr_id":"4","td_to_delete":"2","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 0"
-" COLSPAN  = 1"
-{"tr_id":"4","td_to_delete":"2","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 0"
-" COLSPAN  = 2"
-{"tr_id":"4","td_to_delete":"3","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 0"
-" COLSPAN  = 3"
-{"tr_id":"4","td_to_delete":"2","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 0"
-" COLSPAN  = 2"
-"4"
-"6"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-{"tr_id":5,"table_id":"1","td_id":3,"value":""}
-{"tr_id":5,"table_id":"1","td_id":4,"value":""}
-{"tr_id":5,"table_id":"1","td_id":5,"value":""}
-{"tr_id":5,"table_id":"1","td_id":6,"value":""}
-{"tr_id":"4","td_to_delete":"2","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 0"
-" COLSPAN  = 2"
-{"tr_id":"4","td_to_delete":"3","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 1"
-" COLSPAN  = 4"
-{"tr_id":"4","td_to_delete":"4","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 2"
-" COLSPAN  = 6"
-{"tr_id":"4","td_to_delete":"5","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = 3"
-" COLSPAN  = 8"
-"4"
-"6"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-{"tr_id":5,"table_id":"1","td_id":3,"value":""}
-{"tr_id":5,"table_id":"1","td_id":4,"value":""}
-{"tr_id":5,"table_id":"1","td_id":5,"value":""}
-{"tr_id":5,"table_id":"1","td_id":6,"value":""}
-{"tr_id":"4","td_to_delete":"2","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = "
-" COLSPAN  = 2"
-{"tr_id":"4","td_to_delete":"3","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = "
-" COLSPAN  = 3"
-{"tr_id":"4","td_to_delete":"4","td_col_span":"1","table_id":"1"}
-" EXTRA SPAN  = "
-" COLSPAN  = 4"
-{"tr_id":"4","td_to_delete":"6","td_col_span":"5","table_id":"1"}
-" EXTRA SPAN  = "
-" COLSPAN  = 2"
-"4"
-"6"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-{"tr_id":5,"table_id":"1","td_id":3,"value":""}
-{"tr_id":5,"table_id":"1","td_id":4,"value":""}
-{"tr_id":5,"table_id":"1","td_id":5,"value":""}
-{"tr_id":5,"table_id":"1","td_id":6,"value":""}
-"4"
-"6"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-{"tr_id":5,"table_id":"1","td_id":3,"value":""}
-{"tr_id":5,"table_id":"1","td_id":4,"value":""}
-{"tr_id":5,"table_id":"1","td_id":5,"value":""}
-{"tr_id":5,"table_id":"1","td_id":6,"value":""}
-"4"
-"6"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-{"tr_id":5,"table_id":"1","td_id":3,"value":""}
-{"tr_id":5,"table_id":"1","td_id":4,"value":""}
-{"tr_id":5,"table_id":"1","td_id":5,"value":""}
-{"tr_id":5,"table_id":"1","td_id":6,"value":""}
-"4"
-"6"
-{"tr_id":5,"table_id":"1","td_id":1,"value":""}
-{"tr_id":5,"table_id":"1","td_id":2,"value":""}
-{"tr_id":5,"table_id":"1","td_id":3,"value":""}
-{"tr_id":5,"table_id":"1","td_id":4,"value":""}
-{"tr_id":5,"table_id":"1","td_id":5,"value":""}
-{"tr_id":5,"table_id":"1","td_id":6,"value":""}
+{"td_id":"1","table_id":"1","width":"50"}
+50
+{"td_id":"1","table_id":"1","width":"-50"}
+-50
+{"td_id":"1","table_id":"1","width":"-50"}
+-50
+{"td_id":"2","table_id":"1","width":"-50"}
+-50
+{"td_id":"2","table_id":"1","width":"50"}
+50
+{"td_id":"2","table_id":"1","width":"50"}
+50
+{"td_id":"3","table_id":"1","width":"50"}
+50
+{"td_id":"4","table_id":"1","width":"50"}
+50
+{"td_id":"1","table_id":"1","width":"50"}
+50
+{"td_id":"1","table_id":"1","width":"50"}
+50
+{"td_id":"1","table_id":"1","width":"50"}
+50
+{"td_id":"1","table_id":"1","width":"50"}
+50
+{"td_id":"1","table_id":"1","width":"50"}
+50
+{"td_id":"2","table_id":"1","width":"-20"}
+-20
+{"td_id":"2","table_id":"1","width":"-20"}
+-20
+{"td_id":"2","table_id":"1","width":"-20"}
+-20

@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\utils\D;
 use common\models\Table;
+use common\models\TableColumns;
 use common\models\TableRows;
 use kartik\base\WidgetAsset;
 use Yii;
@@ -106,6 +107,9 @@ class TableCellsController extends Controller
                 if (!$cell->save()) D::dump($cell->errors);
             } while ($counter < $CountCells);
 
+            $column = new TableColumns(['td_id' => $table_max_column + 1, 'table_id' => $table_id, 'width' => '10']);
+            $column->save();
+
             return $this->render('_debug');
 
 
@@ -132,13 +136,13 @@ class TableCellsController extends Controller
                 ->where(['td_id' => $_POST['td_col_span']])
                 ->andWhere(['tr_id' => $_POST['tr_id']])
                 ->andWhere(['table_id' => $_POST['table_id']])
-               // ->select('colspan')
+                // ->select('colspan')
                 ->one();
             $colspan_delete = TableCells::find()
                 ->where(['td_id' => $_POST['td_to_delete']])
                 ->andWhere(['tr_id' => $_POST['tr_id']])
                 ->andWhere(['table_id' => $_POST['table_id']])
-               // ->select('colspan')
+                // ->select('colspan')
                 ->one();
             if (!$colspan_colspan->colspan) $colspan_colspan->colspan = 1;
             if (!$colspan_delete->colspan) $colspan_delete->colspan = 1;
@@ -156,13 +160,26 @@ class TableCellsController extends Controller
         if (($_POST['table_id']) AND ($_POST['tr_id']) AND ($_POST['td_id']) AND $_POST['format']) {
             $cell = TableCells::find()->where(['AND', ['td_id' => $_POST['td_id'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]])->one();
             if ($_POST['format'] == TableCells::H1) {
-                $value = preg_replace("/{value}/", $cell->value, TableCells::H1_pattern);
+                $cell->value = preg_replace("/{value}/", strip_tags($cell->value), TableCells::H1_pattern);
             }
 
             if ($_POST['format'] == TableCells::H4) {
-                $value = preg_replace("/{value}/", strip_tags($cell->value), TableCells::H4_pattern);
+                $cell->value = preg_replace("/{value}/", strip_tags($cell->value), TableCells::H4_pattern);
             }
-            TableCells::updateAll(['value' => $value], ['td_id' => $_POST['td_id'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
+            if ($_POST['format'] == TableCells::CENTER) {
+                $cell->align = 'text-center';
+
+            }
+            if ($_POST['format'] == TableCells::LEFT) {
+                $cell->align = 'text-left';
+
+            }
+            if ($_POST['format'] == TableCells::RIGHT) {
+                $cell->align = 'text-right';
+
+            }
+
+            $cell->update(false);
         }
     }
 
@@ -170,6 +187,7 @@ class TableCellsController extends Controller
     function actionDeleteColumn($table_id, $td_id)
     {
         TableCells::deleteAll(['table_id' => $table_id, 'td_id' => $td_id]);
+        TableColumns::deleteAll(['table_id' => $table_id, 'td_id' => $td_id]);
         $table = Table::findOne($table_id);
         if ($table) $table->reset();
         /* @var $table Table */
@@ -198,6 +216,23 @@ class TableCellsController extends Controller
         if ($table = Table::findOne($table_id)) {
             $table->reorderPriorityColumn($td_id, $priority);
         }
+
+    }
+    public
+    function actionChangeWidth()
+    {
+        $table_id = $_POST['table_id'];
+        $td_id = $_POST['td_id'];
+        $width = $_POST['width'];
+        D::dump($_POST);
+        D::success(intval($width));
+
+        if ($column = TableColumns::find()->where(['table_id' => $table_id])->andWhere(['td_id' => $td_id])->one()) {
+            $width = $column->width + intval($width);
+            if ($width < 0) $width = 0;
+            TableColumns::updateAll(['width' => $width],['table_id' => $table_id,'td_id' => $td_id]);
+        }
+
 
     }
 

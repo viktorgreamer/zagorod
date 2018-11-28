@@ -1,3 +1,19 @@
+
+
+function copyToClipboard(text) {
+    let data = new DataTransfer();
+
+    data.items.add("text/plain", text);
+    navigator.clipboard.write(data).then(function() {
+        /* success */
+    }, function() {
+        /* failure */
+    });
+}
+
+
+
+
 $(document).on('click', 'button.modal-button-create-estimate-stage', function (e) {
     var estimate_id = $(this).data('estimate_id');
     console.log(estimate_id);

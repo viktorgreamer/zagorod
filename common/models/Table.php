@@ -139,6 +139,8 @@ class Table extends \yii\db\ActiveRecord
                 //   D::dump($row);
                 // D::success("SETTING NEW TR_ID ".($key+1)." TO ".$row);
                 TableCells::updateAll(['td_id' => $key + 1], ['td_id' => $column, 'table_id' => $this->table_id]);
+                TableColumns::updateAll(['td_id' => $key + 1], ['td_id' => $column, 'table_id' => $this->table_id]);
+
             }
         }
 
