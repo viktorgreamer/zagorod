@@ -20,7 +20,6 @@ if ($smeta = \common\models\Smeta::find()->where(['forTest' => 1])->one()) {
 };
 
 
-$table_id = 1;
 $table = \common\models\Table::findOne($table_id);
 $estimate = \common\models\Estimate::findOne($table->estimate_id);
 $inputs = $estimate->inputs;
@@ -51,8 +50,8 @@ if ($rows) {
                 $comment_value = $smeta->ReplaceValue($cell['value']);
 
 
-                $value = Html::tag('div', $cell['value'], [
-                        // 'class' => 'edit-cell',
+                $value = Html::tag('cell', $cell['value'], [
+                        'class' => 'edit-cell',
                         'id' => "cell_id_" . $cell['tr_id'] . "_" . $cell['td_id'],
 
                         'title' => $comment_value,
@@ -65,12 +64,12 @@ if ($rows) {
 
                         ]);
 
-                if ($cell['align']) $alignClass = " ".$cell['align'];
+                if ($cell['align']) $alignClass = " " . $cell['align'];
 
                 $tds .= Html::tag('td', $value,
                     [
                         'colspan' => $cell['colspan'],
-                        'class' => 'edit-cell active_cell'.$alignClass,
+                        'class' => 'edit-cell active_cell' . $alignClass,
                         'id' => 'cell_' . $cell['tr_id'] . "_" . $cell['td_id'],
                         'data' => [
                             'tr_id' => $cell['tr_id'],
@@ -91,8 +90,8 @@ if ($rows) {
             }
 
 
-            $value = Html::tag('div', $table_row->result, [
-                    // 'class' => 'edit-cell',
+            $value = Html::tag('cell', $table_row->result, [
+                    'class' => 'div-cell',
                     'id' => "cell_id_" . $cell['tr_id'] . "_0",
 
                     'title' => $result_value,
@@ -124,15 +123,15 @@ if ($rows) {
     }
 
     if ($tableColumns = \common\models\TableColumns::find()->Where(['table_id' => $table_id])->asArray()->all()) {
-      //  D::dump($tableColumns);
+        //  D::dump($tableColumns);
         foreach ($tableColumns as $column) {
             $options = [];
             if ($width = $column['width']) {
-               $options = ['width' => $width.'px'];
+                $options = ['width' => $width . 'px'];
             };
-            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'max_column' => count($tableColumns)]),$options);
+            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'max_column' => count($tableColumns)]), $options);
 
-    }
+        }
 
     }
 
@@ -140,15 +139,14 @@ if ($rows) {
 
 
     $TableHead = Html::tag('thead', $trs_head);
-    $table = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table','id' => 'report_table']);
+    $table_html = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table', 'id' => 'report_table']);
 }
-echo $table;
+echo $table_html;
 \yii\widgets\Pjax::end();
 ?>
 
-    <textarea class="form-control" rows="5" id="variables"><?php $table->variables; ?></textarea>
-  <?= Html::button('Сохранить переменные',['id' => 'save-variables','class' => 'btn btn-success']); ?>
-
+    <textarea class="form-control" rows="5" id="variables"><?php echo $table->variables; ?></textarea>
+<?= Html::button('Сохранить переменные', ['id' => 'save-variables', 'class' => 'btn btn-success']); ?>
 
 
 <?php
@@ -173,25 +171,27 @@ echo Collapse::widget([
 <?php
 
 $js = <<<JS
+window.IsActiveCell = false;
 window.table_id = $table_id;
-$(document).on('click', function(e) {
-    if ( e.target.tagName == 'INPUT' ) {
-        if ((window.old_clicked_tr_id != window.clicked_tr_id) && (window.old_clicked_td_id != window.clicked_td_id)) {
-            save_element();
-            window.old_clicked_td_id = 0;
-            window.old_clicked_tr_id = 0;
-       }
+$(document).on('keypress',function(e) {
+    if (window.IsActiveCell) {
+         save_element();
+       window.IsActiveCell = false;
+    } 
+     
+    console.log(' KEYPRESSED '+ window.IsActiveCell);
+  
       
-    }  else save_element();
 });
 
 $(document).on('click','#combine', function() {
-  
+   window.editStatusChanged = true;
   if (!window.combineStatus) {
       window.combineStatus = true;
       toastr.success("Объединения активировано");
   } else {
       window.combineStatus = false;
+     
       toastr.error("Выделение деактивировано");
   }
 });
@@ -203,16 +203,16 @@ $(document).on('click','.format', function() {
 });
 
 function save_element() {
-    input = document.getElementById("input_id_" + window.old_clicked_tr_id + "_" +window.old_clicked_td_id);
+    input = document.getElementById("input_id_" + window.clicked_tr_id + "_" +window.clicked_td_id);
     if (input)  {
         value = input.value;
-        document.getElementById("cell_id_" + window.old_clicked_tr_id + "_" +window.old_clicked_td_id).innerText = value;
+        document.getElementById("cell_id_" + window.clicked_tr_id + "_" +window.clicked_td_id).innerText = value;
         input.classList.toggle('hidden');
-        document.getElementById("cell_id_" + window.old_clicked_tr_id + "_" +window.old_clicked_td_id).classList.toggle('hidden');
+        document.getElementById("cell_id_" + window.clicked_tr_id + "_" +window.clicked_td_id).classList.toggle('hidden');
           console.log("UPDATE VALUE  = " + value + " TR_ID = " + window.old_clicked_tr_id  + " TD_ID = " + window.old_clicked_td_id );
      $.ajax({
         url: '/admin/table-cells/change',
-        data: {attr: 'value',value: value,tr_id:window.old_clicked_tr_id,td_id:window.old_clicked_td_id,table_id: window.table_id},
+        data: {attr: 'value',value: value,tr_id:window.clicked_tr_id,td_id:window.clicked_td_id,table_id: window.table_id},
         type: 'post',
         success: function (res) {
             console.log(res);
@@ -221,7 +221,10 @@ function save_element() {
         
     });
           
+    } else {
+        console.log(" ELEMENTS TO SAVE NOT FOUND");
     }
+           
          
           
 }
@@ -252,13 +255,12 @@ $(document).on('click','#save-variables', function() {
         type: 'post',
         success: function (res) {
             console.log(res);
-            
-             
-        },
+         },
 
         
     });
 });
+
 $(document).on('click','#add-column-button', function() {
    // table_id = $(this).data('table_id');
      $.ajax({
@@ -273,6 +275,7 @@ $(document).on('click','#add-column-button', function() {
         
     });
 });
+
 $(document).on('click','.delete-row-button', function() {
     delete_tr_id = $(this).data('tr_id');
      $.ajax({
@@ -352,8 +355,11 @@ $(document).on('click','.column-priority-change', function() {
         
     });
 });
-$(document).on("click",".edit-cell", function () {
-    if (window.combineStatus === true) {
+$(document).on("click","td.edit-cell", function () {
+    
+    if ( window.editStatusChanged === true) {
+        window.editStatusChanged = false;
+     if (window.combineStatus === true) {
         if (window.first_tr_id && window.first_td_id) {
             window.second_tr_id = $(this).data('tr_id');
             window.second_td_id = $(this).data('td_id');
@@ -417,16 +423,22 @@ $(document).on("click",".edit-cell", function () {
          
           window.formatStatus = false;
         
-    } else {
-         window.old_clicked_tr_id = window.clicked_tr_id;
-        window.old_clicked_td_id = window.clicked_td_id;
-    
-    window.clicked_tr_id = $(this).data('tr_id');
+    }   
+    }
+     else {
+       /*  window.old_clicked_tr_id = window.clicked_tr_id;
+        window.old_clicked_td_id = window.clicked_td_id;*/
+    if (window.IsActiveCell == false) {
+        window.clicked_tr_id = $(this).data('tr_id');
     window.clicked_td_id = $(this).data('td_id');
-  //  console.log("CELL " + window.clicked_td_id);
-   // console.log("ROW " + window.clicked_tr_id);
+    console.log("CELL " + window.clicked_td_id);
+    console.log("ROW " + window.clicked_tr_id); 
+    
     $(this).find("input").removeClass('hidden');
-    $(this).find("div").addClass('hidden');
+    $(this).find("cell").addClass('hidden');
+    window.IsActiveCell = true;
+    }
+    ;
     }
    
    

@@ -13,6 +13,9 @@ table#report_table  td.active_cell {
 table.table-bordered  thead > tr > td.header_bottom {
     border-bottom: 1px solid black; !important;
 }
+.edit-title-input {
+    width: 100%;
+}
 
 .wrap {
     min-height: 100%;
