@@ -174,12 +174,14 @@ $js = <<<JS
 window.IsActiveCell = false;
 window.table_id = $table_id;
 $(document).on('keypress',function(e) {
+    if(e.which == 13) {
     if (window.IsActiveCell) {
          save_element();
        window.IsActiveCell = false;
     } 
      
     console.log(' KEYPRESSED '+ window.IsActiveCell);
+    }
   
       
 });

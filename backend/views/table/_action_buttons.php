@@ -9,8 +9,14 @@ use common\models\Icons;
 
 ?>
 
-<div align="right">
 
+    <div class="btn-group">
+        <div align="right">
+        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
 
     <?= Html::button(Icons::REMOVE, ['class' => 'btn btn-danger delete-row-button btn-xs',
         'data' => [
@@ -39,4 +45,7 @@ use common\models\Icons;
 
     <?= Html::button(Icons::COPY, ['class' => 'btn btn-primary copy-row-to-output btn-xs',
         'title' => 'Копировать строку']); ?>
+            </li>
+        </ul>
+    </div>
 </div>
