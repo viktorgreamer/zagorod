@@ -197,7 +197,7 @@ $(document).on('click','#combine', function() {
 });
 
 $(document).on('click','.format', function() {
-  
+   window.editStatusChanged = true;
   window.formatStatus = true;
       window.format_type = $(this).data('format_type');
 });
@@ -358,9 +358,10 @@ $(document).on('click','.column-priority-change', function() {
 $(document).on("click","td.edit-cell", function () {
     
     if ( window.editStatusChanged === true) {
-        window.editStatusChanged = false;
+       
      if (window.combineStatus === true) {
         if (window.first_tr_id && window.first_td_id) {
+             window.editStatusChanged = false;
             window.second_tr_id = $(this).data('tr_id');
             window.second_td_id = $(this).data('td_id');
             console.log(" ПРОВОДИМ ОБЪЕДИНЕНИЕ ЯЧЕЕК");
@@ -394,7 +395,7 @@ $(document).on("click","td.edit-cell", function () {
         
     });
                      
-                 
+               
                 toastr.error("Выделение деактивировано");
             window.first_tr_id = 0;
             window.first_td_id = 0;
@@ -411,6 +412,8 @@ $(document).on("click","td.edit-cell", function () {
         
         
     } else if (window.formatStatus === true) {
+         
+          window.editStatusChanged = false;
          $.ajax({
         url: '/admin/table-cells/format',
         data: {tr_id: $(this).data('tr_id') ,td_id: $(this).data('td_id'),format: window.format_type,table_id: window.table_id},
