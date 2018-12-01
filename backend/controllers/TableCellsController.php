@@ -241,7 +241,7 @@ class TableCellsController extends Controller
     function actionChange()
     {
         if ($_POST['tr_id'] AND $_POST['attr'] AND $_POST['table_id']) {
-            if ($_POST['td_id'] == 0) {
+            if (!$_POST['td_id']) {
                 $isUpdated = TableRows::updateAll(['result' => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
                 return $isUpdated;
             } else {

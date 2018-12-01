@@ -21,7 +21,7 @@ use common\models\Icons;
     <?= Html::button(Icons::REMOVE, ['class' => 'btn btn-danger delete-row-button btn-xs',
         'data' => [
                 'tr_id' => $tr_id,
-                'confirm' => 'Удалить?'
+               // 'confirm' => 'Удалить?'
         ]
     ]); ?>
 <?php if ($tr_id == $max_row) $disable_down_priority_button = true; else $disable_down_priority_button = false; ?>

@@ -33,7 +33,8 @@ use yii\bootstrap\ButtonDropdown;
                 <?= Html::button(Icons::REMOVE, ['class' => 'btn btn-danger delete-column-button btn-xs',
                     'data' => [
                         'td_id' => $td_id,
-                        'confirm' => 'Удалить?']
+                      //  'confirm' => 'Удалить?'
+                    ]
                 ]); ?>
 
                 <?php if ($td_id == $max_column) $disable_down_priority_button = true; else $disable_down_priority_button = false; ?>

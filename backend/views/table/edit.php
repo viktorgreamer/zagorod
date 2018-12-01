@@ -279,21 +279,27 @@ $(document).on('click','#add-column-button', function() {
 });
 
 $(document).on('click','.delete-row-button', function() {
-    delete_tr_id = $(this).data('tr_id');
+    if (confirm('Удалить?')) {
+         delete_tr_id = $(this).data('tr_id');
      $.ajax({
         url: '/admin/table-cells/delete-row',
         data: {tr_id: delete_tr_id,table_id: window.table_id},
         type: 'get',
         success: function (res) {
-            console.log(res);
+           // console.log(res);
              $.pjax.reload('#pjax-table',{timeout : false});
              
         },
 
         
     });
+    }
+   
 });
+
 $(document).on('click','.delete-column-button', function() {
+console.log(" delete-column-button CLICKED");
+if (confirm('Удалить?')) {
     delete_td_id = $(this).data('td_id');
      $.ajax({
         url: '/admin/table-cells/delete-column',
@@ -307,6 +313,7 @@ $(document).on('click','.delete-column-button', function() {
 
         
     });
+     }
 });
 $(document).on('click','.column-width-change', function() {
     change_td_id = $(this).data('td_id');
