@@ -62,9 +62,9 @@ class InputControls extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['event_id', 'input_id', 'type'], 'required'],
+            [['event_id', 'input_id', 'type','name'], 'required'],
             [['event_id', 'input_id', 'type'], 'integer'],
-            [['value'], 'string', 'max' => 256],
+            [['value','name'], 'string', 'max' => 256],
         ];
     }
 

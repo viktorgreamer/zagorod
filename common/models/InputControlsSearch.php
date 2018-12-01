@@ -19,7 +19,7 @@ class InputControlsSearch extends InputControls
     {
         return [
             [['id', 'event_id', 'input_id', 'type'], 'integer'],
-            [['value'], 'safe'],
+            [['value','name'], 'safe'],
         ];
     }
 
