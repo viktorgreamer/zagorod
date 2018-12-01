@@ -77,6 +77,7 @@ class TableCellsController extends Controller
             $tr = new TableRows();
             $tr->tr_id = $table_max_row + 1;
             $tr->table_id = $table->table_id;
+            $tr->save();
             $counter = 0;
             D::dump($CountCells);
             do {
@@ -218,6 +219,7 @@ class TableCellsController extends Controller
         }
 
     }
+
     public
     function actionChangeWidth()
     {
@@ -230,7 +232,7 @@ class TableCellsController extends Controller
         if ($column = TableColumns::find()->where(['table_id' => $table_id])->andWhere(['td_id' => $td_id])->one()) {
             $width = $column->width + intval($width);
             if ($width < 0) $width = 0;
-            TableColumns::updateAll(['width' => $width],['table_id' => $table_id,'td_id' => $td_id]);
+            TableColumns::updateAll(['width' => $width], ['table_id' => $table_id, 'td_id' => $td_id]);
         }
 
 
@@ -240,7 +242,7 @@ class TableCellsController extends Controller
     public
     function actionChange()
     {
-        if ($_POST['tr_id'] AND $_POST['attr'] AND $_POST['table_id']) {
+        if ($_POST['tr_id'] AND $_POST['table_id']) {
             if (!$_POST['td_id']) {
                 $isUpdated = TableRows::updateAll(['result' => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
                 return $isUpdated;
