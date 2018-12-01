@@ -91,6 +91,7 @@ class InputControls extends \yii\db\ActiveRecord
             'id' => 'ID',
             'event.name' => 'Событие',
             'input.name' => 'Поле ввода',
+            'typeText' => 'Тип',
             'type' => 'Тип',
             'value' => 'Значение',
         ];
