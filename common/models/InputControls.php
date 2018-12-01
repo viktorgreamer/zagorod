@@ -39,6 +39,10 @@ class InputControls extends \yii\db\ActiveRecord
             self::TYPE_UNCHECKED => "Галочка не нажата"
         ];
     }
+    public function getTypeText()
+    {
+       return $this->mapTypes()[$this->type];
+    }
 
     public function mapEvents($extended = false)
     {
@@ -70,7 +74,12 @@ class InputControls extends \yii\db\ActiveRecord
 
     public function getInput()
     {
-        return $this->hasOne(Input::className(),['input_id' => $this->input_id]);
+        return $this->hasOne(Input::className(),['input_id' => 'input_id']);
+    }
+
+    public function getEvent()
+    {
+        return $this->hasOne(Events::className(),['event_id' => 'event_id']);
     }
 
     /**
@@ -80,8 +89,8 @@ class InputControls extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'event_id' => 'Событие',
-            'input_id' => 'Поле ввода',
+            'event.name' => 'Событие',
+            'input.name' => 'Поле ввода',
             'type' => 'Тип',
             'value' => 'Значение',
         ];
