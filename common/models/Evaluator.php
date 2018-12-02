@@ -9,6 +9,8 @@
 namespace common\models;
 
 
+use backend\utils\D;
+
 class Evaluator
 {
 
@@ -44,8 +46,8 @@ class Evaluator
     public static function makeBoolean($result)
     {
         if (preg_match(self::$formulaPattern, $result)) {
-            $eval = "if (".$result."); return 1; else return 0;";
-
+            $eval = "if (" . $result . ") return 1; else return 0;";
+            D::success($eval);
             try {
                 $response['value'] = eval($eval);
                 $response['type'] = 'success';
