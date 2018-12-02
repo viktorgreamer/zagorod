@@ -47,7 +47,7 @@ class Evaluator
     {
         if (preg_match(self::$formulaPattern, $result)) {
             $eval = "if (" . $result . ") return 1; else return 0;";
-            D::success($eval);
+           // D::success($eval);
             try {
                 $response['value'] = eval($eval);
                 $response['type'] = 'success';
