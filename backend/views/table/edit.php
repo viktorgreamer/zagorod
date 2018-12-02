@@ -95,7 +95,7 @@ if ($rows) {
                 $result_value = $smeta->ReplaceValue($table_row->result);
                 if ($result_value === $table_row->result) {
 
-                    $table_row->result = "<text style=\"color:red\">" . $table_row->result . "</text>";
+                   // $table_row->result = "<text style=\"color:red\">" . $table_row->result . "</text>";
                     $row_class = 'danger';
                 } else {
                     $value = \common\models\Evaluator::makeBoolean($result_value);

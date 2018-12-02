@@ -44,7 +44,7 @@ class Evaluator
     public static function makeBoolean($result)
     {
         if (preg_match(self::$formulaPattern, $result)) {
-            $eval = "; return " . $result . ";";
+            $eval = "if (".$result."); return 1; else return 0;";
 
             try {
                 $response['value'] = eval($eval);
