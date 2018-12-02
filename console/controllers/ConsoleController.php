@@ -31,8 +31,9 @@ class ConsoleController extends \yii\console\Controller
     }
 
     public function actionTestInversion() {
-        $result = Evaluator::makeBoolean('(not(1)) && (1)');
-        D::dump($result['value']);
+        if ((1) && (1)) echo "TRUE";
+        $result = Evaluator::makeBoolean('(1) && (1)');
+        D::dump("VALUE = ".$result['value']);
         D::dump($result['type']);
       //  D::dump(eval("!1"));
     }

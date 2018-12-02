@@ -14,7 +14,7 @@ use backend\utils\D;
 class Evaluator
 {
 
-    public static $formulaPattern = '/[*|\/|-|+|round|abs|floor|]/';
+    public static $formulaPattern = '/[*|\/|-|+|round|abs|floor|\|\||&&]/';
 
     public static function make($result)
     {
@@ -49,6 +49,7 @@ class Evaluator
             $eval = "if (" . $result . ") return 1; else return 0;";
            // D::success($eval);
             try {
+              //  D::dump(eval($eval));
                 $response['value'] = eval($eval);
                 $response['type'] = 'success';
 
