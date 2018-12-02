@@ -34,7 +34,7 @@ use Yii;
  */
 class Material extends \yii\db\ActiveRecord
 {
-    public static $formulaParams = ['id', 'name', 'articul', 'price', 'cost','self_cost','meisure'];
+    public static $formulaParams = ['id', 'name', 'articul', 'price', 'cost','self_cost','measure'];
 
     public static $formulaName = 'material_{id}_';
     public static $pattern = '/material_(\d+)_/';
