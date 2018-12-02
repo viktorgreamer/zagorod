@@ -36,8 +36,8 @@ else echo Html::a(Icons::EYE . ' Посмотреть результат', ['tab
 echo Html::tag("h3", "ТАБЛИЦА");
 if ($rows) {
 
-    if ($_GET['show_result']) echo "SHOW_RESULTS";
-    else echo "DEBUG PANEL";
+  /*  if ($_GET['show_result']) echo "SHOW_RESULTS";
+    else echo "DEBUG PANEL";*/
     $trs = '';
     foreach ($rows as $keyRow => $row) {
         $table_row = \common\models\TableRows::find()->where(['table_id' => $table_id])->andWhere(['tr_id' => $row['tr_id']])->one();

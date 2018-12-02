@@ -275,7 +275,7 @@ class Smeta extends \yii\db\ActiveRecord
         if (!$params['works_id']) $params['works_id'] = Works::preg_match($this->getBodyWorks());
         $variables = array_merge($this->loadEvents(), $this->loadInputs(), $this->loadOutputs(),
             $this->loadStation(), $this->loadMaterials($params['materials_id']),
-            $this->loadManager(), $this->loadCity(),$this->loadWorks());
+            $this->loadManager(), $this->loadCity(),$this->loadWorks($params['works_id']));
 
         $this->variables = $variables;
         $this->variablesKeys = array_keys($this->variables);
