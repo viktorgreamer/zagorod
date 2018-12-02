@@ -19,6 +19,8 @@ class Works extends \yii\db\ActiveRecord
     public static $formulaName = 'work_{id}_';
     public static $formulaParams = ['id', 'name', 'cost','self_cost','meisure'];
 
+    public static $pattern = '/work_(\d+)_/';
+
 
     /**
      * {@inheritdoc}
@@ -65,7 +67,7 @@ class Works extends \yii\db\ActiveRecord
         ];
     }
     public static function preg_match($body = '') {
-        if (preg_match_all('/works_(\d+)_/',$body,$matches)) {
+        if (preg_match_all('/work_(\d+)_/',$body,$matches)) {
             if ($matches[1]) return array_unique($matches[1]);
         }
         return [];
