@@ -17,6 +17,7 @@ class Works extends \yii\db\ActiveRecord
 {
 
     public static $formulaName = 'work[{id}]';
+    public static $formulaParams = ['id', 'name', 'cost','self_cost','meisure'];
 
 
     /**
@@ -63,6 +64,13 @@ class Works extends \yii\db\ActiveRecord
             13 => 'день',
         ];
     }
+    public static function preg_match($body = '') {
+        if (preg_match_all('/works_(\d+)_/',$body,$matches)) {
+            if ($matches[1]) return array_unique($matches[1]);
+        }
+        return [];
+    }
+
 
     public function getMeisureText()
     {

@@ -243,13 +243,39 @@ class Smeta extends \yii\db\ActiveRecord
         }
         return $body;
     }
+    public function getBodyWorks()
+    {
+        $body = '';
+        if ($outputs = Output::find()->where(['in', 'output_id', $this->getOutputsId()])
+            ->andWhere([
+                'OR',
+                ['like', 'formula', 'work_'],
+                ['like', 'result', 'work_'],
+            ])->select('output_id,name,formula,result')->all()) {
+            foreach ($outputs as $output) {
+                $body .= " " . $output->formula;
+                $body .= " " . $output->result;
+            }
+
+
+        }
+        if ($table_cells = TableCells::find()->where(['like', 'value', 'work_'])->select('value')->column()) {
+            foreach ($table_cells as $table_cell) {
+                $body .= " " . $table_cell;
+            }
+
+
+        }
+        return $body;
+    }
 
     public function loadVariables($params = [])
     {
         if (!$params['materials_id']) $params['materials_id'] = Material::preg_match($this->getBodyMaterials());
+        if (!$params['works_id']) $params['works_id'] = Works::preg_match($this->getBodyWorks());
         $variables = array_merge($this->loadEvents(), $this->loadInputs(), $this->loadOutputs(),
             $this->loadStation(), $this->loadMaterials($params['materials_id']),
-            $this->loadManager(), $this->loadCity());
+            $this->loadManager(), $this->loadCity(),$this->loadWorks());
 
         $this->variables = $variables;
         $this->variablesKeys = array_keys($this->variables);
@@ -335,6 +361,25 @@ class Smeta extends \yii\db\ActiveRecord
                 if ($params = Material::$formulaParams) {
                     foreach ($params as $param) {
                         $variables[$material->getFormulaName() . "." . $param] = $material->$param;
+                    }
+                }
+
+            }
+
+            return $variables;
+
+        } else return [];
+    }
+    public function loadWorks($works_id = [])
+    {
+
+        /* @var $work Works */
+
+        if ($works = Works::find()->where(['in', 'id', $works_id])->all()) {
+            foreach ($works as $work) {
+                if ($params = Works::$formulaParams) {
+                    foreach ($params as $param) {
+                        $variables[$work->getFormulaName() . "." . $param] = $work->$param;
                     }
                 }
 
