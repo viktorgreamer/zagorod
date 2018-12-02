@@ -89,6 +89,38 @@ class TableCellsController extends Controller
         }
     }
 
+    public function actionCopyRow($table_id, $tr_id)
+    {
+
+        /* @var $table Table */
+
+        if ($table = Table::findOne($table_id)) {
+            $table_max_row = TableCells::find()->where(['table_id' => $table_id])->max('tr_id');
+            D::dump($table_max_row);
+            $CountCells = TableCells::find()->where(['table_id' => $table_id])->max('td_id');
+            $tr = new TableRows();
+            $tr->tr_id = $table_max_row + 1;
+            $tr->table_id = $table->table_id;
+            $tr->save();
+            $counter = 0;
+            D::dump($CountCells);
+            if ($tr_id) {
+                if ($cells = TableCells::find()->where(['table_id' => $table_id])->andWhere(['tr_id' => $tr_id])->all()) {
+                    foreach ($cells as $cell) {
+                        $counter++;
+                        $new_cell = new TableCells(['tr_id' => $table_max_row + 1, 'table_id' => $table_id, 'td_id' => $cell->td_id]);
+                        $new_cell->classes = $cell->classes;
+                        $new_cell->value = $cell->value;
+                        $new_cell->colspan = $cell->colspan;
+                     //   $new_cell->align = $cell->align;
+                        D::dump($new_cell->toArray());
+                        if (!$new_cell->save()) D::dump($new_cell->errors);
+                    }
+                }
+            }
+        }
+    }
+
 
     public
     function actionAddColumn($table_id)
@@ -158,27 +190,12 @@ class TableCellsController extends Controller
     public
     function actionFormat()
     {
+        D::$isLogToFile = true;
+        D::dump($_POST);
+        /* @var $cell TableCells */
         if (($_POST['table_id']) AND ($_POST['tr_id']) AND ($_POST['td_id']) AND $_POST['format']) {
             $cell = TableCells::find()->where(['AND', ['td_id' => $_POST['td_id'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]])->one();
-            if ($_POST['format'] == TableCells::H1) {
-                $cell->value = preg_replace("/{value}/", strip_tags($cell->value), TableCells::H1_pattern);
-            }
-
-            if ($_POST['format'] == TableCells::H4) {
-                $cell->value = preg_replace("/{value}/", strip_tags($cell->value), TableCells::H4_pattern);
-            }
-            if ($_POST['format'] == TableCells::CENTER) {
-                $cell->align = 'text-center';
-
-            }
-            if ($_POST['format'] == TableCells::LEFT) {
-                $cell->align = 'text-left';
-
-            }
-            if ($_POST['format'] == TableCells::RIGHT) {
-                $cell->align = 'text-right';
-
-            }
+            $cell->toggleClass($_POST['format']);
 
             $cell->update(false);
         }

@@ -30,6 +30,12 @@ class Events extends \yii\db\ActiveRecord
         return preg_replace("/{id}/", $this->event_id, self::$formulaName);
     }
 
+    public function getFormulaLink()
+    {
+        return $this->getFormulaName() . " =" . $this->estimate->name . "->" . $this->name;
+    }
+
+
 
     public function getExtendedName() {
         return "- ".$this->getFormulaName()." - ".$this->estimate->name." - ".$this->name;

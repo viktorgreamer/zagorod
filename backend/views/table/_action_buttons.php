@@ -12,7 +12,7 @@ use common\models\Icons;
 
     <div class="btn-group">
         <div align="right">
-        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-success btn-sm dropdown-toggle action_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Action <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
@@ -43,8 +43,13 @@ use common\models\Icons;
             'pjax-timeout' => 5000,
         ]]); ?>
 
-    <?= Html::button(Icons::COPY, ['class' => 'btn btn-primary copy-row-to-output btn-xs',
-        'title' => 'Копировать строку']); ?>
+    <?= Html::button(Icons::COPY, ['class' => 'btn btn-primary copy-row-from-row btn-xs',
+        'title' => 'Копировать строку',
+        'data' => [
+            'pjax' => '1',
+            'tr_id' => $tr_id,
+            'pjax-timeout' => 5000,
+        ]]);  ?>
             </li>
         </ul>
     </div>

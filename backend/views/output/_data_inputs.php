@@ -9,6 +9,7 @@ if ($inputs) {
         // echo "<br> input[".$input->input_id."] =".$input->stage->name. "->".$input->name;
         echo "<br>".\yii\helpers\Html::button($input->getFormulaLink(),
             ['class' => 'btn btn-success btn-xs add-input-to-formula',
+                'onclick' => "copyToClipboard('".$input->getFormulaName()."')",
                 'data' => [
                     'input_id' => $input->input_id,
                     'formula_link' => $input->getFormulaName()." =".$input->stage->name. "->".$input->name,

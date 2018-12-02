@@ -151,6 +151,7 @@ class OutputController extends Controller
 
 
         $variables = $smeta->loadVariables(['materials_id' => Material::preg_match($smeta->getBodyMaterials() . $formula . $result)]);
+
         if (trim($result)) {
             $output = new Output();
             $output->type = $type;

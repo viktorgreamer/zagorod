@@ -1,17 +1,28 @@
-
-
-function copyToClipboard(text) {
-    let data = new DataTransfer();
-
-    data.items.add("text/plain", text);
-    navigator.clipboard.write(data).then(function() {
-        /* success */
-    }, function() {
-        /* failure */
-    });
+function copyToClipboard(element) {
+    $('#clipboard_area').text(element);
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($('#clipboard_area').text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+    toastr.success(element, 'Скопировано в буфер');
 }
 
+function toggleSelectedCells(tr_id, td_id) {
+    if (selectedCellsArray = window.selectedCells) {
+        selectedCellsArray.forEach(function (item, index) {
+            if ((item[1] == tr_id) && (item[1] == td_id)) {
+                window.selectedCells.splice(index, 1)
 
+            }
+        });
+    } else {
+        console.log(" SELECTED CELLS IF EMPTY");
+        window.selectedCells.push([tr_id, td_id]);
+    }
+
+    console.log(window.selectedCells);
+}
 
 
 $(document).on('click', 'button.modal-button-create-estimate-stage', function (e) {
@@ -100,7 +111,7 @@ $(document).on('click', '.input-priority-change', function (e) {
         type: 'get',
         success: function (res) {
 
-            $.pjax.reload('#pjax_id',{timeout : false});
+            $.pjax.reload('#pjax_id', {timeout: false});
 
         },
 
@@ -171,7 +182,7 @@ $(document).on('click', '.delete-output', function (e) {
 
         $.ajax({
             url: '/admin/output/delete-ajax',
-             data: {id: output_id},
+            data: {id: output_id},
             type: 'post',
             complete: function (res) {
                 console.log("RES  = " + res);
@@ -202,7 +213,7 @@ $(document).on('click', '.output-priority-change', function (e) {
         data: {output_id: output_id, priority: priority},
         type: 'get',
         success: function (res) {
-            $.pjax.reload('#pjax_id',{timeout : false});
+            $.pjax.reload('#pjax_id', {timeout: false});
         },
 
         error: function () {
@@ -225,7 +236,7 @@ $(document).on('click', '.stage-priority-change', function (e) {
         data: {stage_id: stage_id, priority: priority},
         type: 'get',
         success: function (res) {
-            $.pjax.reload('#pjax_id',{timeout : false});
+            $.pjax.reload('#pjax_id', {timeout: false});
         },
 
         error: function () {

@@ -5,9 +5,22 @@ body {
 
 table#report_table  td.active_cell {
     border: 1px solid black;
-    margin: 2px;
-    padding: 2px;
+    margin: 1px;
+    padding: 1px;
     vertical-align: middle; !important;
+}
+
+button.action_button {
+
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+}
+
+table#report_table td {
+    margin: 1px;
+    padding: 1px;
+
 }
 
 table.table-bordered  thead > tr > td.header_bottom {
@@ -16,6 +29,35 @@ table.table-bordered  thead > tr > td.header_bottom {
 .edit-title-input {
     width: 100%;
 }
+
+td.actions_column {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+td.success {
+    color: green ;
+}
+td.danger {
+    color: red ;
+}
+td.default {
+    color: grey ;
+}
+td.text-bold {
+    font-weight: bold;
+}
+table#report_table td.selected {
+ background-color: #bcbcbc;
+}
+
+td.header1 {
+    font-size: 150%;
+}
+td.header4 {
+    font-size: 120%;
+}
+
 
 .wrap {
     min-height: 100%;

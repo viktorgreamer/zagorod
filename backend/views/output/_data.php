@@ -15,6 +15,14 @@ echo Tabs::widget([
             'active' => true
         ],
         [
+            'label' => 'События',
+            'content' => $this->render('_data_events', compact(['events'])),
+        ],
+        [
+            'label' => 'Вычисления',
+            'content' => $this->render('_data_outputs', compact(['outputs'])),
+        ],
+        [
             'label' => 'Стоимость работ',
             'content' =>  $this->render('/works/_template_search')
         ],[

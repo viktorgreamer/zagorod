@@ -35,6 +35,7 @@ if ($id) {
 
             <td><?php echo \yii\helpers\Html::button($link . $property,
                     ['class' => 'btn btn-success btn-xs add-input-to-formula',
+                        'onclick' => "copyToClipboard('".$link . $property."')",
                         'data' => [
                             'formula_link' => $link . $property . " = Материал->" . $name . " ".$label]]); ?></td>
         </tr>

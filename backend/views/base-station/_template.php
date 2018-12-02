@@ -28,8 +28,10 @@ $properties = $basetation->attributeLabels();
 
             <td><?php echo \yii\helpers\Html::button("station.".$property,
                     ['class' => 'btn btn-success btn-xs add-input-to-formula',
+                        'onclick' => "copyToClipboard('"."station.".$property."')",
                         'data' => [
                             'formula_link' => "station.".$property." = Станция->".$label]]); ?></td>
+
         </tr>
     <?php } ?>
 

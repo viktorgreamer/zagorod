@@ -22,5 +22,7 @@ class Icons
     const ALIGH_CENTER = '<span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>';
     const ALIGH_RIGHT = '<span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>';
     const ALIGH_LEFT = '<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>';
+    const TEXT_BOLD = '<span class="glyphicon glyphicon-bold" aria-hidden="true"></span>';
+    const EYE = '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>';
 
 }

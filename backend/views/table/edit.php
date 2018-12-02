@@ -23,20 +23,21 @@ if ($smeta = \common\models\Smeta::find()->where(['forTest' => 1])->one()) {
 $table = \common\models\Table::findOne($table_id);
 $estimate = \common\models\Estimate::findOne($table->estimate_id);
 $inputs = $estimate->inputs;
+$events = $estimate->events;
+$outputs = $estimate->outputs;
 $query_row = TableCells::find()->where(['table_id' => $table_id])->select('tr_id');
 
 $rows = $query_row->distinct()->asArray()->orderBy('tr_id')->all();
-echo Html::button(" ADD ROW", ['id' => 'add-row-button', 'class' => 'btn btn-success']);
-echo Html::button(" ADD COLUMN", ['id' => 'add-column-button', 'class' => 'btn btn-success']);
-echo Html::button(" Объеденить", ['id' => 'combine', 'class' => 'btn btn-primary']);
-echo Html::button(" H1", ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::H1]]);
-echo Html::button(" H4", ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::H4]]);
-echo Html::button(Icons::ALIGH_LEFT, ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::LEFT]]);
-echo Html::button(Icons::ALIGH_CENTER, ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::CENTER]]);
-echo Html::button(Icons::ALIGH_RIGHT, ['class' => 'btn btn-primary format', 'data' => ['format_type' => TableCells::RIGHT]]);
+echo $this->render('_format_panel');
+if ($_GET['show_result']) echo Html::a(Icons::EDIT . ' Режим редактирования', ['table/edit', 'id' => $table->table_id], ['class' => 'btn btn-primary']);
+else echo Html::a(Icons::EYE . ' Посмотреть результат', ['table/edit', 'id' => $table->table_id, 'show_result' => 1], ['class' => 'btn btn-primary']);
+
 \yii\widgets\Pjax::begin(['id' => 'pjax-table']);
 echo Html::tag("h3", "ТАБЛИЦА");
 if ($rows) {
+
+    if ($_GET['show_result']) echo "SHOW_RESULTS";
+    else echo "DEBUG PANEL";
     $trs = '';
     foreach ($rows as $keyRow => $row) {
         $table_row = \common\models\TableRows::find()->where(['table_id' => $table_id])->andWhere(['tr_id' => $row['tr_id']])->one();
@@ -47,13 +48,22 @@ if ($rows) {
             $tds = '';
             foreach ($cells as $cell) {
 
-                $comment_value = $smeta->ReplaceValue($cell['value']);
+                if (($_GET['show_result'])) {
 
+                    $comment_value = $cell['value'];
+                    $response = \common\models\Evaluator::make($smeta->ReplaceValue($cell['value']));
+                    $contentClass = $response['type'];
+                    $value = $response['value'];
+                } else {
+                    $response = \common\models\Evaluator::make($smeta->ReplaceValue($cell['value']));
+                    $contentClass = $response['type'];
+                    $comment_value = $response['value'];
+                    $value = $cell['value'];
+                }
 
-                $value = Html::tag('cell', $cell['value'], [
-                        'class' => 'edit-cell',
+                $value = Html::tag('cell', $value, [
+                        'class' => 'edit-cell ' . $contentClass,
                         'id' => "cell_id_" . $cell['tr_id'] . "_" . $cell['td_id'],
-
                         'title' => $comment_value,
                         // 'data' => ['tr_id' => $cell['tr_id'],'td_id' => $cell['td_id']]]
                     ])
@@ -69,7 +79,7 @@ if ($rows) {
                 $tds .= Html::tag('td', $value,
                     [
                         'colspan' => $cell['colspan'],
-                        'class' => 'edit-cell active_cell' . $alignClass,
+                        'class' => "edit-cell active_cell " . $contentClass . " " . $cell['classes'],
                         'id' => 'cell_' . $cell['tr_id'] . "_" . $cell['td_id'],
                         'data' => [
                             'tr_id' => $cell['tr_id'],
@@ -79,22 +89,37 @@ if ($rows) {
                     ]);
             }
             $row_class = 'success';
+            $cell_value = '';
+            $title = '';
             if ($table_row->result) {
                 $result_value = $smeta->ReplaceValue($table_row->result);
                 if ($result_value === $table_row->result) {
+
                     $table_row->result = "<text style=\"color:red\">" . $table_row->result . "</text>";
                     $row_class = 'danger';
-                } elseif (!$result_value) {
-                    $row_class = 'warning';
-                }
+                } else {
+                    $value = \common\models\Evaluator::makeBoolean($result_value);
+
+                        if (!$value['value']) {
+                            $row_class = 'warning';
+                        }
+                        if ($_GET['show_result']) {
+                            $title = $table_row->result;
+                            $cell_value = $value['value'];
+                        } else {
+                            $cell_value = $table_row->result;
+                             $title = $value['value'];
+                        }
+
+                    }
             }
 
 
-            $value = Html::tag('cell', $table_row->result, [
+            $value = Html::tag('cell', $cell_value, [
                     'class' => 'div-cell',
                     'id' => "cell_id_" . $cell['tr_id'] . "_0",
 
-                    'title' => $result_value,
+                    'title' => $title,
                     // 'data' => ['tr_id' => $cell['tr_id'],'td_id' => $cell['td_id']]]
                 ])
                 . Html::input('text', 'result_row_' . $cell['tr_id'], $table_row->result,
@@ -106,7 +131,7 @@ if ($rows) {
             $tds .= Html::tag('td', $value,
                 [
 
-                    'class' => 'edit-cell',
+                    'class' => 'edit-cell  text-center',
                     'data' => [
                         'tr_id' => $cell['tr_id'],
                         'td_id' => '0'
@@ -118,7 +143,7 @@ if ($rows) {
         }
 
 
-        $td_action = Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)]));
+        $td_action = Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)], ['class' => 'actions_column']));
         $trs .= Html::tag('tr', $tds . $td_action, ['class' => $row_class]);
     }
 
@@ -148,7 +173,7 @@ echo $table_html;
     <textarea class="form-control" rows="5" id="variables"><?php echo $table->variables; ?></textarea>
 <?= Html::button('Сохранить переменные', ['id' => 'save-variables', 'class' => 'btn btn-success']); ?>
 
-
+    <textarea id="clipboard_area" hidden></textarea>
 <?php
 
 echo Collapse::widget([
@@ -160,7 +185,11 @@ echo Collapse::widget([
 
         ], [
             'label' => 'Ссылки на переменный',
-            'content' => $this->render("/output/_data", compact('inputs')),
+            'content' => $this->render("/output/_data", compact(['inputs','outputs','events'])),
+        ],
+        [
+            'label' => 'Справочни функций',
+            'content' => $this->render("/output/functions/_functions"),
         ],
 
     ]
@@ -171,6 +200,7 @@ echo Collapse::widget([
 <?php
 
 $js = <<<JS
+window.selectedCells = [];
 window.IsActiveCell = false;
 window.table_id = $table_id;
 $(document).on('keypress',function(e) {
@@ -188,6 +218,7 @@ $(document).on('keypress',function(e) {
 
 $(document).on('click','#combine', function() {
    window.editStatusChanged = true;
+   window.formatStatus = false; 
   if (!window.combineStatus) {
       window.combineStatus = true;
       toastr.success("Объединения активировано");
@@ -198,9 +229,21 @@ $(document).on('click','#combine', function() {
   }
 });
 
-$(document).on('click','.format', function() {
-   window.editStatusChanged = true;
-  window.formatStatus = true;
+$(document).on('click','button.format', function() {
+    
+      if (window.combineStatus === true) {
+          window.combineStatus = false;
+            toastr.error("Выделение деактивировано");
+            window.first_tr_id = 0;
+            window.first_td_id = 0;
+            window.second_tr_id = 0;
+            window.second_td_id = 0;
+      }
+isActive = $(this).hasClass('active');
+$('button.active').removeClass('active');
+if (!isActive) $(this).addClass('active');
+  if (window.format_type == $(this).data('format_type'))  window.formatStatus = false; 
+  else window.formatStatus = true;
       window.format_type = $(this).data('format_type');
 });
 
@@ -230,6 +273,9 @@ function save_element() {
          
           
 }
+
+
+
 
 
 
@@ -268,6 +314,20 @@ $(document).on('click','#add-column-button', function() {
      $.ajax({
         url: '/admin/table-cells/add-column',
         data: {table_id: window.table_id},
+        type: 'get',
+        success: function (res) {
+            console.log(res);
+             $.pjax.reload('#pjax-table',{timeout : false});
+        },
+
+        
+    });
+});
+$(document).on('click','.copy-row-from-row', function() {
+    tr_id = $(this).data('tr_id');
+     $.ajax({
+        url: '/admin/table-cells/copy-row',
+        data: {table_id: window.table_id,tr_id:tr_id},
         type: 'get',
         success: function (res) {
             console.log(res);
@@ -365,9 +425,9 @@ $(document).on('click','.column-priority-change', function() {
     });
 });
 $(document).on("click","td.edit-cell", function () {
+    $(this).toggleClass('selected');
+    console.log('ONE CLICK ADDED');
     
-    if ( window.editStatusChanged === true) {
-       
      if (window.combineStatus === true) {
         if (window.first_tr_id && window.first_td_id) {
              window.editStatusChanged = false;
@@ -415,14 +475,12 @@ $(document).on("click","td.edit-cell", function () {
         } else {
         window.first_tr_id = $(this).data('tr_id');
         window.first_td_id = $(this).data('td_id');
-        $(this).attr('style','background:grey')
-            
         }
         
         
-    } else if (window.formatStatus === true) {
+    } 
+    if (window.formatStatus === true) {
          
-          window.editStatusChanged = false;
          $.ajax({
         url: '/admin/table-cells/format',
         data: {tr_id: $(this).data('tr_id') ,td_id: $(this).data('td_id'),format: window.format_type,table_id: window.table_id},
@@ -433,14 +491,14 @@ $(document).on("click","td.edit-cell", function () {
         }
          });
          
-          window.formatStatus = false;
         
     }   
-    }
-     else {
-       /*  window.old_clicked_tr_id = window.clicked_tr_id;
-        window.old_clicked_td_id = window.clicked_td_id;*/
-    if (window.IsActiveCell == false) {
+    
+});
+
+$(document).on("dblclick","td.edit-cell", function () {
+     console.log('DUBBLE CLICK ADDED');
+     
         window.clicked_tr_id = $(this).data('tr_id');
     window.clicked_td_id = $(this).data('td_id');
     console.log("CELL " + window.clicked_td_id);
@@ -449,9 +507,9 @@ $(document).on("click","td.edit-cell", function () {
     $(this).find("input").removeClass('hidden');
     $(this).find("cell").addClass('hidden');
     window.IsActiveCell = true;
-    }
+    
     ;
-    }
+    
    
    
 });

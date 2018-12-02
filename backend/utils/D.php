@@ -1,21 +1,24 @@
-<?
+<?php
 
 namespace backend\utils;
 
 class D
 {
+
     const LOG_TO_FILE = true;
     const PATH_TO_JSON = "debug/log.json";
+    public static $isConsole = false;
+    public static $isLogToFile = false;
+
 
     private static $dumpVars;
 
     public static function logToFile($var)
     {
 
-        $log = file_get_contents(self::PATH_TO_JSON);
-        $log .= $var . "\r\n";
+        $log = $var . "\r\n";
 
-        file_put_contents(self::PATH_TO_JSON, $log);
+     if (self::$isLogToFile) file_put_contents(self::PATH_TO_JSON, $log, FILE_APPEND);
     }
 
     public static function dumpToFile($var)
@@ -24,16 +27,19 @@ class D
         $log = file_get_contents(self::PATH_TO_JSON);
         $log .= json_encode($var) . "\r\n";
 
-        file_put_contents(self::PATH_TO_JSON, $log);
+        if (self::$isLogToFile) file_put_contents(self::PATH_TO_JSON, $log);
     }
 
     public static function dump($var)
     {
+        if (self::$isConsole) {
+            print_r($var);
+        }
         ob_start();
         echo "<pre>";
         print_r($var);
         echo "</pre>";
-        static::dumpToFile($var);
+        if (self::$isLogToFile)  static::dumpToFile($var);
 
         static::$dumpVars[] = ob_get_clean();
     }
@@ -53,8 +59,12 @@ class D
         static::$dumpVars[] = ob_get_clean();
     }
 
-    public static function alert($var)
+    public static function alert($var,$type = 'danger')
     {
+        if (self::$isConsole) {
+            self::toConsole($var,'danger');
+        }
+
         ob_start();
         echo "<div class=\"alert-my alert-danger\">" . $var . "</div>";
         static::logToFile($var);
@@ -63,8 +73,23 @@ class D
 
     public static function success($var)
     {
+        if (self::$isConsole) {
+            self::toConsole($var,'success');
+        }
+
         ob_start();
         echo "<div class=\"alert-my alert-success\">" . $var . "</div>";
+        static::$dumpVars[] = ob_get_clean();
+        static::logToFile($var);
+    }
+    public static function primary($var)
+    {
+        if (self::$isConsole) {
+            self::toConsole($var,'primary');
+        }
+
+        ob_start();
+        echo "<div class=\"alert-my alert-primary\">" . $var . "</div>";
         static::$dumpVars[] = ob_get_clean();
         static::logToFile($var);
     }
@@ -98,4 +123,30 @@ class D
         D::echor("<hr> ");
 
     }
+
+    public static function toConsole($message = "Hello", $type = '') {
+
+
+            $message = strip_tags($message);
+            switch ($type) {
+                case 'danger':
+                    echo "\033[1;31m" . strip_tags($message) . "\033[0m\n";
+                    break;
+                case 'success':
+                    echo "\033[1;32m" . strip_tags($message) . "\033[0m\n";
+                    break;
+                case 'warning':
+                    echo "\033[1;33m" . strip_tags($message) . "\033[0m\n";
+                    break;
+                case 'primary':
+                    echo "\033[1;34m" . strip_tags($message) . "\033[0m\n";
+                    break;
+                default:
+                    echo $message . "\n";
+                    break;
+            }
+
+
+        }
+
 }
