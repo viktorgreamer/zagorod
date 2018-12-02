@@ -16,7 +16,7 @@ use Yii;
 class Works extends \yii\db\ActiveRecord
 {
 
-    public static $formulaName = 'work[{id}]';
+    public static $formulaName = 'work_{id}_';
     public static $formulaParams = ['id', 'name', 'cost','self_cost','meisure'];
 
 
