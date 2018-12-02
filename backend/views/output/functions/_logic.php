@@ -86,7 +86,7 @@
         <td>
             <CODE>
                 not(1) = 0;
-                not(2) = 1;
+                not(0) = 1;
             </CODE>
         </td>
     </tr>
