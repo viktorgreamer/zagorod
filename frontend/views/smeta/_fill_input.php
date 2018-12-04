@@ -21,7 +21,7 @@ if ($model->event_id) $data = ['event_id' => $model->event_id];
 $title = '';
 if ($controls = $model->controls) {
     foreach ($controls as $control) {
-        $title .= $control->control_id." ";
+        $title .= "CONTROL_ID ". $control->id." TYPE = ".$control->type;
         if ($event_value = \common\models\SmetaEvents::find()->where(['smeta_id' => $smeta->smeta_id])->andWhere(['event_id' => $control->event_id])->one()) {
             if ($event_value->value) {
                 if ($control->type == \common\models\InputControls::TYPE_SET_VALUE) $value = $control->value;
