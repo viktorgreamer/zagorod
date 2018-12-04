@@ -18,9 +18,10 @@ $inputValue = \common\models\InputValue::find()->where(['smeta_id' => $smeta->sm
 if ($inputValue) $value = $inputValue->value; else $value = '';
 
 if ($model->event_id) $data = ['event_id' => $model->event_id];
-
+$title = '';
 if ($controls = $model->controls) {
     foreach ($controls as $control) {
+        $title .= $control->control_id." ";
         if ($event_value = \common\models\SmetaEvents::find()->where(['smeta_id' => $smeta->smeta_id])->andWhere(['event_id' => $control->event_id])->one()) {
             if ($event_value->value) {
                 if ($control->type == \common\models\InputControls::TYPE_SET_VALUE) $value = $control->value;
@@ -35,7 +36,7 @@ if ($controls = $model->controls) {
 
 
 if ($model->event_id) {
-    $title  = "EVENT_ID = ".$model->event_id." FOR ".$model->getFormName()." IS ".$variables["event_" . $model->event_id . "_"];
+    $title  .= "EVENT_ID = ".$model->event_id." FOR ".$model->getFormName()." IS ".$variables["event_" . $model->event_id . "_"];
 
     if ($variables["event_" . $model->event_id . "_"]) {
         $title .= " ELEMENT " . $model->getFormName() . " IS ACTIVE";
@@ -89,7 +90,7 @@ $id = $model->getFormID();
                         }
 
                     } elseif ($model->type == Input::IN_LIST_BASE_STATION) {
-                        echo Html::dropDownList($model->getFormName(), $value, ArrayHelper::map(BaseStation::find()->all(), 'id', 'name'),
+                        echo Html::dropDownList($model->getFormName(), $value, [ 0 => ''] + ArrayHelper::map(BaseStation::find()->all(), 'id', 'name'),
                             ['class' => $inputClass . ' form-control', 'id' => $id, 'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::IN_LIST_MATERIAL) {
                         echo Html::dropDownList($model->getFormName(), $value, ArrayHelper::map(\common\models\Material::find()->all(), 'id', 'name'), [
