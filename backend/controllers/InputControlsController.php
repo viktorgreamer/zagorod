@@ -95,6 +95,22 @@ class InputControlsController extends Controller
         ]);
     }
 
+    public function actionCopy($id)
+    {
+        if ($model = $this->findModel($id)) {
+            $new_model = new InputControls();
+            $new_model->name = $model->name;
+            $new_model->event_id = $model->event_id;
+            $new_model->input_id = $model->input_id;
+            $new_model->value = $model->value;
+            $new_model->type = $model->type;
+            $new_model->save();
+        }
+
+        return $this->redirect(['index']);
+    }
+
+
     /**
      * Deletes an existing InputControls model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

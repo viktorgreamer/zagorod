@@ -32,7 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'typeText',
             'value',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {copy}',
+                'buttons' => [
+                    'copy' => function ($url) {
+                        return Html::a('<span class="glyphicon glyphicon-copy"> </span>', $url, ['title' => 'Copy']);
+                    },
+                ]
+            ]
         ],
     ]); ?>
 </div>

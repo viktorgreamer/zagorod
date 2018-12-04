@@ -13,13 +13,18 @@ use unclead\multipleinput\MultipleInput;
  */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $control \common\models\InputControls */
+
+?>
+
+<?php
 $smeta = Yii::$app->session->get('smeta');
 $inputValue = \common\models\InputValue::find()->where(['smeta_id' => $smeta->smeta_id])->andWhere(['input_id' => $model->input_id])->one();
 if ($inputValue) $value = $inputValue->value; else $value = '';
 
 if ($model->event_id) $data = ['event_id' => $model->event_id];
-$title = '';
+$title = $input->input_id;
 if ($controls = $model->controls) {
+
     foreach ($controls as $control) {
         $title .= "CONTROL_ID ". $control->id." TYPE = ".$control->type;
         if ($event_value = \common\models\SmetaEvents::find()->where(['smeta_id' => $smeta->smeta_id])->andWhere(['event_id' => $control->event_id])->one()) {
@@ -50,7 +55,6 @@ if ($model->event_id) {
 $inputClass = 'input_field ' . $classVisible;
 $id = $model->getFormID();
 ?>
-
     <div class="input-list-view <?= $classVisible; ?>" id="div-input-id-<?= $model->input_id; ?>"
          style="background-color: #e1e1e1" data-event_id=<?= $model->event_id; ?>>
         <?php if ($model->type == Input::HEADER_1) {
@@ -103,7 +107,7 @@ $id = $model->getFormID();
                             'class' => $inputClass . ' form-control', 'id' => $id, 'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::BOOLEAN_TYPE) {
                         if ($value) $value = true; else $value = false;
-                        echo Html::checkbox($model->getFormName(), $value, ['label' => $model->name, 'class' => $inputClass, 'id' => $id, 'data' => $data, 'disabled' => $disable]);
+                        echo Html::checkbox($model->getFormName(), $value, ['label' => $model->name, 'class' => $inputClass, 'id' => $id, 'data' => $data, 'disabled' => $disable,'title' => $title]);
                     } elseif ($model->type == Input::IN_ARRAY_TYPE) {
                         $items = $model->renderItems($model->list);
                         echo Html::dropDownList($model->getFormName(), $value, $items,
