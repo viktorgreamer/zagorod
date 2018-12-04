@@ -21,7 +21,7 @@ if ($smeta = \common\models\Smeta::find()->where(['forTest' => 1])->one()) {
 $table_id = 1;
 $table = \common\models\Table::findOne($table_id);
 $estimate = \common\models\Estimate::findOne($table->estimate_id);
-$inputs = $estimate->inputs;
+$inputs = array_merge($estimate->inputs,$estimate->parent->inputs);
 $query_row = TableCells::find()->where(['table_id' => $table_id])->select('tr_id');
 
 $rows = $query_row->distinct()->asArray()->orderBy('tr_id')->all();

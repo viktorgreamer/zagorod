@@ -24,9 +24,6 @@ function toggleSelectedCells(tr_id, td_id) {
     console.log(window.selectedCells);
 }
 
-$('[data-toggle="popover"]').popover();
-
-
 
 $(document).on('click', 'button.modal-button-create-estimate-stage', function (e) {
     var estimate_id = $(this).data('estimate_id');

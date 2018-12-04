@@ -50,6 +50,10 @@ class TableController extends Controller
             'table_id' => $id,
         ]);
     }
+    public function actionJsTests()
+    {
+        return $this->render('js_tests');
+    }
 
     public function actionSaveVariables()
     {

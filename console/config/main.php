@@ -30,6 +30,13 @@ return [
                 ],
             ],
         ],
+        'db' => ['class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=a0086640_zagorod',
+            'username' => 'a0086640_pr',
+            'password' => 'WindU160',
+            'charset' => 'utf8',]
+        ,
+
     ],
     'params' => $params,
 ];
