@@ -11,9 +11,6 @@ use \common\models\Icons;
 /* @var $smeta \common\models\Smeta */
 if ($smeta = \common\models\Smeta::find()->where(['forTest' => 1])->one()) {
     if ($variables = $smeta->loadVariables()) {
-        foreach ($variables as $key => $variable) {
-            $body .= " <br>" . $value . " " . $key . " => " . $variable;
-        }
 
     };
 
@@ -22,22 +19,22 @@ if ($smeta = \common\models\Smeta::find()->where(['forTest' => 1])->one()) {
 
 $table = \common\models\Table::findOne($table_id);
 $estimate = \common\models\Estimate::findOne($table->estimate_id);
-$inputs = $estimate->inputs;
+$inputs = $estimate->inputsAll;
 $events = $estimate->events;
 $outputs = $estimate->outputs;
 $query_row = TableCells::find()->where(['table_id' => $table_id])->select('tr_id');
 
 $rows = $query_row->distinct()->asArray()->orderBy('tr_id')->all();
 echo $this->render('_format_panel');
-if ($_GET['show_result']) echo Html::a(Icons::EDIT . ' Режим редактирования', ['table/edit', 'id' => $table->table_id], ['class' => 'btn btn-primary']);
+if ($_GET['show_result']) echo Html::a(Icons::EDIT . ' Режим редактирования', ['table/edit', 'id' => $table->table_id], ['class' => 'btn btn-primary btn-xs']);
 else echo Html::a(Icons::EYE . ' Посмотреть результат', ['table/edit', 'id' => $table->table_id, 'show_result' => 1], ['class' => 'btn btn-primary']);
 
 \yii\widgets\Pjax::begin(['id' => 'pjax-table']);
 echo Html::tag("h3", "ТАБЛИЦА");
 if ($rows) {
 
-  /*  if ($_GET['show_result']) echo "SHOW_RESULTS";
-    else echo "DEBUG PANEL";*/
+    /*  if ($_GET['show_result']) echo "SHOW_RESULTS";
+      else echo "DEBUG PANEL";*/
     $trs = '';
     foreach ($rows as $keyRow => $row) {
         $table_row = \common\models\TableRows::find()->where(['table_id' => $table_id])->andWhere(['tr_id' => $row['tr_id']])->one();
@@ -47,20 +44,47 @@ if ($rows) {
         if ($cells = $row_sells_query->asArray()->all()) {
             $tds = '';
             foreach ($cells as $cell) {
+// вычисляем актична ли строка
+                $row_class = 'success';
+                $cell_value = '';
+                $title = '';
+                if ($table_row->result) {
+                    $result_value = $smeta->ReplaceValue($table_row->result);
+                    if ($result_value === $table_row->result) {
+
+                        // $table_row->result = "<text style=\"color:red\">" . $table_row->result . "</text>";
+                        $row_class = 'danger';
+                    } else {
+                        $value = \common\models\Evaluator::makeBoolean($result_value);
+
+                        if (!$value['value']) {
+                            $row_class = 'warning';
+                        }
+                        if ($_GET['show_result']) {
+                            $title = $table_row->result;
+                            $cell_value = $value['value'];
+                        } else {
+                            $cell_value = $table_row->result;
+                            $title = $value['value'];
+                        }
+
+                    }
+                }
 
                 if (($_GET['show_result'])) {
 
                     $comment_value = $cell['value'];
-                    $response = \common\models\Evaluator::make($smeta->ReplaceValue($cell['value']));
+                    $response = \common\models\Evaluator::make($smeta->ReplaceValue($cell['value']), $cell['type']);
                     $contentClass = $response['type'];
                     $value = $response['value'];
                 } else {
-                    $response = \common\models\Evaluator::make($smeta->ReplaceValue($cell['value']));
+                    $response = \common\models\Evaluator::make($smeta->ReplaceValue($cell['value']), $cell['type']);
                     $contentClass = $response['type'];
                     $comment_value = $response['value'];
                     $value = $cell['value'];
                 }
 
+                if ($row_class !== 'success') $smeta->addVariables([$cell['address'] => 0]); else $smeta->addVariables([$cell['address'] => $response['value']]);
                 $value = Html::tag('cell', $value, [
                         'class' => 'edit-cell ' . $contentClass,
                         'id' => "cell_id_" . $cell['tr_id'] . "_" . $cell['td_id'],
@@ -83,36 +107,13 @@ if ($rows) {
                         'id' => 'cell_' . $cell['tr_id'] . "_" . $cell['td_id'],
                         'data' => [
                             'tr_id' => $cell['tr_id'],
-                            'td_id' => $cell['td_id']
+                            'td_id' => $cell['td_id'],
+                            'address' => $cell['address']
                         ],
 
                     ]);
             }
-            $row_class = 'success';
-            $cell_value = '';
-            $title = '';
-            if ($table_row->result) {
-                $result_value = $smeta->ReplaceValue($table_row->result);
-                if ($result_value === $table_row->result) {
 
-                   // $table_row->result = "<text style=\"color:red\">" . $table_row->result . "</text>";
-                    $row_class = 'danger';
-                } else {
-                    $value = \common\models\Evaluator::makeBoolean($result_value);
-
-                        if (!$value['value']) {
-                            $row_class = 'warning';
-                        }
-                        if ($_GET['show_result']) {
-                            $title = $table_row->result;
-                            $cell_value = $value['value'];
-                        } else {
-                            $cell_value = $table_row->result;
-                             $title = $value['value'];
-                        }
-
-                    }
-            }
 
 
             $value = Html::tag('cell', $cell_value, [
@@ -142,9 +143,8 @@ if ($rows) {
 
         }
 
-
-        $td_action = Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)], ['class' => 'actions_column']));
-        $trs .= Html::tag('tr', $tds . $td_action, ['class' => $row_class]);
+        $td_pre = Html::tag('td', $this->render("_action_buttons", ['tr_id' => $cell['tr_id'], 'max_row' => count($rows)]), ['class' => 'text-center']);
+        $trs .= Html::tag('tr', $td_pre . $tds, ['class' => $row_class]);
     }
 
     if ($tableColumns = \common\models\TableColumns::find()->Where(['table_id' => $table_id])->asArray()->all()) {
@@ -154,13 +154,13 @@ if ($rows) {
             if ($width = $column['width']) {
                 $options = ['width' => $width . 'px'];
             };
-            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'max_column' => count($tableColumns)]), $options);
+            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'max_column' => count($tableColumns), 'column_address' => TableCells::$letters[$column['td_id'] - 1]]), $options);
 
         }
 
     }
 
-    $trs_head .= Html::tag('tr', $tds_head . "<td>Условие</td>");
+    $trs_head .= Html::tag('tr', "<td style='width: 40px'></td>" . $tds_head . "<td>Условие</td>");
 
 
     $TableHead = Html::tag('thead', $trs_head);
@@ -172,9 +172,14 @@ echo $table_html;
 
     <textarea class="form-control" rows="5" id="variables"><?php echo $table->variables; ?></textarea>
 <?= Html::button('Сохранить переменные', ['id' => 'save-variables', 'class' => 'btn btn-success']); ?>
-
     <textarea id="clipboard_area" hidden></textarea>
 <?php
+if ($variables = $smeta->getVariables()) {
+    foreach ($variables as $key => $variable) {
+        $body .= " <br>" . $key . " => " . $variable;
+    }
+
+};
 
 echo Collapse::widget([
     'items' => [
@@ -184,11 +189,11 @@ echo Collapse::widget([
             'content' => $body,
 
         ], [
-            'label' => 'Ссылки на переменный',
-            'content' => $this->render("/output/_data", compact(['inputs','outputs','events'])),
+            'label' => 'Ссылки на переменные',
+            'content' => $this->render("/output/_data", compact(['inputs', 'outputs', 'events'])),
         ],
         [
-            'label' => 'Справочни функций',
+            'label' => 'Справочник функций',
             'content' => $this->render("/output/functions/_functions"),
         ],
 
@@ -203,17 +208,17 @@ $js = <<<JS
 window.selectedCells = [];
 window.IsActiveCell = false;
 window.table_id = $table_id;
+
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
     if (window.IsActiveCell) {
          save_element();
        window.IsActiveCell = false;
-    } 
-     
+    }
     console.log(' KEYPRESSED '+ window.IsActiveCell);
     }
   
-      
+    
 });
 
 $(document).on('click','#combine', function() {
@@ -239,12 +244,85 @@ $(document).on('click','button.format', function() {
             window.second_tr_id = 0;
             window.second_td_id = 0;
       }
-isActive = $(this).hasClass('active');
-$('button.active').removeClass('active');
-if (!isActive) $(this).addClass('active');
-  if (window.format_type == $(this).data('format_type'))  window.formatStatus = false; 
-  else window.formatStatus = true;
-      window.format_type = $(this).data('format_type');
+      
+       if (window.format_type == $(this).data('format_type'))  window.formatStatus = false; 
+         else window.formatStatus = true;
+        window.format_type = $(this).data('format_type'); 
+        
+      selectedCells = $(document).find("td.selected");
+     if (selectedCells) {
+         addresses = [];
+          selectedCells.each( function(index,element) {
+           address =  $(this).data('address');
+           addresses.push(address);
+          
+          });
+           $.ajax({
+        url: '/admin/table-cells/multi-format',
+        data: {addresses: addresses ,format: window.format_type,table_id: window.table_id},
+        type: 'post',
+        success: function (res) {
+              res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+             $.pjax.reload('#pjax-table',{timeout : false});
+        }
+         });
+             $('button.active').removeClass('active');
+           
+           console.log(addresses + " SELECTED");
+     } else {
+         isActive = $(this).hasClass('active');
+        $('button.active').removeClass('active');
+        if (!isActive) $(this).addClass('active');
+        
+     }
+
+});
+
+$(document).on('click','button.render_sum', function() {
+    selectedCells = $(document).find("td.selected");
+     if (selectedCells) {
+         addresses = [];
+          selectedCells.each( function(index,element) {
+           address =  $(this).data('address');
+           addresses.push(address);
+         
+          
+          });
+     }
+       render_sum = addresses.join("+");
+    // toastr.success("Выделено ",render_sum);
+     copyToClipboard(render_sum);
+          
+
+});
+$(document).on('click','button.set_type', function() {
+    settedType = $(this).data('type');
+    selectedCells = $(document).find("td.selected");
+     if (selectedCells) {
+         addresses = [];
+          selectedCells.each( function(index,element) {
+           address =  $(this).data('address');
+           addresses.push(address);
+         
+          
+          });
+          $.ajax({
+        url: '/admin/table-cells/multi-set-type',
+        data: {addresses: addresses ,type: settedType,table_id: window.table_id},
+        type: 'post',
+        success: function (res) {
+              res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+             $.pjax.reload('#pjax-table',{timeout : false});
+        }
+         });
+     }
+      
+         
+
 });
 
 function save_element() {
@@ -260,7 +338,10 @@ function save_element() {
         data: {attr: 'value',value: value,tr_id:window.clicked_tr_id,td_id:window.clicked_td_id,table_id: window.table_id},
         type: 'post',
         success: function (res) {
-            console.log(res);
+            res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+          
         },
 
         
@@ -274,6 +355,35 @@ function save_element() {
           
 }
 
+function update_history_list(table_history) {
+      li = "<li><a class='choose_history' data-table_history_id = '" + table_history.id + "' title = '" + table_history.time + "' >" + table_history.name + "</a></li>";
+      if (history_list = $('#history-list')) {
+          history_list.prepend(li);
+           $('#history-list li').last().remove();
+      }
+             
+}
+
+
+$(document).on('click','.choose_history', function() {
+  history_id = $(this).data('table_history_id');
+  console.log(" HISTORY ID WAS CLICKED " + history_id);
+  
+  $.ajax({
+        url: '/admin/table/restore-history',
+        data: {history_id: history_id},
+        type: 'post',
+        success: function (res) {
+            console.log(res.status);
+           $.pjax.reload('#pjax-table',{timeout : false});
+        },
+
+        
+    });
+          
+  
+});
+
 
 
 
@@ -286,7 +396,9 @@ $(document).on('click','#add-row-button', function() {
         data: {table_id: window.table_id},
         type: 'get',
         success: function (res) {
-            console.log(res);
+               res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
              $.pjax.reload('#pjax-table',{timeout : false});
              
         },
@@ -316,7 +428,9 @@ $(document).on('click','#add-column-button', function() {
         data: {table_id: window.table_id},
         type: 'get',
         success: function (res) {
-            console.log(res);
+              res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
              $.pjax.reload('#pjax-table',{timeout : false});
         },
 
@@ -330,12 +444,30 @@ $(document).on('click','.copy-row-from-row', function() {
         data: {table_id: window.table_id,tr_id:tr_id},
         type: 'get',
         success: function (res) {
-            console.log(res);
+               res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
              $.pjax.reload('#pjax-table',{timeout : false});
         },
 
         
     });
+});
+
+$(document).on('click','.select-row', function() {
+    tr_id = $(this).data('tr_id');
+    console.log(tr_id + ' SELECTED');
+    cells = $('td[data-tr_id="' + tr_id + '"].active_cell');
+   
+   cells.addClass('selected');
+});
+
+$(document).on('click','.select-column', function() {
+    td_id = $(this).data('td_id');
+    console.log(td_id + ' SELECTED');
+    cells = $('td[data-td_id="' + td_id + '"].active_cell');
+   
+   cells.addClass('selected');
 });
 
 $(document).on('click','.delete-row-button', function() {
@@ -346,7 +478,9 @@ $(document).on('click','.delete-row-button', function() {
         data: {tr_id: delete_tr_id,table_id: window.table_id},
         type: 'get',
         success: function (res) {
-           // console.log(res);
+              res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
              $.pjax.reload('#pjax-table',{timeout : false});
              
         },
@@ -366,7 +500,10 @@ if (confirm('Удалить?')) {
         data: {td_id: delete_td_id,table_id: window.table_id},
         type: 'get',
         success: function (res) {
-            console.log(res);
+            res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+            
              $.pjax.reload('#pjax-table',{timeout : false});
              
         },
@@ -375,6 +512,7 @@ if (confirm('Удалить?')) {
     });
      }
 });
+
 $(document).on('click','.column-width-change', function() {
     change_td_id = $(this).data('td_id');
     width = $(this).data('width');
@@ -383,9 +521,11 @@ $(document).on('click','.column-width-change', function() {
         data: {td_id: change_td_id,table_id: window.table_id,width:width},
         type: 'post',
         success: function (res) {
-            console.log(res);
+               res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+            
              $.pjax.reload('#pjax-table',{timeout : false});
-             
         },
 
         
@@ -400,7 +540,10 @@ $(document).on('click','.row-priority-change', function() {
         data: {tr_id: change_tr_id,table_id: window.table_id,priority:priority},
         type: 'post',
         success: function (res) {
-            console.log(res);
+              res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+            
              $.pjax.reload('#pjax-table',{timeout : false});
              
         },
@@ -408,6 +551,7 @@ $(document).on('click','.row-priority-change', function() {
         
     });
 });
+
 $(document).on('click','.column-priority-change', function() {
     change_td_id = $(this).data('td_id');
     priority = $(this).data('priority');
@@ -416,7 +560,10 @@ $(document).on('click','.column-priority-change', function() {
         data: {td_id: change_td_id,table_id: window.table_id,priority:priority},
         type: 'post',
         success: function (res) {
-            console.log(res);
+               res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+            
              $.pjax.reload('#pjax-table',{timeout : false});
              
         },
@@ -424,6 +571,7 @@ $(document).on('click','.column-priority-change', function() {
         
     });
 });
+
 $(document).on("click","td.edit-cell", function () {
     $(this).toggleClass('selected');
     console.log('ONE CLICK ADDED');
@@ -458,7 +606,9 @@ $(document).on("click","td.edit-cell", function () {
         data: {tr_id: window.first_tr_id ,td_to_delete: td_to_delete,td_col_span: td_col_span ,table_id: window.table_id},
         type: 'post',
         success: function (res) {
-            console.log(res);
+               res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
         },
 
         
@@ -486,7 +636,9 @@ $(document).on("click","td.edit-cell", function () {
         data: {tr_id: $(this).data('tr_id') ,td_id: $(this).data('td_id'),format: window.format_type,table_id: window.table_id},
         type: 'post',
         success: function (res) {
-            console.log(res);
+              res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
              $.pjax.reload('#pjax-table',{timeout : false});
         }
          });

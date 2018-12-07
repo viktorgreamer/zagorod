@@ -10,11 +10,11 @@ use yii\bootstrap\ButtonDropdown;
 
 ?>
 
-<div align="right">
+<div align="center">
     <div class="btn-group">
-        <button type="button" class="btn btn-success btn-sm dropdown-toggle action_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Action <span class="caret"></span>
-        </button>
+         <div class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?= $column_address; ?> <span class="caret"></span>
+        </div>
         <ul class="dropdown-menu">
             <li> <?= Html::button(Icons::MOVE_LEFT, ['class' => 'btn btn-primary column-width-change btn-xs',
                     'data' => [
@@ -23,7 +23,7 @@ use yii\bootstrap\ButtonDropdown;
                         'pjax' => '1',
                         'pjax-timeout' => 5000,
                     ]]); ?>
-             <?= Html::button(Icons::MOVE_RIGHT, ['class' => 'btn btn-primary column-width-change btn-xs',
+                <?= Html::button(Icons::MOVE_RIGHT, ['class' => 'btn btn-primary column-width-change btn-xs',
                     'data' => [
                         'width' => '20',
                         'pjax' => '1',
@@ -33,7 +33,7 @@ use yii\bootstrap\ButtonDropdown;
                 <?= Html::button(Icons::REMOVE, ['class' => 'btn btn-danger delete-column-button btn-xs',
                     'data' => [
                         'td_id' => $td_id,
-                      //  'confirm' => 'Удалить?'
+                        //  'confirm' => 'Удалить?'
                     ]
                 ]); ?>
 
@@ -57,16 +57,16 @@ use yii\bootstrap\ButtonDropdown;
                         'td_id' => $td_id,
                         'pjax-timeout' => 5000,
                     ]]); ?>
+
+                <?= Html::button(Icons::SELECT, ['class' => 'btn btn-primary select-column btn-xs',
+                    'title' => 'Выделить столбец',
+                    'data' => [
+                        'pjax' => '1',
+                        'td_id' => $td_id,
+                        'pjax-timeout' => 5000,
+                    ]]);  ?>
             </li>
         </ul>
     </div>
-
-
-
-
-
-
-
-
-
 </div>
+

@@ -87,6 +87,13 @@ class Estimate extends \yii\db\ActiveRecord
         return $this->hasMany(Input::className(), ['estimate_id' => 'estimate_id']);
     }
 
+    public function getInputsAll()
+    {
+        if (!$parentInputs = $this->parent->inputs) $parentInputs  = [];
+
+        return array_merge($parentInputs, $this->inputs);
+    }
+
 
 
 

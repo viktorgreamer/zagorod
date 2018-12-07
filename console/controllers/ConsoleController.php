@@ -8,6 +8,9 @@
 
 namespace console\controllers;
 
+use common\models\Table;
+use common\models\TableCells;
+use common\models\TableHistory;
 use Yii;
 use backend\utils\D;
 use common\models\Evaluator;
@@ -44,32 +47,38 @@ class ConsoleController extends \yii\console\Controller
     public function actionLogDatabase()
     {
         $timestart = time();
-        foreach (range(1, 1) as $item) {
-          //  Yii::$app->db->createCommand('')->execute();
-            Yii::$app->db->createCommand('DROP TABLE  IF EXISTS `table_cells_history_3`; RENAME TABLE `table_cells_history_2` TO `table_cells_history_3`;
-RENAME TABLE `table_cells_history_1` TO `table_cells_history_2`;
-CREATE TABLE  `table_cells_history_1` LIKE `table_cells`;
-INSERT `table_cells_history_1` SELECT * FROM  `table_cells`;')->execute();
-            // Yii::$app->db->createCommand('RENAME TABLE `table_cells_history_2` TO `table_cells_history_3`;')->execute();
-            //  Yii::$app->db->createCommand('RENAME TABLE `table_cells_history_1` TO `table_cells_history_2`;')->execute();
-            // Yii::$app->db->createCommand('CREATE TABLE  `table_cells_history_1` LIKE `table_cells`')->execute();
-            //  Yii::$app->db->createCommand('INSERT `table_cells_history_1` SELECT * FROM  `table_cells`;')->execute();
+        foreach (range(1, 10) as $step) {
 
-            Yii::$app->db->createCommand('DROP TABLE  `table_columns_history_3`;')->execute();
-            Yii::$app->db->createCommand('RENAME TABLE `table_columns_history_2` TO `table_columns_history_3`;')->execute();
-            Yii::$app->db->createCommand('RENAME TABLE `table_columns_history_1` TO `table_columns_history_2`;')->execute();
-            Yii::$app->db->createCommand('CREATE TABLE  `table_columns_history_1` LIKE `table_columns`')->execute();
-            Yii::$app->db->createCommand('INSERT `table_columns_history_1` SELECT * FROM  `table_columns`;')->execute();
+            TableHistory::storeNew();
 
-            Yii::$app->db->createCommand('DROP TABLE  `table_rows_history_3`;')->execute();
-            Yii::$app->db->createCommand('RENAME TABLE `table_rows_history_2` TO `table_rows_history_3`;')->execute();
-            Yii::$app->db->createCommand('RENAME TABLE `table_rows_history_1` TO `table_rows_history_2`;')->execute();
-            Yii::$app->db->createCommand('CREATE TABLE  `table_rows_history_1` LIKE `table_rows`')->execute();
-            Yii::$app->db->createCommand('INSERT `table_rows_history_1` SELECT * FROM  `table_rows`;')->execute();
+            sleep(2);
+
         }
-        D::success("SCRIPTS TAKES " . (time() - $timestart));
+
+        TableHistory::ClearOld();
 
 
+        D::success("SCRIPTS TAKES " . (time() - $timestart - 20) . " WITH RESPONSE ");
+
+
+    }
+
+    public function actionRestore()
+    {
+        $tableHistory = TableHistory::findOne(26);
+       // TableHistory::storeNew();
+        $tableHistory->restore();
+    }
+
+    public function actionGenerateAddresses()
+    {
+        foreach (TableCells::find()->All() as $cell) {
+            $cell->address = $address = $cell->generateAddress();
+
+            D::success(" ADDRESS FOR ".$cell->tr_id." ".$cell->td_id." = ".$cell->address);
+            if (!$cell->save()) D::dump($cell->errors);
+
+        }
     }
 
 }

@@ -32,6 +32,40 @@ class EventsController extends Controller
         ];
     }
 
+    public function actionLoadAjax()
+    {
+        if ($_GET['q']) {
+            $q = $_GET['q'];
+
+
+            D::dump($q);
+            $matches = [];
+            if (!is_null($q)) {
+                if ($events = Events::find()->where(
+                    ['OR',
+                        ['like', 'name', $q],
+                        ['event_id' => $q],
+                    ])->limit(10)->all()) {
+                    foreach ($events as $event) {
+                        $matches[] = ['id' => $event->event_id, 'text' => $event->event_id . " -  " . $event->name];
+                    }
+
+                }
+            }
+
+            return json_encode(['results' => $matches]);
+        }
+        // return $this->render('_debug');
+    }
+
+    public
+    function actionTemplate($id)
+    {
+        return $this->renderAjax('_template', compact('id'));
+    }
+
+
+
     public function actionTestEvents()
     {
         $smeta = Smeta::findOne(3);

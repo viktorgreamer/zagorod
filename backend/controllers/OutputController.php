@@ -37,6 +37,40 @@ class OutputController extends Controller
         ];
     }
 
+    public function actionLoadAjax()
+    {
+        if ($_GET['q']) {
+            $q = $_GET['q'];
+
+
+            D::dump($q);
+            $matches = [];
+            if (!is_null($q)) {
+                if ($outputs = Output::find()->where(
+                    ['OR',
+                        ['like', 'name', $q],
+                        ['output_id' => $q],
+                    ])->limit(10)->all()) {
+                    foreach ($outputs as $output) {
+                        $matches[] = ['id' => $output->output_id, 'text' => $output->output_id . " -  " . $output->name];
+                    }
+
+                }
+            }
+
+            return json_encode(['results' => $matches]);
+        }
+        // return $this->render('_debug');
+    }
+
+    public
+    function actionTemplate($id)
+    {
+        return $this->renderAjax('_template', compact('id'));
+    }
+
+    
+
     /**
      * Lists all Output models.
      * @return mixed

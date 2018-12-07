@@ -1,0 +1,174 @@
+{"address":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
+{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
+{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
+["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"]
+ DELETE TABLE table_cells_1544005655 SUCCESSFULLY
+ DELETE TABLE table_rows_1544005655 SUCCESSFULLY
+ DELETE TABLE table_columns_1544005655 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544059969
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544059969
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544059969
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
+["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"]
+ DELETE TABLE table_cells_1544052617 SUCCESSFULLY
+ DELETE TABLE table_rows_1544052617 SUCCESSFULLY
+ DELETE TABLE table_columns_1544052617 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544061274
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544061274
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544061274
+NO CLASSESS
+NO CLASSESS
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+CLASSESS ARE 
+["text-center"]
+{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"","table_id":"1"}
+["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"]
+ DELETE TABLE table_cells_1544052625 SUCCESSFULLY
+ DELETE TABLE table_rows_1544052625 SUCCESSFULLY
+ DELETE TABLE table_columns_1544052625 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544061282
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544061282
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544061282
+{"tr_id":"2","td_id":"2","format":"","table_id":"1"}
+ DELETE TABLE table_cells_1544053194 SUCCESSFULLY
+ DELETE TABLE table_rows_1544053194 SUCCESSFULLY
+ DELETE TABLE table_columns_1544053194 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544061289
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544061289
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544061289
+{"addresses":["B2"],"format":"","table_id":"1"}
+["B2"]
+ DELETE TABLE table_cells_1544054620 SUCCESSFULLY
+ DELETE TABLE table_rows_1544054620 SUCCESSFULLY
+ DELETE TABLE table_columns_1544054620 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544061291
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544061291
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544061291
+{"addresses":["A1","B1","C1","D1","E1","F1","G1"],"format":"","table_id":"1"}
+["A1","B1","C1","D1","E1","F1","G1"]
+ DELETE TABLE table_cells_1544061274 SUCCESSFULLY
+ DELETE TABLE table_rows_1544061274 SUCCESSFULLY
+ DELETE TABLE table_columns_1544061274 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544061306
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544061306
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544061306
+{"addresses":["A1","B1","C1","D1","E1","F1","G1"],"format":"text-center","table_id":"1"}
+["A1","B1","C1","D1","E1","F1","G1"]
+ DELETE TABLE table_cells_1544061291 SUCCESSFULLY
+ DELETE TABLE table_rows_1544061291 SUCCESSFULLY
+ DELETE TABLE table_columns_1544061291 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544064463
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544064463
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544064463
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+NO CLASSESS
+{"addresses":["B20"],"table_id":"1"}
+["B20"]
+{"addresses":["B20"],"table_id":"1"}
+["B20"]
+{"addresses":["B20"],"type":"1","table_id":"1"}
+["B20"]
+ DELETE TABLE table_cells_1544065999 SUCCESSFULLY
+ DELETE TABLE table_rows_1544065999 SUCCESSFULLY
+ DELETE TABLE table_columns_1544065999 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544070486
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544070486
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544070486
+{"addresses":["B20"],"type":"2","table_id":"1"}
+["B20"]
+ DELETE TABLE table_cells_1544068019 SUCCESSFULLY
+ DELETE TABLE table_rows_1544068019 SUCCESSFULLY
+ DELETE TABLE table_columns_1544068019 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544070494
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544070494
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544070494

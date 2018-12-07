@@ -16,9 +16,9 @@ class Evaluator
 
     public static $formulaPattern = '/[*|\/|-|+|round|abs|floor|\|\||&&]/';
 
-    public static function make($result)
+    public static function make($result,$type = 1)
     {
-        if (preg_match(self::$formulaPattern, $result)) {
+        if (preg_match(self::$formulaPattern, $result) AND ($type !=  TableCells::TEXT_TYPE )) {
             $eval = "; return " . $result . ";";
 
             try {

@@ -362,4 +362,13 @@ class Input extends \yii\db\ActiveRecord
             'is_newline' => 'C новой строки',
         ];
     }
+
+     public function attributeLabelsForFormula()
+    {
+        return [
+            'input_id' => 'Данные',
+        ];
+    }
+
+
 }

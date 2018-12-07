@@ -2,24 +2,21 @@
 
 namespace backend\controllers;
 
-use common\models\TableHistory;
 use Yii;
-use common\models\Table;
-use common\models\TableSearch;
+use common\models\TableHistory;
+use common\models\TableHistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TableController implements the CRUD actions for Table model.
+ * TableHistoryController implements the CRUD actions for TableHistory model.
  */
-class TableController extends Controller
+class TableHistoryController extends Controller
 {
     /**
      * {@inheritdoc}
      */
-
-
     public function behaviors()
     {
         return [
@@ -33,12 +30,12 @@ class TableController extends Controller
     }
 
     /**
-     * Lists all Table models.
+     * Lists all TableHistory models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TableSearch();
+        $searchModel = new TableHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,42 +44,8 @@ class TableController extends Controller
         ]);
     }
 
-    public function actionEdit($id)
-    {
-        return $this->render('edit', [
-            'table_id' => $id,
-        ]);
-    }
-
-    public function actionRestoreHistory()
-    {
-
-        if ($history_id = $_POST['history_id']) {
-            if ($history = TableHistory::findOne(intval($history_id))) {
-                $history->restore("Возврат к ".$history->name);
-                return json_encode(['status' => 'success', 'history' => TableHistory::LastJson()]);
-            } else return json_encode(['status' => 'error',"history ".$history_id." was not found"]);
-
-
-        } else return json_encode(['status' => 'error','history id was not sent']);
-
-    }
-
-    public function actionJsTests()
-    {
-        return $this->render('js_tests');
-    }
-
-    public function actionSaveVariables()
-    {
-        if (($_POST['variables']) AND ($_POST['table_id'])) {
-            Table::updateAll(['variables' => $_POST['variables']], ['table_id' => $_POST['table_id']]);
-        }
-
-    }
-
     /**
-     * Displays a single Table model.
+     * Displays a single TableHistory model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -95,16 +58,16 @@ class TableController extends Controller
     }
 
     /**
-     * Creates a new Table model.
+     * Creates a new TableHistory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Table();
+        $model = new TableHistory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->table_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -113,7 +76,7 @@ class TableController extends Controller
     }
 
     /**
-     * Updates an existing Table model.
+     * Updates an existing TableHistory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -124,7 +87,7 @@ class TableController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->table_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -133,7 +96,7 @@ class TableController extends Controller
     }
 
     /**
-     * Deletes an existing Table model.
+     * Deletes an existing TableHistory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -147,15 +110,15 @@ class TableController extends Controller
     }
 
     /**
-     * Finds the Table model based on its primary key value.
+     * Finds the TableHistory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Table the loaded model
+     * @return TableHistory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Table::findOne($id)) !== null) {
+        if (($model = TableHistory::findOne($id)) !== null) {
             return $model;
         }
 

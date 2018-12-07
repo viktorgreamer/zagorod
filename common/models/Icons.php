@@ -24,5 +24,6 @@ class Icons
     const ALIGH_LEFT = '<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>';
     const TEXT_BOLD = '<span class="glyphicon glyphicon-bold" aria-hidden="true"></span>';
     const EYE = '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>';
+    const SELECT = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
 
 }

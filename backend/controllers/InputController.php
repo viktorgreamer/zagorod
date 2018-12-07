@@ -59,6 +59,39 @@ class InputController extends Controller
         ]);
     }
 
+    public function actionLoadAjax()
+    {
+        if ($_GET['q']) {
+            $q = $_GET['q'];
+
+
+             D::dump($q);
+            $matches = [];
+            if (!is_null($q)) {
+                if ($inputs = Input::find()->where(
+                    ['OR',
+                        ['like', 'name', $q],
+                        ['input_id' => $q],
+                    ])->limit(10)->all()) {
+                    foreach ($inputs as $input) {
+                        $matches[] = ['id' => $input->input_id, 'text' => $input->input_id . " -  " . $input->name];
+                    }
+
+                }
+            }
+
+            return json_encode(['results' => $matches]);
+        }
+        // return $this->render('_debug');
+    }
+
+    public
+    function actionTemplate($id)
+    {
+        return $this->renderAjax('_template', compact('id'));
+    }
+
+
 
     /**
      * Creates a new Input model.
@@ -78,15 +111,15 @@ class InputController extends Controller
     {
         $inputs = $_POST['inputs'];
         $stage_id = $_POST['stage_id'];
-        if (($inputs) && ( $stage_id)){
+        if (($inputs) && ($stage_id)) {
             $priority = Input::find()->where(['stage_id' => $stage_id])->max('priority');
             foreach ($inputs as $input) {
                 $priority++;
-                Input::updateAll(['priority' => $priority,'stage_id' => $stage_id],['input_id' => intval($input)]);
+                Input::updateAll(['priority' => $priority, 'stage_id' => $stage_id], ['input_id' => intval($input)]);
             }
         }
-       D::dump($inputs);
-       D::dump($stage_id);
+        D::dump($inputs);
+        D::dump($stage_id);
 
     }
 
@@ -119,7 +152,7 @@ class InputController extends Controller
 
         $model = new Input();
         $model->stage_id = $stage_id;
-        Yii::$app->session->set('current_estimate_stage_id_admin',$stage_id);
+        Yii::$app->session->set('current_estimate_stage_id_admin', $stage_id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             return $this->redirect(['estimate/view', 'id' => $model->estimate_id]);
@@ -156,7 +189,7 @@ class InputController extends Controller
     function actionUpdateAjax($id)
     {
         $model = $this->findModel($id);
-        Yii::$app->session->set('current_estimate_stage_id_admin',$model->stage_id);
+        Yii::$app->session->set('current_estimate_stage_id_admin', $model->stage_id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             return $this->redirect(['estimate/view', 'id' => $model->estimate_id]);

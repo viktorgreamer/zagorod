@@ -30,19 +30,40 @@ class Smeta extends \yii\db\ActiveRecord
         return 'smeta';
     }
 
+    public static function forTest()
+    {
+        return self::find()->where(['forTest' => 1])->one();
+    }
+
     public function ReplaceValue($value)
     {
         if ($value) {
+            $new_value = $value;
             if ($variables = $this->variables) {
                 foreach ($variables as $key => $variable) {
-                    $value = preg_replace("/" . $key . "/", $this->variables[$key], $value);
+                    $old_value = $new_value;
+                    $new_value = preg_replace("/" . $key . "/", $this->getVariables()[$key], $old_value);
+                 /*   if ($new_value != $old_value) {
+                        if (in_array($key, ["G17", "G18"])) D::success($key . " " . $variable . " VALUE = " . $new_value);
+                    }*/
+
                 }
             }
-            
+
         }
-        return $value;
+        return $new_value;
 
 
+    }
+
+    public function addVariables($variable)
+    {
+        $this->variables = array_merge($variable,$this->variables);
+    }
+
+    public function getVariables()
+    {
+        return $this->variables;
     }
 
 
@@ -243,6 +264,7 @@ class Smeta extends \yii\db\ActiveRecord
         }
         return $body;
     }
+
     public function getBodyWorks()
     {
         $body = '';
@@ -275,7 +297,7 @@ class Smeta extends \yii\db\ActiveRecord
         if (!$params['works_id']) $params['works_id'] = Works::preg_match($this->getBodyWorks());
         $variables = array_merge($this->loadEvents(), $this->loadInputs(), $this->loadOutputs(),
             $this->loadStation(), $this->loadMaterials($params['materials_id']),
-            $this->loadManager(), $this->loadCity(),$this->loadWorks($params['works_id']));
+            $this->loadManager(), $this->loadCity(), $this->loadWorks($params['works_id']));
 
         $this->variables = $variables;
         $this->variablesKeys = array_keys($this->variables);
@@ -370,6 +392,7 @@ class Smeta extends \yii\db\ActiveRecord
 
         } else return [];
     }
+
     public function loadWorks($works_id = [])
     {
 

@@ -124,6 +124,7 @@ class Table extends \yii\db\ActiveRecord
 
     public function reset()
     {
+
         if ($rows = TableCells::find()->where(['table_id' => $this->table_id])->orderBy('tr_id')->distinct()->select('tr_id')->column()) {
             //   D::dump($rows);
             foreach ($rows as $key => $row) {

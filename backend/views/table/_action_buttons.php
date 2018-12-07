@@ -12,8 +12,9 @@ use common\models\Icons;
 
     <div class="btn-group">
         <div align="right">
-        <button type="button" class="btn btn-success btn-sm dropdown-toggle action_button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Action <span class="caret"></span>
+            <div class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?= $tr_id; ?> <span class="caret right"></span>
+            </div>
         </button>
         <ul class="dropdown-menu">
             <li>
@@ -45,6 +46,15 @@ use common\models\Icons;
 
     <?= Html::button(Icons::COPY, ['class' => 'btn btn-primary copy-row-from-row btn-xs',
         'title' => 'Копировать строку',
+        'data' => [
+            'pjax' => '1',
+            'tr_id' => $tr_id,
+            'pjax-timeout' => 5000,
+        ]]);  ?>
+
+
+    <?= Html::button(Icons::SELECT, ['class' => 'btn btn-primary select-row btn-xs',
+        'title' => 'Выделить строку',
         'data' => [
             'pjax' => '1',
             'tr_id' => $tr_id,
