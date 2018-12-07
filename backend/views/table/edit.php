@@ -27,7 +27,7 @@ $query_row = TableCells::find()->where(['table_id' => $table_id])->select('tr_id
 $rows = $query_row->distinct()->asArray()->orderBy('tr_id')->all();
 echo $this->render('_format_panel');
 if ($_GET['show_result']) echo Html::a(Icons::EDIT . ' Режим редактирования', ['table/edit', 'id' => $table->table_id], ['class' => 'btn btn-primary btn-xs']);
-else echo Html::a(Icons::EYE . ' Посмотреть результат', ['table/edit', 'id' => $table->table_id, 'show_result' => 1], ['class' => 'btn btn-primary']);
+else echo Html::a(Icons::EYE . ' Посмотреть результат', ['table/edit', 'id' => $table->table_id, 'show_result' => 1], ['class' => 'btn btn-primary btn-xs']);
 
 \yii\widgets\Pjax::begin(['id' => 'pjax-table']);
 echo Html::tag("h3", "ТАБЛИЦА");
