@@ -22,9 +22,23 @@ class Table extends \yii\db\ActiveRecord
         return 'report_table';
     }
 
-    public function getRows($row_id = null)
+   /* public function getRows($row_id = null)
     {
         return $this->hasMany(TableCells::className(), ['table_id' => 'table_id'])->andFilterWhere(['tr_id' => $row_id]);;
+    }*/
+
+    public function getRows()
+    {
+        return $this->hasMany(TableRows::className(), ['table_id' => 'table_id']);;
+    }
+
+    public function getColumns()
+    {
+        return $this->hasMany(TableColumns::className(), ['table_id' => 'table_id']);;
+    }
+    public function getCells()
+    {
+        return $this->hasMany(TableCells::className(), ['table_id' => 'table_id']);;
     }
 
     public function getEstimate() {

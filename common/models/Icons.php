@@ -25,5 +25,10 @@ class Icons
     const TEXT_BOLD = '<span class="glyphicon glyphicon-bold" aria-hidden="true"></span>';
     const EYE = '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>';
     const SELECT = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+    const SAVE = '<span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>';
+    const CLOSE_EYE = '<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>';
+    const EXCEL = '<i class="fa fa-file-excel-o" aria-hidden="true"></i>';
+    const PDF = '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>';
+
 
 }

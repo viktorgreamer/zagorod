@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'formulaName',
             'name',
-            'meisureText',
+            'ei',
             'cost',
             'self_cost',
 

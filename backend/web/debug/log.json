@@ -1,174 +1,94 @@
-{"address":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
-{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
-{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
-["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"]
- DELETE TABLE table_cells_1544005655 SUCCESSFULLY
- DELETE TABLE table_rows_1544005655 SUCCESSFULLY
- DELETE TABLE table_columns_1544005655 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544059969
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544059969
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544059969
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"text-center","table_id":"1"}
-["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"]
- DELETE TABLE table_cells_1544052617 SUCCESSFULLY
- DELETE TABLE table_rows_1544052617 SUCCESSFULLY
- DELETE TABLE table_columns_1544052617 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544061274
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544061274
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544061274
-NO CLASSESS
-NO CLASSESS
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-CLASSESS ARE 
-["text-center"]
-{"addresses":["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"],"format":"","table_id":"1"}
-["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","A11","A12","A13","A14","A15","A16","A17","A18","A19","A20","A21"]
- DELETE TABLE table_cells_1544052625 SUCCESSFULLY
- DELETE TABLE table_rows_1544052625 SUCCESSFULLY
- DELETE TABLE table_columns_1544052625 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544061282
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544061282
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544061282
-{"tr_id":"2","td_id":"2","format":"","table_id":"1"}
- DELETE TABLE table_cells_1544053194 SUCCESSFULLY
- DELETE TABLE table_rows_1544053194 SUCCESSFULLY
- DELETE TABLE table_columns_1544053194 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544061289
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544061289
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544061289
-{"addresses":["B2"],"format":"","table_id":"1"}
-["B2"]
- DELETE TABLE table_cells_1544054620 SUCCESSFULLY
- DELETE TABLE table_rows_1544054620 SUCCESSFULLY
- DELETE TABLE table_columns_1544054620 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544061291
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544061291
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544061291
-{"addresses":["A1","B1","C1","D1","E1","F1","G1"],"format":"","table_id":"1"}
-["A1","B1","C1","D1","E1","F1","G1"]
- DELETE TABLE table_cells_1544061274 SUCCESSFULLY
- DELETE TABLE table_rows_1544061274 SUCCESSFULLY
- DELETE TABLE table_columns_1544061274 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544061306
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544061306
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544061306
-{"addresses":["A1","B1","C1","D1","E1","F1","G1"],"format":"text-center","table_id":"1"}
-["A1","B1","C1","D1","E1","F1","G1"]
- DELETE TABLE table_cells_1544061291 SUCCESSFULLY
- DELETE TABLE table_rows_1544061291 SUCCESSFULLY
- DELETE TABLE table_columns_1544061291 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544064463
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544064463
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544064463
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-NO CLASSESS
-{"addresses":["B20"],"table_id":"1"}
-["B20"]
-{"addresses":["B20"],"table_id":"1"}
-["B20"]
-{"addresses":["B20"],"type":"1","table_id":"1"}
-["B20"]
- DELETE TABLE table_cells_1544065999 SUCCESSFULLY
- DELETE TABLE table_rows_1544065999 SUCCESSFULLY
- DELETE TABLE table_columns_1544065999 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544070486
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544070486
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544070486
-{"addresses":["B20"],"type":"2","table_id":"1"}
-["B20"]
- DELETE TABLE table_cells_1544068019 SUCCESSFULLY
- DELETE TABLE table_rows_1544068019 SUCCESSFULLY
- DELETE TABLE table_columns_1544068019 SUCCESSFULLY
- TABLE IS table_cells
-NEW TABLE NAME IS table_cells_1544070494
- TABLE IS table_rows
-NEW TABLE NAME IS table_rows_1544070494
- TABLE IS table_columns
-NEW TABLE NAME IS table_columns_1544070494
+[]
+POST ARRAY IS
+{
+  "_csrf-backend": "wXXFNgJNU6-TdVnJWO-WtjzGReLdDztFxh7NiX9luX-YIIBMNB1m5NITC7ssucT7a4xwsog6WSCLRK7CBSjyTw==",
+  "Input": {
+    "name": "Vasilev",
+    "stage_id": "3",
+    "type": "1",
+    "multi_input": [
+      {
+        "name": "user",
+        "rule": "18",
+        "type": "",
+        "items": "45,56,56",
+        "title": "\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"
+      }
+    ],
+    "list": "",
+    "validation_rule_id": "0",
+    "multiple": "0",
+    "required": "0",
+    "is_newline": "0",
+    "width": "20",
+    "event_id": "0"
+  },
+  "noname": "0"
+}
+POST ARRAY IS
+{
+  "_csrf-backend": "sRMRWtLCWuw3Ts4sTZ5XxlDvf-4_T0qWHFBHniSC8MfoRlQg5JJvp3YonF45yAWLB6VKvmp6KPNRCiTVXs-79w==",
+  "Input": {
+    "name": "Vasilev",
+    "stage_id": "3",
+    "type": "1",
+    "multi_input": [
+      {
+        "name": "user",
+        "rule": "18",
+        "type": "dropDownList",
+        "items": "45,56,56",
+        "title": "\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"
+      }
+    ],
+    "list": "",
+    "validation_rule_id": "0",
+    "multiple": "0",
+    "required": "0",
+    "is_newline": "0",
+    "width": "20",
+    "event_id": "0"
+  },
+  "noname": "0"
+}
+{
+  "estimate_id": [
+    "\u041d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0437\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u00ab\u0421\u043c\u0435\u0442\u0430\u00bb."
+  ]
+}
+POST ARRAY IS
+{"_csrf-backend":"0peb66I9_wR5Z4HTM_sixXfrpLaPHOCi_aIhDKY7I-yLwt6RlG3KTzgB06FHrXCIIKGR5topgsew-EJH3HZo3A==","Input":{"name":"Vasilev","stage_id":"3","type":"1","multi_input":[{"name":"user","rule":"1","type":"","items":"45,56,56","title":"\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"},{"name":"","rule":"0","type":"","items":"","title":""}],"list":"","validation_rule_id":"0","multiple":"0","required":"0","is_newline":"0","width":"20","event_id":"0"},"noname":"0"}
+{"estimate_id":["\u041d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0437\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u00ab\u0421\u043c\u0435\u0442\u0430\u00bb."]}
+POST ARRAY IS
+{"_csrf-backend":"BNQnS6XOgPmqx8qmzDEt_Imyfb9AfGh8E6zljd1m7pRdgWIxk561suuhmNS4Z3-x3vhI7xVJChle9obGpyulpA==","Input":{"name":"Vasilev","stage_id":"3","type":"1","multi_input":[{"name":"user","rule":"16","type":"dropDownList","items":"45,56,56","title":"\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"}],"list":"","validation_rule_id":"0","multiple":"0","required":"0","is_newline":"0","width":"20","event_id":"0"},"noname":"0"}
+ESTIMATE ID = 
+{"estimate_id":["\u041d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0437\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u044c \u00ab\u0421\u043c\u0435\u0442\u0430\u00bb."]}
+POST ARRAY IS
+[]
+POST ARRAY IS
+[]
+ESTIMATE ID = 1
+[]
+POST ARRAY IS
+{"_csrf-backend":"HA5MOSPTmUwgBJmeiji4EbVf-BaTE34ft9hmPRmoYyZFWwlDFYOsB2Fiy-z-bupc4hXNRsYmHHr6ggV2Y-UoFg==","Input":{"name":"Vasilev","stage_id":"7","type":"1","multi_input":[{"name":"user","rule":"18","type":"dropDownList","items":"45,56,56","title":"\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"},{"name":"","rule":"0","type":"","items":"","title":""}],"list":"","validation_rule_id":"0","multiple":"0","required":"0","is_newline":"0","width":"20","event_id":"0"},"noname":"0"}
+ESTIMATE ID = 1
+POST ARRAY IS
+[]
+POST ARRAY IS
+[]
+[]
+POST ARRAY IS
+[]
+[]
+POST ARRAY IS
+{"_csrf-backend":"rdABzHDObLErTQZltqwdh0_M02sdv1DzxAoBwn1Kmc30hUS2Rp5Z-morVBfC-k_KGIbmO0iKMpaJUGKJBwfS_Q==","Input":{"name":"Vasilev","stage_id":"7","type":"12","multi_input":[{"name":"user","rule":"1","type":"dropDownList","items":"45,56,56","title":"\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"}],"required":"0","is_newline":"0","width":"20","event_id":"0"}}
+POST ARRAY IS
+[]
+POST ARRAY IS
+[]
+[]
+POST ARRAY IS
+[]
+[]
+POST ARRAY IS
+{"_csrf-backend":"_GZDuuouxMyuXQgrhGpTazeRse8o81lDmgzEwWuahI2lMwbA3H7xh-87WlnwPAEmYNuEv33GOybXVqeKEdfPvQ==","Input":{"name":"Vasilev","stage_id":"7","type":"12","multi_input":[{"name":"user","rule":"1","type":"dropDownList","items":"45,56,56","title":"\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"}],"required":"0","is_newline":"0","width":"20","event_id":"0"}}

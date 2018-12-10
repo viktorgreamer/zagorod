@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use common\models\Icons;
+use common\models\Input;
 
 /* @var $this yii\web\View */
 /* @var $model \common\models\Input */
@@ -15,7 +16,16 @@ use common\models\Icons;
         [
             'data' => ['input_id' => $model->input_id],
             'class' => 'multiple_select']); ?>
-    <?php echo Html::button(Icons::EDIT,
+
+    <?php if ($model->type == Input::GROUP_INPUT) {
+        echo Html::a(Icons::EDIT,  \yii\helpers\Url::to(['input/update', 'id' => $model->input_id]),
+            [
+                'class' => 'btn btn-success btn-xs','target' => "_blank"
+
+            ]
+        );
+    } else {
+      echo Html::button(Icons::EDIT,
         [
             'value' => \yii\helpers\Url::to(['input/update-ajax', 'id' => $model->input_id]),
             'class' => 'btn btn-success btn-xs modal-button-update-stage-input-ajax',
@@ -24,7 +34,11 @@ use common\models\Icons;
             ],
 
         ]
-    ); ?>
+    );
+    }
+
+    ?>
+
 
     <?= Html::button(Icons::REMOVE, ['class' => 'btn btn-danger delete-input btn-xs',
         'data' => [

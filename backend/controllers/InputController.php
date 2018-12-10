@@ -65,7 +65,7 @@ class InputController extends Controller
             $q = $_GET['q'];
 
 
-             D::dump($q);
+            D::dump($q);
             $matches = [];
             if (!is_null($q)) {
                 if ($inputs = Input::find()->where(
@@ -90,7 +90,6 @@ class InputController extends Controller
     {
         return $this->renderAjax('_template', compact('id'));
     }
-
 
 
     /**
@@ -130,17 +129,26 @@ class InputController extends Controller
         $model->copyToOutput();
     }
 
-    public function actionCreate($stage_id)
+    public function actionCreateMultipleInput($stage_id)
     {
+        /* D::$isLogToFile = true;
+         D::alert("POST ARRAY IS");
+         D::dump($_POST);*/
 
         $model = new Input();
         $model->stage_id = $stage_id;
-
+        $model->type = Input::GROUP_INPUT;
+        $stage = EstimateStage::findOne($stage_id);
+        $model->estimate_id = $stage->estimate_id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            return $this->redirect(['view', 'id' => $model->input_id]);
+            if ($model->type == Input::GROUP_INPUT) {
+                if ($multiple_inputs = $_POST['Input']['multi_input']) {
+                    $model->loadMultipleFields($multiple_inputs);
+                }
+            }
+            return $this->redirect(['estimate/view', 'id' => $model->estimate_id]);
         }
-        return $this->render('create', [
+        return $this->render('create_multiple_input', [
             'model' => $model,
         ]);
     }
@@ -149,6 +157,9 @@ class InputController extends Controller
     public
     function actionCreateAjax($stage_id)
     {
+        D::$isLogToFile = true;
+        D::alert("POST ARRAY IS");
+        D::dump($_POST);
 
         $model = new Input();
         $model->stage_id = $stage_id;
@@ -177,9 +188,21 @@ class InputController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->input_id]);
+            if ($model->type == Input::GROUP_INPUT) {
+                if ($multiple_inputs = $_POST['Input']['multi_input']) {
+                    $model->loadMultipleFields($multiple_inputs);
+                }
+            }
+
+            return $this->redirect(['estimate/view', 'id' => $model->estimate_id]);
 
         }
+        if ($model->type == Input::GROUP_INPUT) {
+            return $this->render('update_multiple_input.php', [
+                'model' => $model,
+            ]);
+        }
+
         return $this->render('update', [
             'model' => $model,
         ]);

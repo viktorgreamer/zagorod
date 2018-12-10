@@ -12,6 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/font-awesome.min.css',
         'css/site.css',
         'css/bootstrap-treeview.min.css',
         'http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css',

@@ -178,4 +178,44 @@ class ConsoleController extends \yii\console\Controller
         }
     }
 
+    public function actionTestRows()
+    {
+        D::success(" WE ARE TESTING ROWS");
+        $tableCell = new TableCells();
+        $width = 35;
+
+        // $tableCell->value = " Этот текст надо перенести, если что, но можно и не переносить";
+        $tableCell->value = "Мой скрипт используется не только на моём локальном сервере, но и на сервере хостинга, а установить что-либо на него мне не представляется возможным.";
+
+        $countChars = strlen($tableCell->value);
+        $words = preg_split("/\s/", $tableCell->value);
+        $countWords = count($words);
+        $sense = [];
+        $string = [];
+        $countRows = 1;
+        foreach ($words as $key => $word) {
+
+            if (mb_strlen(implode(" ", $string) . " " . $word) > $width) {
+                D::alert(" LEN  = " . mb_strlen(implode(" ", $string) . " " . $word));
+                //  D::primary($string);
+                $sense[] = implode(" ",$string);
+                $string = [];
+                $string[] = $word;
+                $countRows++;
+
+            } else {
+                $string[] = $word;
+            }
+
+        }
+        $sense[] = implode(" ",$string);
+       // D::dump($sense);
+         echo implode("\n",$sense);
+        echo "\n";
+        D::success(" COUNT CHARS = " . $countChars);
+        D::success(" COUNT WORDS = " . $countWords);
+        D::success(" COUNT ROWS = " . TableCells::countRows($tableCell->value, $width));
+
+    }
+
 }

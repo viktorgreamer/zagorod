@@ -11,8 +11,9 @@ use yii\bootstrap\ButtonDropdown;
 ?>
 
 <div align="center">
+  <?=  $column['hidden'] ? Icons::CLOSE_EYE : Icons::EYE; ?>
     <div class="btn-group">
-         <div class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <div class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Ширина <?= round($width/6); ?> символов ">
             <?= $column_address; ?> <span class="caret"></span>
         </div>
         <ul class="dropdown-menu">
@@ -33,7 +34,6 @@ use yii\bootstrap\ButtonDropdown;
                 <?= Html::button(Icons::REMOVE, ['class' => 'btn btn-danger delete-column-button btn-xs',
                     'data' => [
                         'td_id' => $td_id,
-                        //  'confirm' => 'Удалить?'
                     ]
                 ]); ?>
 
@@ -60,6 +60,15 @@ use yii\bootstrap\ButtonDropdown;
 
                 <?= Html::button(Icons::SELECT, ['class' => 'btn btn-primary select-column btn-xs',
                     'title' => 'Выделить столбец',
+                    'data' => [
+                        'pjax' => '1',
+                        'td_id' => $td_id,
+                        'pjax-timeout' => 5000,
+                    ]]);  ?>
+
+
+                <?= Html::button($column['hidden'] ? Icons::EYE : Icons::CLOSE_EYE, ['class' => 'btn btn-primary toggle-column-visibility btn-xs',
+                    'title' => $column['hidden'] ? 'Показывать клиентам' : 'Непоказывать клиентам',
                     'data' => [
                         'pjax' => '1',
                         'td_id' => $td_id,

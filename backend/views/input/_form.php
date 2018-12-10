@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Events;
+use unclead\multipleinput\MultipleInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Input */
@@ -17,11 +18,17 @@ use common\models\Events;
                 <?= $form->field($model, 'name')->textInput() ?>
 
             </div>
+
             <div class="col-lg-12">
                 <?= $form->field($model, 'stage_id')->textInput()->hiddenInput()->label(false) ?>
 
                 <?= $form->field($model, 'type')->dropDownList($model->mapTypes()) ?>
+
+                <?php
+                echo $this->render('_multi-input',['form' => $form,'model' => $model]); ?>
+
                 <div class="alert alert-danger hidden" id="wiki-for-multigroup-input">
+
                     <ul>
                         <li>
                             Новое поле с новой строки!
@@ -47,7 +54,7 @@ use common\models\Events;
                             title - Название для поля ввода
                         </li>
                         <li>
-                           Пример:
+                            Пример:
                             </br>name=user:type=dropDownList:items=Один,Два:title=Пользователь
                             name=priority:rule=2:title=Приоритет
                         </li>
@@ -79,6 +86,8 @@ use common\models\Events;
         <?= $form->field($model, 'event_id')->dropDownList([0 => 'нет'] + Events::mapEvents()) ?>
 
         <div class="form-group">
+            <?php echo Html::a('Создать множественное поля ввода', ['input/create-multiple-input', 'stage_id' => $model->stage_id], ['target' => '_blank']); ?>
+
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
         </div>
 

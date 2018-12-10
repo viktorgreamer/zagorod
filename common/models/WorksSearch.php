@@ -18,7 +18,7 @@ class WorksSearch extends Works
     public function rules()
     {
         return [
-            [['id', 'meisure', 'cost', 'self_cost'], 'integer'],
+            [['id', 'ei', 'cost', 'self_cost'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class WorksSearch extends Works
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'meisure' => $this->meisure,
+            'ei' => $this->ei,
             'cost' => $this->cost,
             'self_cost' => $this->self_cost,
         ]);

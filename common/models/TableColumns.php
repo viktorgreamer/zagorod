@@ -13,6 +13,9 @@ use Yii;
  */
 class TableColumns extends \yii\db\ActiveRecord
 {
+
+    const HIDDEN = 1;
+    const NOT_HIDDEN = 0;
     /**
      * {@inheritdoc}
      */

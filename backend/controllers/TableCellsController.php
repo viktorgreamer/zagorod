@@ -72,7 +72,7 @@ class TableCellsController extends Controller
         /* @var $table Table */
 
         if ($table = Table::findOne($table_id)) {
-          $history =  TableHistory::storeNew('Добавить строку');
+            $history = TableHistory::storeNew('Добавить строку');
             $table_max_row = TableCells::find()->where(['table_id' => $table_id])->max('tr_id');
             D::dump($table_max_row);
             $CountCells = TableCells::find()->where(['table_id' => $table_id])->max('td_id');
@@ -88,7 +88,7 @@ class TableCellsController extends Controller
                 D::dump($cell->toArray());
                 if (!$cell->save()) D::dump($cell->errors);
             } while ($counter < $CountCells);
-            return json_encode(['status' => 1,'history' => $history]);
+            return json_encode(['status' => 1, 'history' => $history]);
         }
     }
 
@@ -98,7 +98,7 @@ class TableCellsController extends Controller
         /* @var $table Table */
 
         if ($table = Table::findOne($table_id)) {
-           $history =  TableHistory::storeNew('Копировать строку');
+            $history = TableHistory::storeNew('Копировать строку');
             $table_max_row = TableCells::find()->where(['table_id' => $table_id])->max('tr_id');
             D::dump($table_max_row);
             $CountCells = TableCells::find()->where(['table_id' => $table_id])->max('td_id');
@@ -116,13 +116,13 @@ class TableCellsController extends Controller
                         $new_cell->classes = $cell->classes;
                         $new_cell->value = $cell->value;
                         $new_cell->colspan = $cell->colspan;
-                     //   $new_cell->align = $cell->align;
+                        //   $new_cell->align = $cell->align;
                         D::dump($new_cell->toArray());
                         if (!$new_cell->save()) D::dump($new_cell->errors);
                     }
                 }
             }
-            return json_encode(['status' => 1,'history' => $history]);
+            return json_encode(['status' => 1, 'history' => $history]);
 
         }
     }
@@ -134,7 +134,7 @@ class TableCellsController extends Controller
 
         /* @var $table Table */
         if ($table = Table::findOne($table_id)) {
-          $history =  TableHistory::storeNew('Добавить столбец');
+            $history = TableHistory::storeNew('Добавить столбец');
             $table_max_column = TableCells::find()->where(['table_id' => $table_id])->max('td_id');
             D::dump($table_max_column);
             $CountCells = TableCells::find()->where(['table_id' => $table_id])->max('tr_id');
@@ -149,8 +149,8 @@ class TableCellsController extends Controller
 
             $column = new TableColumns(['td_id' => $table_max_column + 1, 'table_id' => $table_id, 'width' => '10']);
             $column->save();
-            return json_encode(['status' => 1,'history' => $history]);
-           // return $this->render('_debug');
+            return json_encode(['status' => 1, 'history' => $history]);
+            // return $this->render('_debug');
 
 
         }
@@ -161,11 +161,11 @@ class TableCellsController extends Controller
     public
     function actionDeleteRow($table_id, $tr_id)
     {
-       $history =  TableHistory::storeNew('Удалили строку');
+        $history = TableHistory::storeNew('Удалили строку');
         TableCells::deleteAll(['table_id' => $table_id, 'tr_id' => $tr_id]);
         $table = Table::findOne($table_id);
         if ($table) $table->reset();
-        return json_encode(['status' => 1,'history' => $history]);
+        return json_encode(['status' => 1, 'history' => $history]);
         /* @var $table Table */
 
     }
@@ -173,7 +173,7 @@ class TableCellsController extends Controller
     public function actionCombine()
     {
         if (($_POST['table_id']) AND ($_POST['tr_id']) AND ($_POST['td_to_delete']) AND $_POST['td_col_span']) {
-           $history =  TableHistory::storeNew('Убьеденить ячейки');
+            $history = TableHistory::storeNew('Убьеденить ячейки');
             $colspan_colspan = TableCells::find()
                 ->where(['td_id' => $_POST['td_col_span']])
                 ->andWhere(['tr_id' => $_POST['tr_id']])
@@ -192,7 +192,7 @@ class TableCellsController extends Controller
 
             $colspan = $colspan_colspan->colspan + $colspan_delete->colspan;
             TableCells::updateAll(['colspan' => $colspan], ['td_id' => $_POST['td_col_span'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
-            return json_encode(['status' => 1,'history' => $history]);
+            return json_encode(['status' => 1, 'history' => $history]);
         }
 
 
@@ -205,12 +205,12 @@ class TableCellsController extends Controller
         D::dump($_POST);
         /* @var $cell TableCells */
         if (($_POST['table_id']) AND ($_POST['tr_id']) AND ($_POST['td_id'])) {
-          $history =   TableHistory::storeNew('Отменить '.TableCells::formatText($_POST['format']));
+            $history = TableHistory::storeNew('Отменить ' . TableCells::formatText($_POST['format']));
             $cell = TableCells::find()->where(['AND', ['td_id' => $_POST['td_id'], 'tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]])->one();
             $cell->toggleClass($_POST['format']);
 
             $cell->update(false);
-            return json_encode(['status' => 1,'history' => $history]);
+            return json_encode(['status' => 1, 'history' => $history]);
         }
     }
 
@@ -222,17 +222,18 @@ class TableCellsController extends Controller
         D::dump($_POST['addresses']);
         /* @var $cell TableCells */
         if (($_POST['table_id']) AND ($_POST['addresses'])) {
-          $history = TableHistory::storeNew('Отменить '.TableCells::formatText($_POST['format']));
-            $cells = TableCells::find()->where(['AND', ['in','address', $_POST['addresses'], 'table_id' => $_POST['table_id']]])->all();
-           if ($cells) {
-               foreach ($cells as $cell) {
-                   $cell->addClass($_POST['format']);
-                   $cell->update(false);
-               }
-           }
-            return json_encode(['status' => 1,'history' => $history]);
+            $history = TableHistory::storeNew('Отменить ' . TableCells::formatText($_POST['format']));
+            $cells = TableCells::find()->where(['AND', ['in', 'address', $_POST['addresses'], 'table_id' => $_POST['table_id']]])->all();
+            if ($cells) {
+                foreach ($cells as $cell) {
+                    $cell->addClass($_POST['format']);
+                    $cell->update(false);
+                }
+            }
+            return json_encode(['status' => 1, 'history' => $history]);
         }
     }
+
     public
     function actionMultiSetType()
     {
@@ -241,31 +242,54 @@ class TableCellsController extends Controller
         D::dump($_POST['addresses']);
         /* @var $cell TableCells */
         if (($_POST['table_id']) AND ($_POST['addresses']) AND ($_POST['type'])) {
-          $history = TableHistory::storeNew('Отменить тип');
-            $cells = TableCells::find()->where(['AND', ['in','address', $_POST['addresses'], 'table_id' => $_POST['table_id']]])->all();
-           if ($cells) {
-               foreach ($cells as $cell) {
-                   $cell->type = $_POST['type'];
-                   $cell->update(false);
-               }
-           }
-            return json_encode(['status' => 1,'history' => $history]);
+            $history = TableHistory::storeNew('Отменить тип');
+            $cells = TableCells::find()->where(['AND', ['in', 'address', $_POST['addresses'], 'table_id' => $_POST['table_id']]])->all();
+            if ($cells) {
+                foreach ($cells as $cell) {
+                    $cell->type = $_POST['type'];
+                    $cell->update(false);
+                }
+            }
+            return json_encode(['status' => 1, 'history' => $history]);
         }
     }
-
 
 
     public
     function actionDeleteColumn($table_id, $td_id)
     {
 
-       $history = TableHistory::storeNew('Удалить столбец');
+        $history = TableHistory::storeNew('Удалить столбец');
         TableCells::deleteAll(['table_id' => $table_id, 'td_id' => $td_id]);
         TableColumns::deleteAll(['table_id' => $table_id, 'td_id' => $td_id]);
         $table = Table::findOne($table_id);
         if ($table) $table->reset();
         /* @var $table Table */
-        return json_encode(['status' => 1,'history' => $history]);
+        return json_encode(['status' => 1, 'history' => $history]);
+
+    }
+
+    public
+    function actionToggleVisibilityColumn()
+    {
+        D::$isLogToFile;
+        D::dump($_POST);
+        if ($_POST['table_id'] && $_POST['td_id']) {
+
+            if ($column = TableColumns::find()->where(['table_id' => $_POST['table_id']])->andWhere(['td_id' => $_POST['td_id']])->one()) {
+                if ($column->hidden) {
+                    $isUpdated = TableColumns::updateAll(['hidden' => TableColumns::NOT_HIDDEN], ['AND', ['table_id' => $_POST['table_id'], 'td_id' => $_POST['td_id']]]);
+                    $history = TableHistory::storeNew('Скрыть столбец');
+                } else {
+                    $isUpdated = TableColumns::updateAll(['hidden' => TableColumns::HIDDEN], ['AND', ['table_id' => $_POST['table_id'], 'td_id' => $_POST['td_id']]]);
+                    $history = TableHistory::storeNew('Показать столбец');
+                }
+            }
+
+            /* @var $table Table */
+            return json_encode(['status' => $isUpdated, 'history' => $history]);
+
+        } else return json_encode(['status' => 0, 'history' => '']);
 
     }
 
@@ -276,9 +300,9 @@ class TableCellsController extends Controller
         $tr_id = $_POST['tr_id'];
         $priority = $_POST['priority'];
         if ($table = Table::findOne($table_id)) {
-          $history =  TableHistory::storeNew('Поменять строки местами');
+            $history = TableHistory::storeNew('Поменять строки местами');
             $table->reorderPriority($tr_id, $priority);
-            return json_encode(['status' => 1,'history' => $history]);
+            return json_encode(['status' => 1, 'history' => $history]);
         }
 
     }
@@ -293,7 +317,7 @@ class TableCellsController extends Controller
             $history = TableHistory::storeNew('Поменять столбцы местами');
             $table->reorderPriorityColumn($td_id, $priority);
 
-            return json_encode(['status' => 1,'history' => $history]);
+            return json_encode(['status' => 1, 'history' => $history]);
         }
 
     }
@@ -311,14 +335,15 @@ class TableCellsController extends Controller
             $history = TableHistory::storeNew('Поменять ширину столбца');
             $width = $column->width + intval($width);
             if ($width < 0) $width = 0;
-            TableColumns::updateAll(['width' => $width], ['table_id' => $table_id, 'td_id' => $td_id]);
-            return json_encode(['status' => $isUpdated,'history' => $history]);
+            $isUpdated = TableColumns::updateAll(['width' => $width], ['table_id' => $table_id, 'td_id' => $td_id]);
+            return json_encode(['status' => $isUpdated, 'history' => $history]);
         }
 
 
     }
 
-    public function JsonResponse($response) {
+    public function JsonResponse($response)
+    {
         return json_decode($response);
     }
 
@@ -327,13 +352,13 @@ class TableCellsController extends Controller
     function actionChange()
     {
         if ($_POST['tr_id'] AND $_POST['table_id']) {
-           $history =  TableHistory::storeNew('Ввод данных '. $_POST['value']);
+            $history = TableHistory::storeNew('Ввод данных ' . $_POST['value']);
             if (!$_POST['td_id']) {
                 $isUpdated = TableRows::updateAll(['result' => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'table_id' => $_POST['table_id']]);
-                return json_encode(['status' => $isUpdated,'history' => $history]);
+                return json_encode(['status' => $isUpdated, 'history' => $history]);
             } else {
                 $isUpdated = TableCells::updateAll([$_POST['attr'] => $_POST['value']], ['tr_id' => $_POST['tr_id'], 'td_id' => $_POST['td_id'], 'table_id' => $_POST['table_id']]);
-                return json_encode(['status' => $isUpdated,'history' => $history]);
+                return json_encode(['status' => $isUpdated, 'history' => $history]);
             }
 
 

@@ -29,16 +29,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'event_id',
             'estimate.name',
-
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {edit}',
+                'template' => '{view} {update} {delete} {edit} {excel} {export-excel} {export-pdf}',
                 'buttons' => [
                     'edit' => function ($url) {
-                        return Html::a('<span class="glyphicon glyphicon-edit"> </span>', $url, ['title' => 'Report']);
+                        return Html::a('<span class="glyphicon glyphicon-edit"> </span>', $url, ['title' => 'Edit']);
+                    },
+                    'excel' => function ($url) {
+                        return Html::a('<span class="glyphicon glyphicon-save"> </span>', $url, ['title' => 'Report']);
+                    },
+                    'export-excel' => function ($url) {
+                        return Html::a(\common\models\Icons::EXCEL, $url, ['title' => 'Report to Excel']);
+                    },'export-pdf' => function ($url) {
+                        return Html::a(\common\models\Icons::PDF, $url, ['title' => 'Report to Pdf']);
                     },
                 ]
             ]
         ],
     ]); ?>
 </div>
+<?php
+
+?>>

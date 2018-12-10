@@ -38,18 +38,31 @@ td.actions_column {
     padding-bottom: 0px;
 }
 
-td.success {
+/*td.success {
     color: green ;
-}
+}*/
 td.danger {
     color: red ;
 }
-td.default {
+table#report_table td.default {
     color: grey ;
 }
-td.text-bold {
+table#report_table td.text-bold {
     font-weight: bold;
 }
+
+table#report_table td.fill-red {
+    background-color: #FF0000; !important;
+
+}
+table#report_table td.fill-green {
+    background-color: #4d803b;  !important;
+}
+table#report_table td.fill-blue {
+    background-color: #46dbff;  !important;
+}
+
+
 table#report_table td.selected {
  background-color: #bcbcbc;
 }

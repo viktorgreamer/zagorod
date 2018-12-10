@@ -25,9 +25,7 @@ $outputs = $estimate->outputs;
 $query_row = TableCells::find()->where(['table_id' => $table_id])->select('tr_id');
 
 $rows = $query_row->distinct()->asArray()->orderBy('tr_id')->all();
-echo $this->render('_format_panel');
-if ($_GET['show_result']) echo Html::a(Icons::EDIT . ' Режим редактирования', ['table/edit', 'id' => $table->table_id], ['class' => 'btn btn-primary btn-xs']);
-else echo Html::a(Icons::EYE . ' Посмотреть результат', ['table/edit', 'id' => $table->table_id, 'show_result' => 1], ['class' => 'btn btn-primary btn-xs']);
+echo $this->render('_format_panel',compact('table'));
 
 \yii\widgets\Pjax::begin(['id' => 'pjax-table']);
 echo Html::tag("h3", "ТАБЛИЦА");
@@ -152,9 +150,9 @@ if ($rows) {
         foreach ($tableColumns as $column) {
             $options = [];
             if ($width = $column['width']) {
-                $options = ['width' => $width . 'px'];
+                $options = ['style' => "width:".$width . "px"];
             };
-            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'max_column' => count($tableColumns), 'column_address' => TableCells::$letters[$column['td_id'] - 1]]), $options);
+            $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'column' => $column, 'max_column' => count($tableColumns), 'width' => $width, 'column_address' => TableCells::$letters[$column['td_id'] - 1]]), $options);
 
         }
 
@@ -164,7 +162,7 @@ if ($rows) {
 
 
     $TableHead = Html::tag('thead', $trs_head);
-    $table_html = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table', 'id' => 'report_table']);
+    $table_html = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table', 'width' => '100%','id' => 'report_table']);
 }
 echo $table_html;
 \yii\widgets\Pjax::end();
@@ -206,6 +204,7 @@ echo Collapse::widget([
 
 $js = <<<JS
 window.selectedCells = [];
+window.dblclickedCells = [];
 window.IsActiveCell = false;
 window.table_id = $table_id;
 
@@ -297,6 +296,7 @@ $(document).on('click','button.render_sum', function() {
           
 
 });
+
 $(document).on('click','button.set_type', function() {
     settedType = $(this).data('type');
     selectedCells = $(document).find("td.selected");
@@ -384,17 +384,30 @@ $(document).on('click','.choose_history', function() {
   
 });
 
-
-
-
-
-
 $(document).on('click','#add-row-button', function() {
    // table_id = $(this).data('table_id');
      $.ajax({
         url: '/admin/table-cells/add-row',
         data: {table_id: window.table_id},
         type: 'get',
+        success: function (res) {
+               res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+             $.pjax.reload('#pjax-table',{timeout : false});
+             
+        },
+
+        
+    });
+});
+
+$(document).on('click','.toggle-column-visibility', function() {
+    td_id = $(this).data('td_id');
+     $.ajax({
+        url: '/admin/table-cells/toggle-visibility-column',
+        data: {table_id: window.table_id,td_id:td_id},
+        type: 'post',
         success: function (res) {
                res = JSON.parse(res);
             console.log(res.history);
@@ -437,6 +450,7 @@ $(document).on('click','#add-column-button', function() {
         
     });
 });
+
 $(document).on('click','.copy-row-from-row', function() {
     tr_id = $(this).data('tr_id');
      $.ajax({
@@ -629,7 +643,7 @@ $(document).on("click","td.edit-cell", function () {
         
         
     } 
-    if (window.formatStatus === true) {
+   /* if (window.formatStatus === true) {
          
          $.ajax({
         url: '/admin/table-cells/format',
@@ -644,7 +658,7 @@ $(document).on("click","td.edit-cell", function () {
          });
          
         
-    }   
+    }   */
     
 });
 

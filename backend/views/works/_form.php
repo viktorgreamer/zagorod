@@ -14,7 +14,7 @@ use common\models\Works;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'meisure')->dropDownList(Works::mapMeasure()) ?>
+    <?= $form->field($model, 'ie')->textInput() ?>
 
     <?= $form->field($model, 'cost')->textInput() ?>
 

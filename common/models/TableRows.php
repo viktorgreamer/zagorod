@@ -33,6 +33,30 @@ class TableRows extends \yii\db\ActiveRecord
         ];
     }
 
+    public function isActive(Smeta $smeta)
+    {
+        if ($this->result) {
+            $result_value = $smeta->ReplaceValue($this->result);
+            if ($result_value === $this->result) {
+
+                // $table_row->result = "<text style=\"color:red\">" . $table_row->result . "</text>";
+                return false;
+            } else {
+                $value = \common\models\Evaluator::makeBoolean($result_value);
+
+                if (!$value['value']) {
+                    return false;
+                } else return true;
+
+            }
+        } else return true;
+    }
+
+    public function getCells()
+    {
+        return $this->hasMany(TableCells::className(), ['tr_id' => 'tr_id'])->andWhere(['table_id' => $this->table_id]);
+    }
+
     /**
      * {@inheritdoc}
      */

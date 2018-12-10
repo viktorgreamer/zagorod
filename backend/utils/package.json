@@ -1,0 +1,14 @@
+{
+  "name": "viktorgreamer/dlogger",
+  "type": "library",
+  "description": "Useful logger",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.4.0",
+  },
+  "autoload": {
+    "psr-4": {
+      "Dataart\\Package\\": "src/"
+    }
+  }
+}

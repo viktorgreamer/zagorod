@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\ExcelTable;
 use common\models\TableHistory;
 use Yii;
 use common\models\Table;
@@ -54,26 +55,67 @@ class TableController extends Controller
         ]);
     }
 
-    public function actionRestoreHistory()
+    public function actionExcel($id)
+    {
+        return $this->render('_excel', [
+            'table_id' => $id,
+        ]);
+    }
+
+    public function actionExportExcel($id)
+    {
+
+        if ($id) {
+            $excelTable = new ExcelTable();
+            $excelTable->table_id = $id;
+            $excelTable->make();
+            $excelTable->saveToExcel();
+        }
+
+        return $this->render('debug', [
+            'table_id' => $id,
+        ]);
+
+    }
+
+    public function actionExportPdf($id)
+    {
+        if ($id) {
+            $excelTable = new ExcelTable();
+            $excelTable->table_id = $id;
+            $excelTable->forClient = true;
+            $excelTable->make();
+            $excelTable->saveToPdf();
+        }
+        return $this->render('debug', [
+            'table_id' => $id,
+        ]);
+
+    }
+
+    public
+    function actionRestoreHistory()
     {
 
         if ($history_id = $_POST['history_id']) {
             if ($history = TableHistory::findOne(intval($history_id))) {
-                $history->restore("Возврат к ".$history->name);
+                $history->restore("Возврат к " . $history->name);
                 return json_encode(['status' => 'success', 'history' => TableHistory::LastJson()]);
-            } else return json_encode(['status' => 'error',"history ".$history_id." was not found"]);
+            } else return json_encode(['status' => 'error', "history " . $history_id . " was not found"]);
 
 
-        } else return json_encode(['status' => 'error','history id was not sent']);
+        } else return json_encode(['status' => 'error', 'history id was not sent']);
 
     }
 
-    public function actionJsTests()
+    public
+    function actionJsTests()
     {
         return $this->render('js_tests');
     }
 
-    public function actionSaveVariables()
+    public
+    function actionSaveVariables()
     {
         if (($_POST['variables']) AND ($_POST['table_id'])) {
             Table::updateAll(['variables' => $_POST['variables']], ['table_id' => $_POST['table_id']]);
@@ -87,7 +129,8 @@ class TableController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public
+    function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -99,7 +142,8 @@ class TableController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public
+    function actionCreate()
     {
         $model = new Table();
 
@@ -119,7 +163,8 @@ class TableController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public
+    function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -139,7 +184,8 @@ class TableController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public
+    function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
@@ -153,7 +199,8 @@ class TableController extends Controller
      * @return Table the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected
+    function findModel($id)
     {
         if (($model = Table::findOne($id)) !== null) {
             return $model;

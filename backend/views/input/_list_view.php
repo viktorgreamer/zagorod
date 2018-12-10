@@ -14,6 +14,7 @@ use yii\helpers\ArrayHelper;
 use unclead\multipleinput\MultipleInput;
 
 
+
 ?>
 
 <div class="input-list-view" id="div-input-id-<?= $model->input_id; ?>" style="background-color: #e1e1e1">
@@ -63,6 +64,17 @@ use unclead\multipleinput\MultipleInput;
                     } elseif ($model->type == Input::IN_ARRAY_TYPE) {
                         $items = $model->renderItems($model->list);
                         echo Html::dropDownList('', '', $items, ['label' => $model->name, 'class' => $inputClass .' form-control','id' => $model->formID, 'data' => $data]);
+                    } elseif ($model->type == Input::GROUP_INPUT) {
+                        echo "<div class='$inputClass'>";
+                        // \backend\utils\D::success($model->input_id);
+                        // \backend\utils\D::dump($model->getColumnsSchema());
+                        echo MultipleInput::widget([
+                           // 'data' => $model->getGroupValue($value),
+                            'max' => 4,
+                            'name' => $model->getFormName(),
+                            'columns' => $model->getColumnsSchema(),
+                        ]);
+                        echo "</div>";
                     }
 
                     ?>

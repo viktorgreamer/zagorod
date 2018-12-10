@@ -27,6 +27,26 @@ use yii\helpers\ArrayHelper;
 class Input extends \yii\db\ActiveRecord
 {
 
+    public function renderMultipleInput() {
+        if ($this->list) {
+            if ($rows = explode("\n",$this->list)) {
+                foreach ($rows as $row) {
+                    if ($fields = explode(":",$row)) {
+                        foreach ($fields as $field) {
+                            if ($name_value = preg_split("/=/",$field)) {
+                                $data_row[$name_value[0]] = $name_value[1];
+                            }
+
+                        }
+                    }
+                    $data[] = $data_row;
+                }
+            }
+
+        }
+        return $data;
+    }
+
     public function getFormulaLink()
     {
         return $this->getFormulaName() . " =" . $this->stage->name . "->" . $this->name;
@@ -35,6 +55,34 @@ class Input extends \yii\db\ActiveRecord
     public function getExtendedName()
     {
         return "- " . $this->getFormulaName() . " - " . $this->stage->name . " - " . $this->name . " - " . $this->mapTypes()[$this->type];
+    }
+
+    public function loadMultipleFields($multiple_inputs)
+    {
+
+        foreach ($multiple_inputs as $multiple_input) {
+            $field = [];
+            if ($multiple_input['name']) {
+                $field[] = "name=" . $multiple_input['name'];
+                $field[] = "title=" . $multiple_input['title'];
+                if ($multiple_input['type'] == 'dropDownList') {
+                    $field[] = "type=dropDownList";
+                    if ($multiple_input['items']) {
+                        $field[] = 'items=' . $multiple_input['items'];
+                    }
+
+                } else {
+                    if ($multiple_input['rule']) {
+                        $field[] = 'rule=' . $multiple_input['rule'];
+                    }
+                }
+                $rows[] = implode(":", $field);
+            }
+
+        }
+        $this->list = implode(PHP_EOL, $rows);
+        $this->update(false);
+
     }
 
 
@@ -363,7 +411,7 @@ class Input extends \yii\db\ActiveRecord
         ];
     }
 
-     public function attributeLabelsForFormula()
+    public function attributeLabelsForFormula()
     {
         return [
             'input_id' => 'Данные',

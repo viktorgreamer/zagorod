@@ -30,6 +30,10 @@ class TableCells extends \yii\db\ActiveRecord
     const LEFT = 'text-left';
     const BOLD = 'text-bold';
     const CURSIVE = 'text-cursive';
+    const FILL_RED = 'fill-red';
+    const FILL_GREEN = 'fill-green';
+    const FILL_BLUE = 'fill-blue';
+
 
     const FORMULA_TYPE = 1;
     const TEXT_TYPE = 2;
@@ -42,7 +46,36 @@ class TableCells extends \yii\db\ActiveRecord
         self::H4 => [self::H1],
         self::BOLD => [],
         self::CURSIVE => [],
+        self::FILL_RED => [self::FILL_GREEN,self::FILL_BLUE],
+        self::FILL_BLUE => [self::FILL_GREEN,self::FILL_RED],
+        self::FILL_GREEN => [self::FILL_RED,self::FILL_BLUE],
     ];
+
+    public static function countRows($value, $width)
+    {
+       // $sense = [];
+        $string = [];
+        $countRows = 1;
+        if ( $words = preg_split("/\s/", $value)) {
+            foreach ($words as $word) {
+                if (mb_strlen(implode(" ", $string) . " " . $word) > $width) {
+                  //  D::alert(" LEN  = " . mb_strlen(implode(" ", $string) . " " . $word));
+                    //  D::primary($string);
+                   // $sense[] = implode(" ",$string);
+                    $string = [];
+                    $string[] = $word;
+                    $countRows++;
+
+                } else {
+                    $string[] = $word;
+                }
+
+            }
+            return $countRows;
+        } else return 0;
+
+
+    }
 
     public static $formatMessages = [
         self::LEFT => Icons::ALIGH_LEFT,
@@ -104,6 +137,7 @@ class TableCells extends \yii\db\ActiveRecord
 
 
     }
+
     public function removeClass($format = '')
     {
         if ($format) {
@@ -143,7 +177,7 @@ class TableCells extends \yii\db\ActiveRecord
                 // вычитаем конфликтующие элементы
                 D::success("CLASSESS ARE ");
                 D::dump($classess);
-                if (!in_array($format, $classess))  array_push($classess, $format);
+                if (!in_array($format, $classess)) array_push($classess, $format);
                 $this->classes = implode(" ", $classess);
             } else {
                 D::alert("NO CLASSESS");
@@ -166,6 +200,7 @@ class TableCells extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
     public function rules()
     {
         return [

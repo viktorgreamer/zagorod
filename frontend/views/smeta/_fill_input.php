@@ -26,7 +26,7 @@ $title = $input->input_id;
 if ($controls = $model->controls) {
 
     foreach ($controls as $control) {
-        $title .= "CONTROL_ID ". $control->id." TYPE = ".$control->type;
+        $title .= "CONTROL_ID " . $control->id . " TYPE = " . $control->type;
         if ($event_value = \common\models\SmetaEvents::find()->where(['smeta_id' => $smeta->smeta_id])->andWhere(['event_id' => $control->event_id])->one()) {
             if ($event_value->value) {
                 if ($control->type == \common\models\InputControls::TYPE_SET_VALUE) $value = $control->value;
@@ -41,7 +41,7 @@ if ($controls = $model->controls) {
 
 
 if ($model->event_id) {
-    $title  .= "EVENT_ID = ".$model->event_id." FOR ".$model->getFormName()." IS ".$variables["event_" . $model->event_id . "_"];
+    $title .= "EVENT_ID = " . $model->event_id . " FOR " . $model->getFormName() . " IS " . $variables["event_" . $model->event_id . "_"];
 
     if ($variables["event_" . $model->event_id . "_"]) {
         $title .= " ELEMENT " . $model->getFormName() . " IS ACTIVE";
@@ -94,7 +94,7 @@ $id = $model->getFormID();
                         }
 
                     } elseif ($model->type == Input::IN_LIST_BASE_STATION) {
-                        echo Html::dropDownList($model->getFormName(), $value, [ 0 => ''] + ArrayHelper::map(BaseStation::find()->all(), 'id', 'name'),
+                        echo Html::dropDownList($model->getFormName(), $value, [0 => ''] + ArrayHelper::map(BaseStation::find()->all(), 'id', 'name'),
                             ['class' => $inputClass . ' form-control', 'id' => $id, 'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::IN_LIST_MATERIAL) {
                         echo Html::dropDownList($model->getFormName(), $value, ArrayHelper::map(\common\models\Material::find()->all(), 'id', 'name'), [
@@ -107,14 +107,16 @@ $id = $model->getFormID();
                             'class' => $inputClass . ' form-control', 'id' => $id, 'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::BOOLEAN_TYPE) {
                         if ($value) $value = true; else $value = false;
-                        echo Html::checkbox($model->getFormName(), $value, ['label' => $model->name, 'class' => $inputClass, 'id' => $id, 'data' => $data, 'disabled' => $disable,'title' => $title]);
+                        echo Html::checkbox($model->getFormName(), $value, ['label' => $model->name, 'class' => $inputClass, 'id' => $id, 'data' => $data, 'disabled' => $disable, 'title' => $title]);
                     } elseif ($model->type == Input::IN_ARRAY_TYPE) {
                         $items = $model->renderItems($model->list);
                         echo Html::dropDownList($model->getFormName(), $value, $items,
-                            ['label' => $model->name, 'class' => $inputClass . ' form-control', 'title' => $title,'id' => $id,
-                            'data' => $data, 'disabled' => $disable]);
+                            ['label' => $model->name, 'class' => $inputClass . ' form-control', 'title' => $title, 'id' => $id,
+                                'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::GROUP_INPUT) {
                         echo "<div class='$inputClass'>";
+                       // \backend\utils\D::success($model->input_id);
+                       // \backend\utils\D::dump($model->getColumnsSchema());
                         echo MultipleInput::widget([
                             'data' => $model->getGroupValue($value),
                             'max' => 4,
