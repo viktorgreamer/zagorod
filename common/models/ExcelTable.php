@@ -181,7 +181,7 @@ class ExcelTable extends Spreadsheet
 
         if (!$name) $name = date("d_m_y_h_i_s_A") . ".xlsx";
         $writer = new Xlsx($this);
-        $writer->save($name);
+        $writer->save("export/".$name);
 
     }
 
@@ -195,7 +195,7 @@ class ExcelTable extends Spreadsheet
 
         if (!$name) $name = date("d_m_y_h_i_s_A") . ".pdf";
 
-        $writer->save($name);
+        $writer->save("export/".$name);
 
     }
 

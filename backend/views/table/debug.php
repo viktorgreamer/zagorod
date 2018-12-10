@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Анастсия
- * Date: 09.12.2018
- * Time: 17:03
- */
+
+
+echo \yii\helpers\Html::a($filename,'/admin/export/'.$filename);

@@ -65,30 +65,35 @@ class TableController extends Controller
     public function actionExportExcel($id)
     {
 
+        $filename = date("d_m_y_h_i_s_A") . ".xlsx";
+
+
         if ($id) {
             $excelTable = new ExcelTable();
             $excelTable->table_id = $id;
             $excelTable->make();
-            $excelTable->saveToExcel();
+            $excelTable->saveToExcel($filename);
         }
 
         return $this->render('debug', [
-            'table_id' => $id,
+            'filename' => $filename,
         ]);
 
     }
 
     public function actionExportPdf($id)
     {
+
+        $filename = date("d_m_y_h_i_s_A") . ".pdf";
         if ($id) {
             $excelTable = new ExcelTable();
             $excelTable->table_id = $id;
             $excelTable->forClient = true;
             $excelTable->make();
-            $excelTable->saveToPdf();
+            $excelTable->saveToPdf($filename);
         }
         return $this->render('debug', [
-            'table_id' => $id,
+            'filename' => $filename,
         ]);
 
     }
