@@ -43,9 +43,9 @@ class Smeta extends \yii\db\ActiveRecord
                 foreach ($variables as $key => $variable) {
                     $old_value = $new_value;
                     $new_value = preg_replace("/" . $key . "/", $this->getVariables()[$key], $old_value);
-                 /*   if ($new_value != $old_value) {
-                        if (in_array($key, ["G17", "G18"])) D::success($key . " " . $variable . " VALUE = " . $new_value);
-                    }*/
+                    /*   if ($new_value != $old_value) {
+                           if (in_array($key, ["G17", "G18"])) D::success($key . " " . $variable . " VALUE = " . $new_value);
+                       }*/
 
                 }
             }
@@ -58,7 +58,7 @@ class Smeta extends \yii\db\ActiveRecord
 
     public function addVariables($variable)
     {
-        $this->variables = array_merge($variable,$this->variables);
+        $this->variables = array_merge($variable, $this->variables);
     }
 
     public function getVariables()
@@ -418,6 +418,7 @@ class Smeta extends \yii\db\ActiveRecord
         $variables = [];
 
         /* @var $event SmetaEvents */
+        /* @var $station BaseStation */
 
         if ($estimate_ids = $this->getEstimatesId()) {
             $active_stages = EstimateStage::find()->select('stage_id')->where(['in', 'estimate_id', $estimate_ids])->andWhere(['status' => EstimateStage::STATUS_ACTIVE])->column();
@@ -429,10 +430,13 @@ class Smeta extends \yii\db\ActiveRecord
                 $station_id = $inputValueStation->value;
                 //   D::success($station_id);
             }
-            if ($station = BaseStation::find()->where(['id' => $station_id])->asArray()->one()) {
-                foreach ($station as $key => $value) {
-                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) $value = "'" . $value . "'";
-                    elseif (!$value) $value = 0;
+
+            if ($station = BaseStation::find()->where(['id' => $station_id])->one()) {
+                $attributes = $station->formulaLabels();
+                foreach ($attributes as $key) {
+                    $value = $station->$key;
+                    if (!filter_var($value, FILTER_VALIDATE_FLOAT)) {
+                    } elseif (!$value) $value = 0;
                     $variables["station." . $key] = $value;
                 }
             }

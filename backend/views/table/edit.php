@@ -25,7 +25,7 @@ $outputs = $estimate->outputs;
 $query_row = TableCells::find()->where(['table_id' => $table_id])->select('tr_id');
 
 $rows = $query_row->distinct()->asArray()->orderBy('tr_id')->all();
-echo $this->render('_format_panel',compact('table'));
+echo $this->render('_format_panel', compact('table'));
 
 \yii\widgets\Pjax::begin(['id' => 'pjax-table']);
 echo Html::tag("h3", "ТАБЛИЦА");
@@ -97,6 +97,7 @@ if ($rows) {
                         ]);
 
                 if ($cell['align']) $alignClass = " " . $cell['align'];
+                if ($cell['fillColor']) $style = 'background-color: #' . $cell['fillColor']; else $style = '';
 
                 $tds .= Html::tag('td', $value,
                     [
@@ -108,10 +109,10 @@ if ($rows) {
                             'td_id' => $cell['td_id'],
                             'address' => $cell['address']
                         ],
+                        'style' => $style
 
                     ]);
             }
-
 
 
             $value = Html::tag('cell', $cell_value, [
@@ -150,7 +151,7 @@ if ($rows) {
         foreach ($tableColumns as $column) {
             $options = [];
             if ($width = $column['width']) {
-                $options = ['style' => "width:".$width . "px"];
+                $options = ['style' => "width:" . $width . "px"];
             };
             $tds_head .= Html::tag('td', $this->render("_action_buttons_column", ['td_id' => $column['td_id'], 'column' => $column, 'max_column' => count($tableColumns), 'width' => $width, 'column_address' => TableCells::$letters[$column['td_id'] - 1]]), $options);
 
@@ -162,7 +163,7 @@ if ($rows) {
 
 
     $TableHead = Html::tag('thead', $trs_head);
-    $table_html = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table', 'width' => '100%','id' => 'report_table']);
+    $table_html = Html::tag("table", $TableHead . $trs, ['class' => 'table table-stripped table-bordered report-table', 'width' => '100%', 'id' => 'report_table']);
 }
 echo $table_html;
 \yii\widgets\Pjax::end();
@@ -259,6 +260,52 @@ $(document).on('click','button.format', function() {
            $.ajax({
         url: '/admin/table-cells/multi-format',
         data: {addresses: addresses ,format: window.format_type,table_id: window.table_id},
+        type: 'post',
+        success: function (res) {
+              res = JSON.parse(res);
+            console.log(res.history);
+            update_history_list(res.history);
+             $.pjax.reload('#pjax-table',{timeout : false});
+        }
+         });
+             $('button.active').removeClass('active');
+           
+           console.log(addresses + " SELECTED");
+     } else {
+         isActive = $(this).hasClass('active');
+        $('button.active').removeClass('active');
+        if (!isActive) $(this).addClass('active');
+        
+     }
+
+});
+
+$(document).on('click','.select-color', function() {
+    console.log(" SELECT COLOR WAS CLICKED");
+      if (window.combineStatus === true) {
+          window.combineStatus = false;
+            toastr.error("Выделение деактивировано");
+            window.first_tr_id = 0;
+            window.first_td_id = 0;
+            window.second_tr_id = 0;
+            window.second_td_id = 0;
+      }
+      
+       if (window.color == $(this).data('color'))  window.formatStatus = false; 
+         else window.formatStatus = true;
+        window.color = $(this).data('color'); 
+        
+      selectedCells = $(document).find("td.selected");
+     if (selectedCells) {
+         addresses = [];
+          selectedCells.each( function(index,element) {
+           address =  $(this).data('address');
+           addresses.push(address);
+          
+          });
+           $.ajax({
+        url: '/admin/table-cells/multi-color',
+        data: {addresses: addresses ,color: window.color,table_id: window.table_id},
         type: 'post',
         success: function (res) {
               res = JSON.parse(res);

@@ -94,7 +94,8 @@ $id = $model->getFormID();
                         }
 
                     } elseif ($model->type == Input::IN_LIST_BASE_STATION) {
-                        echo Html::dropDownList($model->getFormName(), $value, [0 => ''] + ArrayHelper::map(BaseStation::find()->all(), 'id', 'name'),
+                        echo " ДОСТУПНО ".count(BaseStation::getAvailableForCurrent());
+                        echo Html::dropDownList($model->getFormName(), $value, [0 => ''] + ArrayHelper::map(BaseStation::getAvailableForCurrent(), 'id', 'name'),
                             ['class' => $inputClass . ' form-control', 'id' => $id, 'data' => $data, 'disabled' => $disable]);
                     } elseif ($model->type == Input::IN_LIST_MATERIAL) {
                         echo Html::dropDownList($model->getFormName(), $value, ArrayHelper::map(\common\models\Material::find()->all(), 'id', 'name'), [

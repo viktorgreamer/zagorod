@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="base-station-index">
     <div class="row">
         <?= Html::a('Добавить станцию', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Сгенерировать цены для станций', ['base-station/generate-prices'], ['class' => 'btn btn-success']) ?>
+
         <?php
         Modal::begin([
             'header' => Html::tag('h4', "Добавить в группы "),

@@ -92,3 +92,154 @@ POST ARRAY IS
 []
 POST ARRAY IS
 {"_csrf-backend":"_GZDuuouxMyuXQgrhGpTazeRse8o81lDmgzEwWuahI2lMwbA3H7xh-87WlnwPAEmYNuEv33GOybXVqeKEdfPvQ==","Input":{"name":"Vasilev","stage_id":"7","type":"12","multi_input":[{"name":"user","rule":"1","type":"dropDownList","items":"45,56,56","title":"\u0412\u0421\u0435 \u0447\u0442\u043e \u043d\u0443\u0436\u043d\u043e \u0437\u043d\u0430\u0442\u044c \u043f\u0440\u043e \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442"}],"required":"0","is_newline":"0","width":"20","event_id":"0"}}
+POST ARRAY IS
+[]
+POST ARRAY IS
+[]
+{"color":"003366","table_id":"1"}
+null
+{"addresses":["B2"],"color":"00ff66","table_id":"1"}
+["B2"]
+ DELETE TABLE table_cells_1544340712 SUCCESSFULLY
+ DELETE TABLE table_rows_1544340712 SUCCESSFULLY
+ DELETE TABLE table_columns_1544340712 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544756607
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544756607
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544756607
+{"addresses":["A2"],"color":"0033ff","table_id":"1"}
+["A2"]
+ DELETE TABLE table_cells_1544340936 SUCCESSFULLY
+ DELETE TABLE table_rows_1544340936 SUCCESSFULLY
+ DELETE TABLE table_columns_1544340936 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544756824
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544756824
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544756824
+{"addresses":["B5"],"color":"0000ff","table_id":"1"}
+["B5"]
+ DELETE TABLE table_cells_1544341003 SUCCESSFULLY
+ DELETE TABLE table_rows_1544341003 SUCCESSFULLY
+ DELETE TABLE table_columns_1544341003 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544758689
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544758689
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544758689
+{"addresses":["B3"],"color":"00cc99","table_id":"1"}
+["B3"]
+ DELETE TABLE table_cells_1544341009 SUCCESSFULLY
+ DELETE TABLE table_rows_1544341009 SUCCESSFULLY
+ DELETE TABLE table_columns_1544341009 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544758755
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544758755
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544758755
+{"addresses":["B4"],"color":"00cccc","table_id":"1"}
+["B4"]
+ DELETE TABLE table_cells_1544756607 SUCCESSFULLY
+ DELETE TABLE table_rows_1544756607 SUCCESSFULLY
+ DELETE TABLE table_columns_1544756607 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544758765
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544758765
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544758765
+{"addresses":["C6"],"color":"ff0000","table_id":"1"}
+["C6"]
+ DELETE TABLE table_cells_1544756638 SUCCESSFULLY
+ DELETE TABLE table_rows_1544756638 SUCCESSFULLY
+ DELETE TABLE table_columns_1544756638 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544758789
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544758789
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544758789
+{"addresses":["A4","B4","C4","A5","B5","C5"],"color":"","table_id":"1"}
+["A4","B4","C4","A5","B5","C5"]
+ DELETE TABLE table_cells_1544756824 SUCCESSFULLY
+ DELETE TABLE table_rows_1544756824 SUCCESSFULLY
+ DELETE TABLE table_columns_1544756824 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544760162
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544760162
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544760162
+{"color":"cc6666","table_id":"1"}
+null
+{"addresses":["D6"],"color":"cc0033","table_id":"1"}
+["D6"]
+ DELETE TABLE table_cells_1544758689 SUCCESSFULLY
+ DELETE TABLE table_rows_1544758689 SUCCESSFULLY
+ DELETE TABLE table_columns_1544758689 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544760198
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544760198
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544760198
+{"addresses":["B1","B2","B3","B4","B5","B6","B7","B8","B9","B10","B11","B12","B13","B14","B15","B16","B17","B18","B19","B20","B21","B22","B23","B24","B25","B26","B27","B28","B29"],"color":"66ff99","table_id":"1"}
+["B1","B2","B3","B4","B5","B6","B7","B8","B9","B10","B11","B12","B13","B14","B15","B16","B17","B18","B19","B20","B21","B22","B23","B24","B25","B26","B27","B28","B29"]
+ DELETE TABLE table_cells_1544758755 SUCCESSFULLY
+ DELETE TABLE table_rows_1544758755 SUCCESSFULLY
+ DELETE TABLE table_columns_1544758755 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544760219
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544760219
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544760219
+{"addresses":["B3"],"color":"","table_id":"1"}
+["B3"]
+ DELETE TABLE table_cells_1544758765 SUCCESSFULLY
+ DELETE TABLE table_rows_1544758765 SUCCESSFULLY
+ DELETE TABLE table_columns_1544758765 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544760406
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544760406
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544760406
+{"addresses":["B3","A4","B4","C4","D4"],"color":"","table_id":"1"}
+["B3","A4","B4","C4","D4"]
+ DELETE TABLE table_cells_1544758789 SUCCESSFULLY
+ DELETE TABLE table_rows_1544758789 SUCCESSFULLY
+ DELETE TABLE table_columns_1544758789 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544760511
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544760511
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544760511
+{"addresses":["C6"],"color":"","table_id":"1"}
+["C6"]
+ DELETE TABLE table_cells_1544760162 SUCCESSFULLY
+ DELETE TABLE table_rows_1544760162 SUCCESSFULLY
+ DELETE TABLE table_columns_1544760162 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544760517
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544760517
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544760517
+{"addresses":["B4","C4"],"color":"9966cc","table_id":"1"}
+["B4","C4"]
+ DELETE TABLE table_cells_1544760198 SUCCESSFULLY
+ DELETE TABLE table_rows_1544760198 SUCCESSFULLY
+ DELETE TABLE table_columns_1544760198 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1544760945
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1544760945
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1544760945

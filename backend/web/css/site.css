@@ -44,6 +44,10 @@ td.actions_column {
 td.danger {
     color: red ;
 }
+
+ul#color-picker.dropdown-menu {
+    min-width: 240px; !important;
+}
 table#report_table td.default {
     color: grey ;
 }
@@ -64,7 +68,11 @@ table#report_table td.fill-blue {
 
 
 table#report_table td.selected {
- background-color: #bcbcbc;
+    opacity:0.2; !important;
+}
+
+table#report_table td {
+    opacity:1; !important;
 }
 
 td.header1 {

@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\utils\D;
+use common\models\Colors;
 use common\models\Table;
 use common\models\TableColumns;
 use common\models\TableHistory;
@@ -11,6 +12,7 @@ use kartik\base\WidgetAsset;
 use Yii;
 use common\models\TableCells;
 use common\models\TableCellsSearch;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -231,6 +233,32 @@ class TableCellsController extends Controller
                 }
             }
             return json_encode(['status' => 1, 'history' => $history]);
+        }
+    }
+
+    public
+    function actionMultiColor()
+    {
+        D::$isLogToFile = true;
+        D::dump($_POST);
+        D::dump($_POST['addresses']);
+        /* @var $cell TableCells */
+        if (($_POST['table_id']) AND ($_POST['addresses'])) {
+            $history = TableHistory::storeNew('Отменить ' .
+                Html::tag('div', '', ['style' => 'background-color: #' . $_POST['color'] . ";width:25px;height:25px"])
+            );
+            Colors::updateAll(['time' => time()],['hex' => $_POST['color']]);
+            $cells = TableCells::find()->where(['AND', ['in', 'address', $_POST['addresses'], 'table_id' => $_POST['table_id']]])->all();
+            if ($cells) {
+                foreach ($cells as $cell) {
+
+                    $cell->setColor($_POST['color']);
+                    $cell->update(false);
+                }
+            }
+            return json_encode(['status' => 1, 'history' => $history]);
+        } else {
+            return json_encode(['status' => 0]);
         }
     }
 

@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\MaterialToStation;
+use common\models\StationPrices;
 use Yii;
 use common\models\BaseStation;
 use common\models\BaseStationSearch;
@@ -11,6 +12,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use common\models\Material;
+use backend\utils\D;
+use common\models\Regions;
 
 
 /**
@@ -32,6 +35,28 @@ class BaseStationController extends Controller
             ],
         ];
     }
+
+    public function actionGeneratePrices($region_id = 0)
+    {
+
+        /* @var $station BaseStation */
+        /* @var $region Regions */
+
+
+        $queryRegions = Regions::find();
+        if ($region_id) $queryRegions->where(['id' => $region_id]);
+        D::success(" COUNT REGIONS = " . $queryRegions->count());
+        $regions = $queryRegions->all();
+        foreach ($regions as $region) {
+            D::primary(" REGION NAME = " . $region->name);
+            $region->generatePrices();
+        }
+
+        return $this->render('debug');
+
+
+    }
+
 
     /**
      * Lists all BaseStation models.
@@ -80,8 +105,7 @@ class BaseStationController extends Controller
         };
 
     }
-    
-    
+
 
     /**
      * Displays a single BaseStation model.
@@ -106,6 +130,7 @@ class BaseStationController extends Controller
         $model = new BaseStation();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->setPrices(($_POST['BaseStation']['prices']));
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -126,6 +151,7 @@ class BaseStationController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->setPrices(($_POST['BaseStation']['prices']));
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

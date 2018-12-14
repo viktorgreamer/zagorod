@@ -96,7 +96,7 @@ class ExcelTable extends Spreadsheet
                 if ($table_column->hidden) {
                     if ($this->forClient) {
 
-                       // $sheet->removeColumn($letter);
+                        // $sheet->removeColumn($letter);
                     }
                     D::alert(" КОЛОНКА " . $letter . " СКРЫТА ");
                 }
@@ -133,7 +133,7 @@ class ExcelTable extends Spreadsheet
 
                             // задаем стили ячейке согласно логике
 
-                            $this->setStyles($address, $cell->classes);
+                            $this->setStyles($address, $cell);
 
                             // вычисляем высоту строки в записимости от того
                             $countRows = TableCells::countRows($response['value'], $widths[$cell->td_id]);
@@ -159,7 +159,7 @@ class ExcelTable extends Spreadsheet
         }
 
         if ($this->forClient) {
-              D::alert(" FOR CLIENT OPTION IS ACTIVATED");
+            D::alert(" FOR CLIENT OPTION IS ACTIVATED");
 
             // берем все колонки для
             if ($table_columns = $table->columns) {
@@ -181,7 +181,7 @@ class ExcelTable extends Spreadsheet
 
         if (!$name) $name = date("d_m_y_h_i_s_A") . ".xlsx";
         $writer = new Xlsx($this);
-        $writer->save("export/".$name);
+        $writer->save("export/" . $name);
 
     }
 
@@ -195,13 +195,14 @@ class ExcelTable extends Spreadsheet
 
         if (!$name) $name = date("d_m_y_h_i_s_A") . ".pdf";
 
-        $writer->save("export/".$name);
+        $writer->save("export/" . $name);
 
     }
 
-    public function setStyles($address, $styles)
+    public function setStyles($address, TableCells $cell)
     {
         $sheet = $this->getActiveSheet();
+        $styles = $cell->classes;
 
         /* @var $sheet */
         // задаем переносы строк в ячейке по умолчанию
@@ -213,20 +214,11 @@ class ExcelTable extends Spreadsheet
         if (preg_match("/" . \common\models\TableCells::H4 . "/", $styles)) $sheet->getStyle($address)->getFont()->setSize(18);
         if (preg_match("/" . \common\models\TableCells::H1 . "/", $styles)) $sheet->getStyle($address)->getFont()->setSize(24);
         if (preg_match("/" . \common\models\TableCells::BOLD . "/", $styles)) $sheet->getStyle($address)->getFont()->setBold(true);
-        if (preg_match("/" . \common\models\TableCells::FILL_BLUE . "/", $styles)) {
-            // $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->setStartColor('FF0000')->setEndColor("FF0000");
-            $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->getStartColor()->setARGB(Style\Color::COLOR_BLUE);
-        }
-        if (preg_match("/" . \common\models\TableCells::FILL_GREEN . "/", $styles)) {
 
-            // $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->setStartColor('FF0000')->setEndColor("FF0000");
-            $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->getStartColor()->setARGB(Style\Color::COLOR_GREEN);
-        }
-        if (preg_match("/" . \common\models\TableCells::FILL_RED . "/", $styles)) {
-            // $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->setStartColor('FF0000')->setEndColor("FF0000");
-            $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF0000');
-        }
-        /*  if (preg_match("/" . \common\models\TableCells::FILL_GREEN . "/", $styles))  $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->setStartColor()->setEndColor("4d803b");
+       if ($cell->fillColor) $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->getStartColor()->setRGB($cell->fillColor);
+
+
+       /*  if (preg_match("/" . \common\models\TableCells::FILL_GREEN . "/", $styles))  $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->setStartColor()->setEndColor("4d803b");
           if (preg_match("/" . \common\models\TableCells::FILL_BLUE . "/", $styles))  $sheet->getStyle($address)->getFill()->setFillType(Style\Fill::FILL_SOLID)->setStartColor()->setEndColor("46dbff");*/
 
 

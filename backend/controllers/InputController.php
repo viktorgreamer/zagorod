@@ -129,6 +129,11 @@ class InputController extends Controller
         $model->copyToOutput();
     }
 
+    public function actionTestMultiple()
+    {
+        return $this->render("_test_multiple");
+    }
+
     public function actionCreateMultipleInput($stage_id)
     {
         /* D::$isLogToFile = true;

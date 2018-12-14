@@ -43,13 +43,55 @@ use common\models\TableHistory;
 
     <!-- Single button -->
     <div class="btn-group">
-        <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Цвет  заливки<span class="caret"></span>
+        <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            Цвет заливки<span class="caret"></span>
         </button>
-        <ul class="dropdown-menu">
-            <li> <? echo Html::button("Красный фон", ['class' => 'btn btn-danger format btn-xs', 'title' => "Красный фон", 'data' => ['format_type' => TableCells::FILL_RED]]); ?></li>
-            <li> <? echo Html::button("Синий фон", ['class' => 'btn btn-primary format btn-xs', 'title' => "Синий фон", 'data' => ['format_type' => TableCells::FILL_BLUE]]); ?></li>
-            <li> <? echo Html::button("Зеленый фон", ['class' => 'btn btn-success format btn-xs', 'title' => "Зеленый фон", 'data' => ['format_type' => TableCells::FILL_GREEN]]); ?></li>
+        <ul id='color-picker' class="dropdown-menu">
+            <?php
+            if ($colors = \common\models\Colors::find()->select('hex')->orderBy(['time' => SORT_DESC])->limit(12)->column()) {
+                foreach (array_chunk($colors, 12) as $color_row) {
+                    $tds = '';
+                    foreach ($color_row as $color) {
+                        $tds .= Html::tag('td','',
+
+                            [
+                                'style' => 'background-color: #' . $color, 'width' => '20px', 'height' => '20px',
+                                'class' => 'select-color',
+                                'data' => ['color' => $color]]);
+                    }
+                    $trs .= Html::tag('tr', $tds);
+
+                }
+                $table = Html::tag('table', $trs);
+                echo $table;
+            }
+            echo Html::button('Удалить заливку',   [
+                'style' => 'width:100%;',
+                'class' => 'btn btn-danger btn-xs select-color',
+                'data' => ['color' => '']]);
+
+            if ($colors = \common\models\Colors::find()->select('hex')->column()) {
+                $trs = '';
+                foreach (array_chunk($colors, 12) as $color_row) {
+                    $tds = '';
+                    foreach ($color_row as $color) {
+                        $tds .= Html::tag('td','',
+
+                            [
+                                'style' => 'background-color: #' . $color, 'width' => '20px', 'height' => '20px',
+                                'class' => 'select-color',
+                                'data' => ['color' => $color]]);
+                    }
+                    $trs .= Html::tag('tr', $tds);
+
+                }
+                $table = Html::tag('table', $trs);
+                echo $table;
+            }
+
+
+            ?>
         </ul>
     </div>
 

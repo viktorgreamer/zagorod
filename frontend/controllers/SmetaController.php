@@ -48,6 +48,7 @@ class SmetaController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new SmetaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

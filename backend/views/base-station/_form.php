@@ -26,6 +26,39 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'mark')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'prices')->widget(\unclead\multipleinput\MultipleInput::className(), [
+        'max' => \common\models\Regions::find()->count(),
+        'columns' => [
+            [
+                'name' => 'region_id',
+                'type' => 'dropDownList',
+                'title' => 'Регион',
+                'items' => \yii\helpers\ArrayHelper::map(\common\models\Regions::find()->all(), 'id', 'name'),
+            ],
+            [
+                'name' => 'price',
+                'title' => 'Цена клиента',
+                'enableError' => true,
+            ],
+            [
+                'name' => 'cost',
+                'title' => 'Себестоимость',
+                'enableError' => true,
+            ], [
+                'name' => 'self_cost',
+                'title' => 'Себестоимость2',
+                'enableError' => true,
+            ],
+            [
+                'name' => 'is_available',
+                'type' => 'dropDownList',
+                'title' => 'Доступность в регионе',
+                'items' => [1 => 'Есть',0 => 'нет'],
+            ],
+        ]
+    ]); ?>
+
+
     <?= $form->field($model, 'performance')->textInput() ?>
 
     <?= $form->field($model, 'people')->textInput() ?>
