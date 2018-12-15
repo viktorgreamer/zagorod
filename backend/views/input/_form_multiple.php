@@ -40,6 +40,10 @@ use unclead\multipleinput\MultipleInput;
                 <?= $form->field($model, 'width')->dropDownList($model->mapWidth()) ?>
 
             </div>
+            <div class="col-lg-6">
+                <?= $form->field($model, 'max')->textInput() ?>
+
+            </div>
         </div>
 
         <?= $form->field($model, 'event_id')->dropDownList([0 => 'нет'] + Events::mapEvents()) ?>

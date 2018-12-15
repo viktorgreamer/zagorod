@@ -131,7 +131,8 @@ class InputController extends Controller
 
     public function actionTestMultiple()
     {
-        return $this->render("_test_multiple");
+      //  return $this->render("_test_multiple");
+        return $this->render("_test_multiple1");
     }
 
     public function actionCreateMultipleInput($stage_id)

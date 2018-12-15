@@ -27,13 +27,14 @@ use yii\helpers\ArrayHelper;
 class Input extends \yii\db\ActiveRecord
 {
 
-    public function renderMultipleInput() {
+    public function renderMultipleInput()
+    {
         if ($this->list) {
-            if ($rows = explode("\n",$this->list)) {
+            if ($rows = explode("\n", $this->list)) {
                 foreach ($rows as $row) {
-                    if ($fields = explode(":",$row)) {
+                    if ($fields = explode(":", $row)) {
                         foreach ($fields as $field) {
-                            if ($name_value = preg_split("/=/",$field)) {
+                            if ($name_value = preg_split("/=/", $field)) {
                                 $data_row[$name_value[0]] = $name_value[1];
                             }
 
@@ -75,6 +76,9 @@ class Input extends \yii\db\ActiveRecord
                     if ($multiple_input['rule']) {
                         $field[] = 'rule=' . $multiple_input['rule'];
                     }
+                }
+                if ($multiple_input['is_relative']) {
+                    $field[] = "is_relative=1";
                 }
                 $rows[] = implode(":", $field);
             }
@@ -217,6 +221,20 @@ class Input extends \yii\db\ActiveRecord
         return $this->hasMany(InputControls::className(), ['input_id' => 'input_id']);
     }
 
+    public function relatedItemsGroups()
+    {
+        if ($fields = $this->getColumnsSchema()) {
+          //  D::dump($fields);
+            foreach ($fields as $field) {
+                if ($field['options']['data']['is_relative']) $array[$field['name']] = $field['items'];
+            }
+
+            return $array;
+        }
+
+
+    }
+
     public function getColumnsSchema($forWidget = true)
     {
         // $template = "name=user:type=dropDownList:items=Один,Два:title=Пользователь|name=priority:title=Приоритет";
@@ -241,6 +259,9 @@ class Input extends \yii\db\ActiveRecord
                                     } else {
                                         $columns[$key][$options[0]] = trim($options[1]);
                                     }
+                                }
+                                if ($options[0] == 'is_relative') {
+                                    if ($options[1]) $columns[$key]['options']['data'] = ['is_relative' => 1];
                                 }
                             } else {
                                 if (preg_match("/,/", $options[1])) {
@@ -384,7 +405,8 @@ class Input extends \yii\db\ActiveRecord
         return [
             [['estimate_id', 'stage_id', 'type', 'name'], 'required'],
             [['estimate_id', 'stage_id', 'type', 'event_id', 'validation_rule_id', 'multiple', 'required', 'width', 'priority', 'is_newline'], 'integer'],
-            [['name', 'list'], 'string', 'max' => 256]
+            [['name', 'list'], 'string', 'max' => 256],
+            [['max'], 'integer', 'max' => 999]
         ];
     }
 
@@ -408,6 +430,7 @@ class Input extends \yii\db\ActiveRecord
             'event_id' => 'Событие',
             'list' => 'Выбор из списка',
             'is_newline' => 'C новой строки',
+            'max' => 'Максимальное количество для множественных групп полей',
         ];
     }
 

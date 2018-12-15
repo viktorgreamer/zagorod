@@ -1,72 +1,50 @@
 <?php
 
 use unclead\multipleinput\MultipleInput;
+$id_div = "div-input-id-".$model->input_id;
+echo $id_div;?>
+<div class="input-list-view" id="div-input-id-<?= $model->input_id; ?>" style="background-color: #e1e1e1">
+<?php
 
-$items = [1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5'];
-echo MultipleInput::widget(
-    [
-        'name' => "name",
-        'max' => 4,
-        'columns' => [
-            [
-                'name' => 'name',
-                'title' => 'Name',
-                'options' => [
-                    'class' => 'input-priority'
-                ]
-            ],
-            [
-                'name' => 'rule',
-                'type' => 'dropDownList',
-                'title' => 'Правило Валидации',
-                'defaultValue' => 0,
-                'items' => $items,
-                'options' => ['data' => ['is_relative' => 1]]
-
-            ],
-            [
-                'name' => 'type',
-                'type' => 'dropDownList',
-                'title' => "Тип",
-                'defaultValue' => 0,
-                'items' => ['' => 'Текстовое поле', 'dropDownList' => "Выпадающий список"]
-            ],
-
-        ],
-        'options' =>
-            ['data' => ['is_relative' => 1]]
+echo MultipleInput::widget([
+        'data' => $model->getGroupValue($value),
+        'max' => $model->max,
+        'name' => $model->getFormName(),
+        'columns' => $model->getColumnsSchema(),
     ]);
+?>
+<div class="input-list-view" id="div-input-id-<?= $model->input_id; ?>" style="background-color: #e1e1e1">
 
-$items = json_encode(array_values($items));
+    <?php
+$script = '';
 
-$script = <<< JS
-items_name_rules = $items;
-console.log(items_name_rules);
-function wait(ms){
-    start = new Date().getTime();
-    end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
-
+if ($itemGroups = $model->relatedItemsGroups()) {
+    foreach ($itemGroups as $name => $itemGroup) {
+        echo $selector = "#".$id_div." .multiple-input .list-cell__".$name." select[data-is_relative=\"1\"]";
+        $itemGroup = json_encode(array_values($itemGroup));
+       $multiple_global_selector =  "#".$id_div. " .multiple-input";
+        $script .= <<< JS
+avalilableItems$name = $itemGroup;
+var td_class_name = '.list-cell__$name';
+var select_selector = '$selector';
+var multiple_global_selector = '$multiple_global_selector';
+console.log(avalilableItems$name);
+/*
 let selected_values = [];
 window.elementsToRemoveGlobal = [];
 window.elementsToRemove = [];
-window.options_selected = [];
+window.options_selected = [];*/
 
-$(document).on('change', '.multiple-input select[data-is_relative="1"]', function(e) { 
+$(document).on('change', select_selector, function(e) { 
      console.log("SELECT OPTION WAS CHANGED ");
-    availableOptions = items_name_rules.slice();
-    elementsToRemoveGlobal = [];
-    elementsToRemove = [];
+    availableOptions = avalilableItems$name.slice();
+    
     options_selected_before = [];
 
-    multipleSelectedOptions = jQuery('.multiple-input').find('select[data-is_relative="1"]');
+    multipleSelectedOptions = jQuery(select_selector);
   //  countOptionSelectedBefore = multipleSelectedOptions.length;
  
     multipleSelectedOptions.each( function(i) {
-       // console.log(" INDEX = " + i + " " + $(this).attr('name'));
         options_selected_before.push($(this).val());
         value = $(this).val();
         indexOfElementToDelete = availableOptions.indexOf(value);
@@ -75,7 +53,7 @@ $(document).on('change', '.multiple-input select[data-is_relative="1"]', functio
     
      console.log("AVAILABLE OPTIONS " + availableOptions);
     
-    multipleSelectedOptions.each( function(i) {
+    multipleSelectedOptions.each( function() {
          console.log(" ITERATING OBJECT NAME = " + $(this).attr('name'));
              $(this).find('option').each( function() {
                    isSelected = $(this).is(':selected');
@@ -101,23 +79,16 @@ $(document).on('change', '.multiple-input select[data-is_relative="1"]', functio
 });
 
 
-jQuery('.multiple-input').on('beforeAddRow', function(e) {
-    
-   // console.log(multipleSelectedOptions);
-   // console.log('calls on before add row event');
-}).on('afterAddRow', function(e, row) {
-    
-    availableOptions = items_name_rules.slice();
-  
-    elementsToRemoveGlobal = [];
-    elementsToRemove = [];
+jQuery(multiple_global_selector).on('afterAddRow', function(e, row) {
+    console.log("afterAddRow")
+    availableOptions = avalilableItems$name.slice();
     options_selected_before = [];
     
-    multipleSelectedOptions = $(this).find('select[data-is_relative="1"]');
-  //  countOptionSelectedBefore = multipleSelectedOptions.length;
+    multipleSelectedOptions = $(select_selector);
     
-    multipleSelectedOptions.each( function(i) {
-       // console.log(" INDEX = " + i + " " + $(this).attr('name'));
+    console.log("COUNT multipleSelectedOptions " + multipleSelectedOptions.length);
+    
+    multipleSelectedOptions.each( function() {
         options_selected_before.push($(this).val());
         value = $(this).val();
         indexOfElementToDelete = availableOptions.indexOf(value);
@@ -126,16 +97,15 @@ jQuery('.multiple-input').on('beforeAddRow', function(e) {
     
     options_selected_before  = options_selected_before.filter((v, i, a) => a.indexOf(v) === i);
     var first_element = availableOptions.shift();
-    $(this).find('select[data-is_relative="1"]').last().val(first_element);
+    $(select_selector).last().val(first_element);
     options_selected_before.push(first_element);
-    multipleSelectedOptions = $(this).find('select[data-is_relative="1"]');
-    
+   
        console.log(' SELECTED VALUES =' + options_selected_before + ' AVAILABLE OPTIONS ' + availableOptions);
  
  
    // console.log("COUNT OF ELEMENTS = " + multipleSelectedOptions.length);
     
-    multipleSelectedOptions.each( function(i) {
+    multipleSelectedOptions.each( function() {
          console.log(" ITERATING OBJECT NAME = " + $(this).attr('name'));
              $(this).find('option').each( function() {
                    isSelected = $(this).is(':selected');
@@ -149,7 +119,7 @@ jQuery('.multiple-input').on('beforeAddRow', function(e) {
                          }
                   } else  {
                        $(this).removeClass('hidden'); 
-                      console.log("value " + value + "  IN in array " + selected_values + " AND " + isSelected + ' ... skiping');
+                      console.log("value " + value + "  IN in array " + options_selected_before + " AND " + isSelected + ' ... skiping');
                   }
              //  } 
                
@@ -157,21 +127,11 @@ jQuery('.multiple-input').on('beforeAddRow', function(e) {
                
       });
     
-}).on('beforeDeleteRow', function(e, row){
-  
-    // row - HTML container of the current row for removal.
-    // For TableRenderer it is tr.multiple-input-list__item
-    console.log('calls on before remove row event.');
-    return confirm('Are you sure you want to delete row?')
 }).on('afterDeleteRow', function(e, row){
+     availableOptions = avalilableItems$name.slice();
+     options_selected_before = [];
     
-     availableOptions = items_name_rules.slice();
- 
-    elementsToRemoveGlobal = [];
-    elementsToRemove = [];
-    options_selected_before = [];
-    
-    multipleSelectedOptions = $(this).find('select[data-is_relative="1"]');
+     multipleSelectedOptions = $(select_selector);
   //  countOptionSelectedBefore = multipleSelectedOptions.length;
     
     multipleSelectedOptions.each( function(i) {
@@ -200,7 +160,7 @@ jQuery('.multiple-input').on('beforeAddRow', function(e) {
                          }
                   } else  {
                       
-                      console.log("value " + value + "  IN in array " + selected_values + " AND " + isSelected + ' ... skiping');
+                      console.log("value " + value + "  IN in array " + options_selected_before + " AND " + isSelected + ' ... skiping');
                   }
              //  } 
                
@@ -208,12 +168,12 @@ jQuery('.multiple-input').on('beforeAddRow', function(e) {
                
       });
     
-    
-    console.log('calls on after remove row event');
-    console.log(row);
-}).on('afterDropRow', function(e, item){       
-    console.log('calls on after drop row', item);
 });
 
 JS;
+    }
+
+}
+
+
 $this->registerJs($script, yii\web\View::POS_READY);

@@ -45,13 +45,23 @@ use unclead\multipleinput\MultipleInput;
             'options' => [
                 'class' => 'input-priority'
             ]
-        ], [
+        ]
+        ,
+        [
             'name' => 'title',
             'title' => 'Описание',
             'enableError' => true,
             'options' => [
                 'class' => 'input-priority'
             ]
+        ],
+        [
+            'name' => 'is_relative',
+            'title' => 'Зависимое поле',
+            'type' => 'dropDownList',
+            'defaultValue' => 0,
+            'items' => [0 => 'Нет', 1 => "Да"]
+
         ]
     ]
 ]);
