@@ -2,9 +2,7 @@
 
 use unclead\multipleinput\MultipleInput;
 $id_div = "div-input-id-".$model->input_id;
-echo $id_div;?>
-<div class="input-list-view" id="div-input-id-<?= $model->input_id; ?>" style="background-color: #e1e1e1">
-<?php
+
 
 echo MultipleInput::widget([
         'data' => $model->getGroupValue($value),
@@ -13,7 +11,6 @@ echo MultipleInput::widget([
         'columns' => $model->getColumnsSchema(),
     ]);
 ?>
-<div class="input-list-view" id="div-input-id-<?= $model->input_id; ?>" style="background-color: #e1e1e1">
 
     <?php
 $script = '';

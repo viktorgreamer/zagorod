@@ -11,7 +11,7 @@ use common\models\Input;
 use common\models\Icons;
 use common\models\BaseStation;
 use yii\helpers\ArrayHelper;
-use unclead\multipleinput\MultipleInput;
+use common\widgets\MultipleInput;
 
 
 
@@ -68,12 +68,9 @@ use unclead\multipleinput\MultipleInput;
                         echo "<div class='$inputClass'>";
                         // \backend\utils\D::success($model->input_id);
                         // \backend\utils\D::dump($model->getColumnsSchema());
-                        echo MultipleInput::widget([
-                           // 'data' => $model->getGroupValue($value),
-                            'max' => 4,
-                            'name' => $model->getFormName(),
-                            'columns' => $model->getColumnsSchema(),
-                        ]);
+
+                        \common\widgets\MultipleInput::widget(['input' => $model]);
+
                         echo "</div>";
                     }
 
