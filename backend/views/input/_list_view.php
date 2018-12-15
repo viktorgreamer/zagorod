@@ -69,7 +69,7 @@ use common\widgets\MultipleInput;
                         // \backend\utils\D::success($model->input_id);
                         // \backend\utils\D::dump($model->getColumnsSchema());
 
-                        \common\widgets\MultipleInput::widget(['input' => $model]);
+                       echo  \common\widgets\MultipleInput::widget(['input' => $model]);
 
                         echo "</div>";
                     }
