@@ -29,7 +29,7 @@ use common\widgets\MultipleInput;
 
                     if (in_array($model->type, [Input::STRING_TYPE, Input::FLOAT_TYPE, Input::INTEGER_TYPE])) {
                         if ($model->multiple) {
-                        echo MultipleInput::widget(
+                        echo \unclead\multipleinput\MultipleInput::widget(
                                 [
                                         'name' => $model->getFormulaName(),
 
