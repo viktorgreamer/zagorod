@@ -30,6 +30,9 @@ return [
     ],
 
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'request' => [
             'baseUrl' => '',
             'csrfParam' => '_csrf-frontend',

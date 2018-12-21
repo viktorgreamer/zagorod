@@ -243,3 +243,36 @@ NEW TABLE NAME IS table_cells_1544760945
 NEW TABLE NAME IS table_rows_1544760945
  TABLE IS table_columns
 NEW TABLE NAME IS table_columns_1544760945
+{"addresses":["C4"],"type":"2","table_id":"1"}
+["C4"]
+ DELETE TABLE table_cells_1544760511 SUCCESSFULLY
+ DELETE TABLE table_rows_1544760511 SUCCESSFULLY
+ DELETE TABLE table_columns_1544760511 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1545318647
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1545318647
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1545318647
+{"addresses":["B4"],"type":"1","table_id":"1"}
+["B4"]
+ DELETE TABLE table_cells_1544760517 SUCCESSFULLY
+ DELETE TABLE table_rows_1544760517 SUCCESSFULLY
+ DELETE TABLE table_columns_1544760517 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1545320676
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1545320676
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1545320676
+{"addresses":["B4"],"type":"2","table_id":"1"}
+["B4"]
+ DELETE TABLE table_cells_1544760945 SUCCESSFULLY
+ DELETE TABLE table_rows_1544760945 SUCCESSFULLY
+ DELETE TABLE table_columns_1544760945 SUCCESSFULLY
+ TABLE IS table_cells
+NEW TABLE NAME IS table_cells_1545320679
+ TABLE IS table_rows
+NEW TABLE NAME IS table_rows_1545320679
+ TABLE IS table_columns
+NEW TABLE NAME IS table_columns_1545320679

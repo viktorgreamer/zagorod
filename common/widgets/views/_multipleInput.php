@@ -17,7 +17,7 @@ $script = '';
 
 if ($itemGroups = $model->relatedItemsGroups()) {
     foreach ($itemGroups as $name => $itemGroup) {
-        echo $selector = "#".$id_div." .multiple-input .list-cell__".$name." select[data-is_relative=\"1\"]";
+       // echo $selector = "#".$id_div." .multiple-input .list-cell__".$name." select[data-is_relative=\"1\"]";
         $itemGroup = json_encode(array_values($itemGroup));
        $multiple_global_selector =  "#".$id_div. " .multiple-input";
         $script .= <<< JS

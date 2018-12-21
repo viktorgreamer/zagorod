@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -10,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use backend\utils\D;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -33,16 +35,20 @@ AppAsset::register($this);
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
-           // 'style' => 'background-color:#a94442',
+            // 'style' => 'background-color:#a94442',
         ],
     ]);
     $menuItems = [
-        ['label' => 'admin', 'url' => ['/admin']],
-        ['label' => 'Smeta', 'url' => ['/smeta/index']],
-        ['label' => 'Трассировка', 'url' => ['/tracing/tree']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Сметы', 'url' => ['/smeta/index']],
+     //   ['label' => 'Трассировка', 'url' => ['/tracing/tree']],
+      //  ['label' => 'About', 'url' => ['/site/about']],
+      //  ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
+
+    if (Yii::$app->user->can('admin')) {
+        $menuItems[] = ['label' => 'admin', 'url' => ['/admin']];
+    }
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\Icons;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Smeta */
@@ -30,7 +31,42 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'smeta_id',
             'estimate_id',
-            'date',
+            [
+                'label' => 'Действия',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $links[] = Html::a(Icons::EDIT , ['/smeta/fill-data', 'smeta_id' => $model->smeta_id], ['target' => '_blank', 'class' => 'btn btn-success']);
+                    $links[] = Html::a(Icons::COPY , ['/smeta/copy', 'smeta_id' => $model->smeta_id], ['target' => '_blank', 'class' => 'btn btn-success']);
+                    $links[] = Html::a(Icons::PDF , ['/smeta/report-pdf', 'smeta_id' => $model->smeta_id], ['target' => '_blank', 'class' => 'btn btn-success']);
+                    $links[] = Html::a(Icons::EXCEL , ['/smeta/report-excel', 'smeta_id' => $model->smeta_id], ['target' => '_blank', 'class' => 'btn btn-success']);
+
+                    return implode(" ", $links);
+                },
+            ],
+            [
+                'label' => 'Даты',
+                'attribute' => 'user',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->dates;
+                },
+            ],
+            [
+                'label' => 'Копии',
+                'attribute' => 'user',
+                'format' => 'raw',
+                'value' => function (\common\models\Smeta $model) {
+                    return $model->renderCopies();
+                },
+            ],
+            [
+                'label' => 'Файлы',
+                'attribute' => 'files',
+                'format' => 'raw',
+                'value' => function (\common\models\Smeta $model) {
+                    return $model->renderFiles();
+                },
+            ],
         ],
     ]) ?>
 

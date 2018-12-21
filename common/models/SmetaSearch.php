@@ -12,14 +12,18 @@ use common\models\Smeta;
  */
 class SmetaSearch extends Smeta
 {
+
+    public $show_copy;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['smeta_id', 'estimate_id'], 'integer'],
-            [['date'], 'safe'],
+            [['smeta_id', 'user_id', 'show_copy'], 'integer'],
+            [['name'], 'string'],
+            [['created_at','updated_at'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -42,7 +46,7 @@ class SmetaSearch extends Smeta
     public function search($params)
     {
         $query = Smeta::find();
-        $query->from(['smeta' => \common\models\Smeta::tableName()]);
+        $query->from(['smeta' => Smeta::tableName()]);
         $query->joinWith('user');
         $query->joinWith('estimate');
 
@@ -64,10 +68,29 @@ class SmetaSearch extends Smeta
         if ($this->smeta_id) $query->andFilterWhere([
             'smeta.smeta_id' => $this->smeta_id,
         ]);
-        if ($this->estimate_id) $query->andFilterWhere([
-            'smeta.estimate_id' => $this->estimate_id,
+
+        if ($this->name) $query->andFilterWhere([
+            'like','smeta.name',$this->name,
         ]);
+        if (!$this->show_copy) $query->andWhere([
+            'IS','smeta.history_of',NULL
+        ]);
+        if (Yii::$app->user->can('admin')) {
+        if ($this->user_id) $query->andFilterWhere([
+            'smeta.user_id' => $this->user_id,
+        ]);
+        } else {
+            $user_id = Yii::$app->user->identity->id;
+            $query->andFilterWhere([
+                'smeta.user_id' => $user_id,
+            ]);
+        }
+
 
         return $dataProvider;
+    }
+
+    public function attributeLabels() {
+        return array_merge(parent::attributeLabels(),['show_copy' => 'ПОказывать копии']);
     }
 }

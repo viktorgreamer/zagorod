@@ -16,11 +16,11 @@ class Evaluator
 
     public static $formulaPattern = '/[*|\/|-|+|round|abs|floor|\|\||&&]/';
 
-    public static function make($result,$type = 1)
+    public static function make($result, $type = 1)
     {
-        if (preg_match(self::$formulaPattern, $result) AND ($type !=  TableCells::TEXT_TYPE )) {
+        if (preg_match(self::$formulaPattern, $result) AND ($type != TableCells::TEXT_TYPE)) {
             $eval = "; return " . $result . ";";
-
+           // D::alert($eval);
             try {
                 $response['value'] = eval($eval);
                 $response['type'] = 'success';
@@ -47,9 +47,9 @@ class Evaluator
     {
         if (preg_match(self::$formulaPattern, $result)) {
             $eval = "if (" . $result . ") return 1; else return 0;";
-           // D::success($eval);
+            // D::success($eval);
             try {
-              //  D::dump(eval($eval));
+                //  D::dump(eval($eval));
                 $response['value'] = eval($eval);
                 $response['type'] = 'success';
 

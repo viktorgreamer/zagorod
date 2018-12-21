@@ -24,10 +24,12 @@ use yii\web\IdentityInterface;
  * @property string $name Имя
  * @property string $surname Фамилия
  * @property int $type Профессия
+ * @property int $role Роль
  * @property int $parent_id Менеджер
  * @property string $phone
  * @property string $password write-only password
  */
+
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
@@ -36,6 +38,12 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
+
+    const ROLE_JUST_SIGNUP = 0;
+    const ROLE_USER = 1;
+    const ROLE_ADMIN = 2;
+    const ROLE_PROGRAMMER = 5;
+
     public static function tableName()
     {
         return '{{%user}}';
@@ -77,6 +85,16 @@ class User extends ActiveRecord implements IdentityInterface
             2 => 'Замерщик',
             3 => 'Сметчик',
             10 => 'Программист',
+        ];
+    }
+    public function mapRoles()
+    {
+        return [
+
+            0 => 'нет',
+            1 => 'Замерщик',
+            2 => 'Администратор',
+            5 => 'Программист',
         ];
     }
 

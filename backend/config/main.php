@@ -1,4 +1,6 @@
 <?php
+use yii\web\BadRequestHttpException;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -22,6 +24,10 @@ return [
         ]
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
+
         /* 'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=zagorod',
@@ -81,11 +87,11 @@ return [
             ],
             [
                 'allow' => true,
-                'roles' => ['@'],
+                'roles' => ['@','admin','programmer'],
             ],
         ],
         'denyCallback' => function () {
-            return Yii::$app->response->redirect(['site/login']);
+            throw new BadRequestHttpException(" ВАМ НЕ РАЗРЕШЕНО ДАННОЕ ДЕЙСТВИЕ");
         },
     ],
     'params' => $params,

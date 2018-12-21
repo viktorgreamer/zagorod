@@ -59,7 +59,7 @@ class ExcelTable extends Spreadsheet
                 'color' => ['rgb' => '808080']
             ]];
 
-    public function make()
+    public function make(\common\models\Smeta $smeta)
     {
 
         /* @var $outputValue \common\models\OutputValue */
@@ -74,7 +74,7 @@ class ExcelTable extends Spreadsheet
 
         $sheet = $this->getActiveSheet();
 
-        $smeta = Smeta::forTest();
+
         $smeta->loadVariables();
 
 
@@ -181,7 +181,9 @@ class ExcelTable extends Spreadsheet
 
         if (!$name) $name = date("d_m_y_h_i_s_A") . ".xlsx";
         $writer = new Xlsx($this);
-        $writer->save("export/" . $name);
+       $writer->save("export/" . $name);
+       return true;
+
 
     }
 
@@ -196,6 +198,7 @@ class ExcelTable extends Spreadsheet
         if (!$name) $name = date("d_m_y_h_i_s_A") . ".pdf";
 
         $writer->save("export/" . $name);
+        return true;
 
     }
 

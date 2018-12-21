@@ -10,6 +10,9 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
+    public $name;
+    public $surname;
+    public $phone;
     public $username;
     public $email;
     public $password;
@@ -49,6 +52,10 @@ class SignupForm extends Model
         }
 
         $user = new User();
+        $user->username = $this->username;
+        $user->phone = $this->phone;
+        $user->name = $this->name;
+        $user->surname = $this->surname;
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);

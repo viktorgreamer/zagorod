@@ -84,7 +84,7 @@ class SiteController extends Controller
         return $this->render('multigroup');
     }
 
-    public function actionAutoLogin()
+       public function actionAutoLogin()
     {
         $managers = "Павел Пучков	7(904)160-89-06	pavel_3agorod@icloud.com
 Василий Газизуллин	7(963)850-57-77	vasiliy.3agorod@yandex.ru
@@ -104,7 +104,7 @@ class SiteController extends Controller
         $managers = explode("\n", $managers);
         foreach ($managers as $manager) {
             $data = preg_split("/\s/", $manager);
-           // \backend\utils\D::dump($data);
+            // \backend\utils\D::dump($data);
             $login = preg_split("/@/", $data[3]);
             $user = new User();
             $user->name = $data[0];
@@ -114,7 +114,7 @@ class SiteController extends Controller
             $user->phone = "+".$data[2];
             $user->setPassword($login[0]);
             $user->generateAuthKey();
-          if (!$user->save()) \backend\utils\D::dump($user->getErrors());
+            if (!$user->save()) \backend\utils\D::dump($user->getErrors());
             \backend\utils\D::dump($user->toArray());
         }
         \backend\utils\D::dump($managers);

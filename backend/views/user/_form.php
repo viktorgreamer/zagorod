@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'type')->dropDownList([0 => "нет"] + $model->mapTypes()) ?>
+    <?= $form->field($model, 'role')->dropDownList($model->mapRoles()) ?>
 
     <?= $form->field($model, 'parent_id')->dropDownList([0 => "нет"] + $model->mapUsers()) ?>
     <?= $form->field($model, 'region_id')->dropDownList([0 => "нет"] + $model->mapRegions()) ?>

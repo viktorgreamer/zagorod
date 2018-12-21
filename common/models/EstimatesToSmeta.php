@@ -28,7 +28,7 @@ class EstimatesToSmeta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['estimate_id'], 'required'],
+            [['estimate_id','smeta_id'], 'required'],
             [['estimate_id', 'priority','status'], 'integer'],
         ];
     }

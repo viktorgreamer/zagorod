@@ -5,6 +5,8 @@ namespace common\models;
 use backend\utils\D;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+
 
 /**
  * This is the model class for table "smeta".
@@ -13,12 +15,13 @@ use yii\helpers\ArrayHelper;
  * @property int $estimate_id
  * @property int $parent_id
  * @property int $current_stage
- * @property int $date
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $history_of;
  * @property string $name
  */
 class Smeta extends \yii\db\ActiveRecord
 {
-
     protected $variables;
     protected $variablesKeys;
 
@@ -28,6 +31,164 @@ class Smeta extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'smeta';
+    }
+
+    public function getFiles()
+    {
+        return $this->hasMany(Files::className(), ['smeta_id' => 'smeta_id']);
+    }
+
+    public function getDates()
+    {
+        return "Создана " . Yii::$app->formatter->asDatetime($this->created_at) . "<br>Обновлена " . Yii::$app->formatter->asDatetime($this->updated_at);
+    }
+
+    public function reportExcel($table)
+    {
+        /* @var $table Table */
+        $filename = "smeta_" . $this->smeta_id . "_" . date("d.m.y h.i.s A") . ".xlsx";
+        $excelTable = new ExcelTable();
+        $excelTable->table_id = $table->table_id;
+        $excelTable->make($this);
+        if ($excelTable->saveToExcel($filename)) {
+            $file = new Files(['type' => Files::TYPE_EXCEL,'smeta_id' => $this->smeta_id,'link' => "/export/".$filename,'time' => time()]);
+          D::dump($file);
+           if (!$file->save()) D::dump($file->errors);
+            return $filename;
+        }
+        else return false;
+
+    }
+
+    public function renderFiles() {
+        if ($files = $this->files) {
+            foreach ($files as $file) {
+                if ($file->type == Files::TYPE_EXCEL) {
+                    $excels[] = "<br>".Html::a(basename($file->link),$file->link,['target' => 'blank']);
+                } else {
+                    $pdfs[] = "<br>".Html::a(basename($file->link),$file->link,['target' => 'blank']);
+                }
+            }
+            if ($excels) $body[] = implode(" ",$excels);
+            if ($pdfs) $body[] = implode(" ", $pdfs);
+            return implode("<br>",$body);
+        }
+    }
+
+    public function getCopies()
+    {
+        return $this->hasMany(self::className(), ['history_of' => 'smeta_id']);
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(self::className(), ['smeta_id' => 'history_of']);
+    }
+
+    public function renderCopies()
+    {
+        /* @var $copy Smeta */
+        if ($copies = $this->copies) {
+            $li = [];
+            foreach ($copies as $copy) {
+                $li[] = Html::tag('li', Html::a($copy->name, ['smeta/view', 'id' => $copy->smeta_id], ['target' => '_blank']), ['class' => 'list-group-item']);
+            }
+            return Html::tag('ul', implode("", $li), ['class' => 'list-group']);
+        }
+    }
+
+    public function reportPdf($table)
+    {
+        $filename = "smeta_" . $this->smeta_id . "_" . date("d.m.y h.i.s A") . ".pdf";
+        $excelTable = new ExcelTable();
+        $excelTable->table_id = $table->table_id;
+        $excelTable->make($this);
+        if ($excelTable->saveToPdf($filename)) {
+            $file = new Files(['type' => Files::TYPE_PDF,'smeta_id' => $this->smeta_id,'link' => "/export/".$filename,'time' => time()]);
+            $file->save();
+            return $filename;
+        }
+        else return false;
+    }
+
+    public function copy()
+    {
+        $smeta = new Smeta();
+        $smeta->name = $this->name;
+        $smeta->current_stage = $this->current_stage;
+        $smeta->user_id = $this->user_id;
+        if ($this->history_of) {
+            $smeta->history_of = $this->history_of;
+        } else {
+            D::alert(" MAKING FIRST CHILD OF SMETA_ID  = " . $this->smeta_id);
+            $smeta->history_of = $this->smeta_id;
+        }
+        $smeta->save();
+
+        /* @var $inputValue InputValue */
+
+        if ($inputValues = $this->inputValues) {
+            foreach ($inputValues as $inputValue) {
+                $new_inputValue = new InputValue();
+                $new_inputValue->input_id = $inputValue->input_id;
+                $new_inputValue->value = $inputValue->value;
+                $new_inputValue->smeta_id = $smeta->smeta_id;
+                $new_inputValue->estimate_id = $inputValue->estimate_id;
+                $new_inputValue->type = $inputValue->type;
+                $new_inputValue->insert(false);
+            }
+        } else {
+            D::alert(" NO $inputValue TO SMETA");
+        }
+
+        /* @var $outputValue OutputValue */
+
+        if ($outputValues = $this->outputValues) {
+            foreach ($outputValues as $outputValue) {
+                $new_outputValue = new OutputValue();
+                $new_outputValue->output_id = $outputValue->output_id;
+                $new_outputValue->value = $outputValue->value;
+                $new_outputValue->smeta_id = $smeta->smeta_id;
+                $new_outputValue->stage_id = $outputValue->stage_id;
+                $new_outputValue->insert(false);
+            }
+        } else {
+            D::alert(" NO OutputValue TO SMETA");
+        }
+
+        /* @var $smetaEvent SmetaEvents */
+
+        if ($smetaEvents = $this->events) {
+            foreach ($smetaEvents as $smetaEvent) {
+                $new_smeta_event = new SmetaEvents();
+                $new_smeta_event->event_id = $smetaEvent->event_id;
+                $new_smeta_event->value = $smetaEvent->value;
+                $new_smeta_event->smeta_id = $smeta->smeta_id;
+                $new_smeta_event->insert(false);
+            }
+        } else {
+            D::alert(" NO SmetaEvents TO SMETA");
+        }
+
+        /* @var $EstimateToSmeta EstimatesToSmeta */
+
+        if ($EstimatesToSmeta = $this->estimatesToSmeta) {
+
+            foreach ($EstimatesToSmeta as $EstimateToSmeta) {
+                $new_estimateToSmeta = new EstimatesToSmeta();
+                $new_estimateToSmeta->estimate_id = $EstimateToSmeta->estimate_id;
+                $new_estimateToSmeta->status = $EstimateToSmeta->status;
+                $new_estimateToSmeta->priority = $EstimateToSmeta->priority;
+                $new_estimateToSmeta->smeta_id = $smeta->smeta_id;
+                if (!$new_estimateToSmeta->save()) Yii::$app->session->setFlash('danger', serialize($new_estimateToSmeta->errors));
+
+            }
+        } else {
+            D::alert(" NO ESTIMATES TO SMETA");
+        }
+
+        return $smeta->smeta_id;
+
     }
 
     public static function forTest()
@@ -72,8 +233,20 @@ class Smeta extends \yii\db\ActiveRecord
         return ArrayHelper::map(Estimate::find()->all(), 'estimate_id', 'name');
     }
 
+    public function beforeDelete()
+    {
+        SmetaEvents::deleteAll(['smeta_id' => $this->smeta_id]);
+        InputValue::deleteAll(['smeta_id' => $this->smeta_id]);
+        OutputValue::deleteAll(['smeta_id' => $this->smeta_id]);
+        EstimatesToSmeta::deleteAll(['smeta_id' => $this->smeta_id]);
+
+        return parent::beforeDelete();
+    }
+
     public function beforeSave($insert)
     {
+        if (!$this->created_at) $this->created_at = time();
+        if (!$this->updated_at) $this->updated_at = time();
 
         return parent::beforeSave($insert);
     }
@@ -81,6 +254,11 @@ class Smeta extends \yii\db\ActiveRecord
     public function getInputValues()
     {
         return $this->hasMany(InputValue::className(), ['smeta_id' => 'smeta_id']);
+    }
+
+    public function getOutputValues()
+    {
+        return $this->hasMany(OutputValue::className(), ['smeta_id' => 'smeta_id']);
     }
 
     public function getEvents()
@@ -128,7 +306,7 @@ class Smeta extends \yii\db\ActiveRecord
             }
         }
 
-        if (!$this->date) $this->date = time();
+
         if (!isset($this->user_id)) $this->user_id = Yii::$app->user->identity->getId();
         return parent::beforeValidate();
     }
@@ -137,6 +315,11 @@ class Smeta extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Estimate::className(), ['estimate_id' => 'estimate_id'])
             ->viaTable(EstimatesToSmeta::tableName(), ['smeta_id' => 'smeta_id']);
+    }
+
+    public function getEstimatesToSmeta()
+    {
+        return $this->hasMany(EstimatesToSmeta::className(), ['smeta_id' => 'smeta_id']);
     }
 
     public function getEstimatesId()
@@ -150,11 +333,11 @@ class Smeta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date', 'user_id'], 'required'],
-            [['estimate_id'], 'integer'],
+            [['user_id'], 'required'],
+            [['estimate_id', 'history_of'], 'integer'],
             [['name'], 'string'],
             [['name'], 'safe'],
-            [['date'], 'integer'],
+            [['created_at', 'updated_at'], 'integer'],
         ];
     }
 
@@ -567,7 +750,9 @@ class Smeta extends \yii\db\ActiveRecord
             'smeta_id' => 'id',
             'user_id' => 'Мастер',
             'estimate_id' => 'Estimate ID',
-            'date' => 'Date',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
+            'history_of' => 'Копия ',
             'estimate.name' => 'Из',
             'name' => 'Название',
         ];

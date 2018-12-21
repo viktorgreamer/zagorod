@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\ExcelTable;
+use common\models\Smeta;
 use common\models\TableHistory;
 use Yii;
 use common\models\Table;
@@ -67,11 +68,11 @@ class TableController extends Controller
 
         $filename = date("d_m_y_h_i_s_A") . ".xlsx";
 
-
         if ($id) {
             $excelTable = new ExcelTable();
             $excelTable->table_id = $id;
-            $excelTable->make();
+            $smeta = Smeta::forTest();
+            $excelTable->make($smeta);
             $excelTable->saveToExcel($filename);
         }
 
@@ -84,12 +85,13 @@ class TableController extends Controller
     public function actionExportPdf($id)
     {
 
-        $filename = date("d_m_y_h_i_s_A") . ".pdf";
+        $filename = date("d\\m\\y h\\i\\s A") . ".pdf";
         if ($id) {
             $excelTable = new ExcelTable();
             $excelTable->table_id = $id;
             $excelTable->forClient = true;
-            $excelTable->make();
+            $smeta = Smeta::forTest();
+            $excelTable->make($smeta);
             $excelTable->saveToPdf($filename);
         }
         return $this->render('debug', [

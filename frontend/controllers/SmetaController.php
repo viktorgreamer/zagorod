@@ -8,6 +8,7 @@ use common\models\Events;
 use common\models\Input;
 use common\models\InputValue;
 use common\models\SmetaEvents;
+use common\models\Table;
 use Yii;
 use common\models\Smeta;
 use common\models\SmetaSearch;
@@ -80,7 +81,7 @@ class SmetaController extends Controller
     public function actionReset($id)
     {
         $this->findModel($id)->generateVariables();
-      //  return $this->redirect(['index']);
+        //  return $this->redirect(['index']);
 
         return $this->render('_debug');
     }
@@ -121,7 +122,7 @@ class SmetaController extends Controller
                     $columns[$input_id] = array_column($inputInstanse->getColumnsSchema(false), 'name');
                     // ;
 
-                  $inputs_values[$input_id][] = $input['value'];
+                    $inputs_values[$input_id][] = $input['value'];
                 } else {
                     $input_index = preg_replace('/\[.+\]/', '', $input['name']);
 
@@ -172,7 +173,7 @@ class SmetaController extends Controller
                         // вставляем мульти поля
                         $inputs_values_new[$key] = $inputs_value;
                     }
-                   // $inputs_values[$key] = $row;
+                    // $inputs_values[$key] = $row;
 
 
                 }
@@ -184,7 +185,7 @@ class SmetaController extends Controller
             //
             $inputs_values = $inputs_values + $inputs_values_new;
             D::dump($inputs_values);
-         //   D::dump(array_keys($inputs_values));
+            //   D::dump(array_keys($inputs_values));
 
             if ($inputs = Input::find()->where(['in', 'input_id', array_keys($inputs_values)])->all()) {
                 foreach ($inputs as $input) {
@@ -204,6 +205,7 @@ class SmetaController extends Controller
                         }
 
                     }
+
                     // ищем события, которые происходят от станции
                     if ($events = Events::find()->where(['like', 'formula', 'station'])->all()) {
                         D::alert("EVENTS EXISTS");
@@ -227,7 +229,7 @@ class SmetaController extends Controller
                             }
                         }
                     }
-                    Smeta::updateAll(['current_stage' => $_POST['current_stage']], ['smeta_id' => $smeta->smeta_id]);
+                    Smeta::updateAll(['current_stage' => $_POST['current_stage'], 'updated_at' => time()], ['smeta_id' => $smeta->smeta_id]);
 
 
                 }
@@ -264,11 +266,61 @@ class SmetaController extends Controller
         ]);
     }
 
-    public function actionForTest($id) {
+    public function actionCopy($smeta_id)
+    {
+        $smeta = Smeta::findOne($smeta_id);
+        $smeta_id = $smeta->copy();
+
+        return $this->render('view', [
+            'model' => $this->findModel($smeta_id),
+        ]);
+    }
+
+    public function actionReportPdf($smeta_id)
+    {
+        D::$isLogToFile = true;
+
+        /* @var $table  Table */
+
+        $smeta = $this->findModel($smeta_id);
+
+        if ($estimatesId = $smeta->getEstimatesId()) {
+               $tables = Table::find()->where(['in','estimate_id' ,$estimatesId])->all();
+               foreach ($tables as $table) {
+                   $smeta->reportPdf($table);
+               }
+        }
+
+        return $this->render('view', [
+            'model' => $this->findModel($smeta_id),
+        ]);
+    }
+
+    public function actionReportExcel($smeta_id)
+    {
+        /* @var $table  Table */
+
+        $smeta = $this->findModel($smeta_id);
+
+        if ($estimatesId = $smeta->getEstimatesId()) {
+            $tables = Table::find()->where(['in','estimate_id' ,$estimatesId])->all();
+            foreach ($tables as $table) {
+                $smeta->reportExcel($table);
+            }
+        }
+
+
+        return $this->render('view', [
+            'model' => $this->findModel($smeta_id),
+        ]);
+    }
+
+    public function actionForTest($id)
+    {
 
         if ($id) {
             Smeta::updateAll(['forTest' => 0]);
-            Smeta::updateAll(['forTest' => 1],['smeta_id' => $id]);
+            Smeta::updateAll(['forTest' => 1], ['smeta_id' => $id]);
         }
 
         return $this->redirect('index');
